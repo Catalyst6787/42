@@ -6,7 +6,7 @@
 #    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 16:03:02 by lfaure            #+#    #+#              #
-#    Updated: 2024/10/04 12:59:01 by lfaure           ###   ########.fr        #
+#    Updated: 2024/10/04 14:39:56 by lfaure           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,8 @@ SRCS = \
 	   $(PATH_SRCS)ft_memcpy.c $(PATH_SRCS)ft_strlcpy.c $(PATH_SRCS)ft_memmove.c $(PATH_SRCS)ft_strlcat.c \
 	   $(PATH_SRCS)ft_toupper.c $(PATH_SRCS)ft_tolower.c $(PATH_SRCS)ft_strchr.c $(PATH_SRCS)ft_strrchr.c \
 	   $(PATH_SRCS)ft_strncmp.c $(PATH_SRCS)ft_memchr.c $(PATH_SRCS)ft_memcmp.c $(PATH_SRCS)ft_strnstr.c \
-	   $(PATH_SRCS)ft_atoi.c
+	   $(PATH_SRCS)ft_atoi.c $(PATH_SRCS)ft_calloc.c $(PATH_SRCS)ft_strdup.c $(PATH_SRCS)ft_substr.c 
+
 
 
 
