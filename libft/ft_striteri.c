@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/04 13:38:34 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/07 21:57:50 by lfaure           ###   ########.fr       */
+/*   Created: 2024/10/07 17:47:06 by lfaure            #+#    #+#             */
+/*   Updated: 2024/10/07 18:04:34 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "libft.h"
-
-void	*ft_calloc(size_t count, size_t size)
+/*
+void	ft_newtoupper(unsigned int i, char *c)
 {
-	unsigned char	*str;
+	(void)i;
+	if (*c >= 'a' && *c <= 'z')
+		*c -= 32;
+}
+*/
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	unsigned int	i;
 
-	str = malloc(count * size);
-	if (!str)
-		return (NULL);
-	ft_bzero(str, count * size);
-	return (str);
+	i = 0;
+	while (s[i])
+	{
+		(*f)(i, &s[i]);
+		i++;
+	}
 }
 /*
 #include <stdio.h>
-int	main(void)
+int	main(int ac, char **av)
 {
-	char *str;
-	str = ft_calloc(0, sizeof(char));
-	str[10] = '\0';
-	printf("%s\n", str);
+	if (ac != 2)
+		return (0);
+	ft_striteri(av[1], (*ft_newtoupper));
+	printf("%s\n", av[1]);
+	return(0);
 }
 */

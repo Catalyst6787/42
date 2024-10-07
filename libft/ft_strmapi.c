@@ -1,48 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   strlcpy.c                                          :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/03 10:49:42 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/07 14:48:03 by lfaure           ###   ########.fr       */
+/*   Created: 2024/10/07 17:27:08 by lfaure            #+#    #+#             */
+/*   Updated: 2024/10/07 17:44:46 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize)
+/*
+char	ft_newtoupper(unsigned int i, char c)
 {
-	size_t	i;
+	(void)i;
+	if (c >= 'a' && c <= 'z')
+		c -= 32;
+	return (c);
+}
+*/
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	unsigned int	i;
+	char			*ns;
 
 	i = 0;
-	if (dstsize == 0)
-		return (ft_strlen(src));
-	while (i < dstsize - 1 && src[i])
+	ns = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!ns)
+		return (NULL);
+	while (s[i])
 	{
-		dst[i] = src[i];
+		ns[i] = (*f)(i, s[i]);
 		i++;
 	}
-	dst[i] = '\0';
-	return (ft_strlen(src));
+	ns[i] = '\0';
+	return (ns);
 }
-
 /*
 #include <stdio.h>
-#include <stdlib.h>
 int	main(int ac, char **av)
 {
-	if (ac != 4)
-	{
-		printf("not enough args");
+	if (ac != 2)
 		return (0);
-	}
-	//printf("%s\n", av[1]);
-	//printf("%s\n", av[2]);
-	ft_strlcpy(av[1] ,av[2], atoi(av[3]));
-	printf("%s\n", av[1]);
-	printf("%s\n", av[2]);
-	return (0);
+	printf("%s\n", ft_strmapi(av[1], (*ft_newtoupper)));
+	return(0);
 }
 */

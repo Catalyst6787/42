@@ -6,7 +6,7 @@
 #    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 16:03:02 by lfaure            #+#    #+#              #
-#    Updated: 2024/10/04 16:08:13 by lfaure           ###   ########.fr        #
+#    Updated: 2024/10/07 18:28:39 by lfaure           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,15 @@ SRCS = \
 	   $(PATH_SRCS)ft_toupper.c $(PATH_SRCS)ft_tolower.c $(PATH_SRCS)ft_strchr.c $(PATH_SRCS)ft_strrchr.c \
 	   $(PATH_SRCS)ft_strncmp.c $(PATH_SRCS)ft_memchr.c $(PATH_SRCS)ft_memcmp.c $(PATH_SRCS)ft_strnstr.c \
 	   $(PATH_SRCS)ft_atoi.c $(PATH_SRCS)ft_calloc.c $(PATH_SRCS)ft_strdup.c $(PATH_SRCS)ft_substr.c  \
-	   $(PATH_SRCS)ft_strjoin.c $(PATH_SRCS)ft_strtrim.c 
+	   $(PATH_SRCS)ft_strjoin.c $(PATH_SRCS)ft_strtrim.c $(PATH_SRCS)ft_split.c $(PATH_SRCS)ft_itoa.c \
+	   $(PATH_SRCS)ft_strmapi.c $(PATH_SRCS)ft_striteri.c $(PATH_SRCS)ft_putchar_fd.c $(PATH_SRCS)ft_putstr_fd.c \
+	   $(PATH_SRCS)ft_putendl_fd.c $(PATH_SRCS)ft_putnbr_fd.c
+
+
+
+
+
+
 
 
 
