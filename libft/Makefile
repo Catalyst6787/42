@@ -32,7 +32,11 @@ SRCS = \
 
 SRCSB = \
 	   $(PATH_SRCS)ft_lstnew_bonus.c $(PATH_SRCS)ft_lstadd_front_bonus.c $(PATH_SRCS)ft_lstsize_bonus.c \
-	   $(PATH_SRCS)ft_lstlast_bonus.c
+	   $(PATH_SRCS)ft_lstlast_bonus.c $(PATH_SRCS)ft_lstdelone_bonus.c $(PATH_SRCS)ft_lstclear_bonus.c \
+	   $(PATH_SRCS)ft_lstiter_bonus.c
+
+
+
 
 
 
