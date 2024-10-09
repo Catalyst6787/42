@@ -55,12 +55,10 @@ char	*ft_strtrim(char const *s1, char const *set)
 {
 	int		ht[127];
 	size_t	i;
-	size_t	j;
 	size_t	trimc;
 	char	*nstr;
 
 	i = 0;
-	j = 0;
 	if (set[0])
 	{
 		while (i < 127)

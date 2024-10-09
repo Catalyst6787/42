@@ -27,23 +27,11 @@ SRCS = \
 	   $(PATH_SRCS)ft_strncmp.c $(PATH_SRCS)ft_memchr.c $(PATH_SRCS)ft_memcmp.c $(PATH_SRCS)ft_strnstr.c \
 	   $(PATH_SRCS)ft_atoi.c $(PATH_SRCS)ft_calloc.c $(PATH_SRCS)ft_strdup.c $(PATH_SRCS)ft_substr.c  \
 	   $(PATH_SRCS)ft_strjoin.c $(PATH_SRCS)ft_strtrim.c $(PATH_SRCS)ft_split.c $(PATH_SRCS)ft_itoa.c \
-	   $(PATH_SRCS)ft_strmapi.c $(PATH_SRCS)ft_striteri.c $(PATH_SRCS)ft_putchar_fd.c $(PATH_SRCS)ft_putstr_fd.c \
-	   $(PATH_SRCS)ft_putendl_fd.c $(PATH_SRCS)ft_putnbr_fd.c
+	   $(PATH_SRCS)ft_strmapi.c $(PATH_SRCS)ft_striteri.c $(PATH_SRCS)ft_putchar_fd.c \
+       $(PATH_SRCS)ft_putstr_fd.c $(PATH_SRCS)ft_putendl_fd.c $(PATH_SRCS)ft_putnbr_fd.c
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+SRCSB = \
+	   $(PATH_SRCS)ft_lstnew_bonus.c
 
 OBJS = $(SRCS:.c=.o)
 
