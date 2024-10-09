@@ -31,7 +31,11 @@ SRCS = \
        $(PATH_SRCS)ft_putstr_fd.c $(PATH_SRCS)ft_putendl_fd.c $(PATH_SRCS)ft_putnbr_fd.c
 
 SRCSB = \
-	   $(PATH_SRCS)ft_lstnew_bonus.c
+	   $(PATH_SRCS)ft_lstnew_bonus.c $(PATH_SRCS)ft_lstadd_front_bonus.c $(PATH_SRCS)ft_lstsize_bonus.c \
+	   $(PATH_SRCS)ft_lstlast_bonus.c
+
+
+
 
 OBJS = $(SRCS:.c=.o)
 
