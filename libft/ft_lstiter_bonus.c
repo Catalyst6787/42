@@ -2,49 +2,70 @@
 
 void	ft_lstiter(t_list *lst, void (*f) (void *))
 {
-	while(lst->next)
+	if (!f)
+		return ;
+	while (lst)
 	{
 		f(lst->content);
 		lst = lst->next;
 	}
 }
-
 /*
 #include <stdio.h>
-// Example function to apply to each list element
-void increment(void *data)
-{
-    int *value = (int *)data;
-    (*value)++;
+#include <stdlib.h>
+
+void print_content(void *content) {
+    printf("%s\n", (char *)content);
 }
 
-void print_list(t_list *lst)
-{
-    while (lst)
-    {
-        printf("%d ", *(int *)(lst->content));
-        lst = lst->next;
-    }
-    printf("\n");
-}
+int main() {
+    // Case 1: List of 1 element
+    t_list *single_elem_list = malloc(sizeof(t_list));
+    single_elem_list->content = "Single Element";
+    single_elem_list->next = NULL;
 
-int main()
-{
-    // Create a sample linked list: 1 -> 2 -> 3
-    t_list *list = ft_lstnew(&(int){1});
-    list->next = ft_lstnew(&(int){2});
-    list->next->next = ft_lstnew(&(int){3});
+    printf("Case 1: List of 1 element\n");
+    ft_lstiter(single_elem_list, print_content);
 
-    printf("Original list: ");
-    print_list(list);
+    // Cleanup
+    free(single_elem_list);
 
-    // Apply increment function to each element
-    ft_lstiter(list, increment);
+    // Case 2: List of multiple elements
+    t_list *first_elem = malloc(sizeof(t_list));
+    t_list *second_elem = malloc(sizeof(t_list));
+    t_list *third_elem = malloc(sizeof(t_list));
 
-    printf("Modified list: ");
-    print_list(list);
+    first_elem->content = "First Element";
+    first_elem->next = second_elem;
+    second_elem->content = "Second Element";
+    second_elem->next = third_elem;
+    third_elem->content = "Third Element";
+    third_elem->next = NULL;
 
-    // Free the list (implement free_list function if necessary)
+    printf("\nCase 2: List of multiple elements\n");
+    ft_lstiter(first_elem, print_content);
+
+    // Cleanup
+    free(third_elem);
+    free(second_elem);
+    free(first_elem);
+
+    // Case 3: Pass an empty list
+    t_list *empty_list = NULL;
+
+    printf("\nCase 3: Pass an empty list\n");
+    ft_lstiter(empty_list, print_content); // Should handle gracefully
+
+    // Case 4: Pass a NULL function
+    t_list *another_list = malloc(sizeof(t_list));
+    another_list->content = "Another Element";
+    another_list->next = NULL;
+
+    printf("\nCase 4: Pass a NULL function\n");
+    ft_lstiter(another_list, NULL); // Should handle gracefully
+
+    // Cleanup
+    free(another_list);
 
     return 0;
 }

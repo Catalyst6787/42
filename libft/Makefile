@@ -32,16 +32,12 @@ SRCS = \
 
 SRCSB = \
 	   $(PATH_SRCS)ft_lstnew_bonus.c $(PATH_SRCS)ft_lstadd_front_bonus.c $(PATH_SRCS)ft_lstsize_bonus.c \
-	   $(PATH_SRCS)ft_lstlast_bonus.c $(PATH_SRCS)ft_lstdelone_bonus.c $(PATH_SRCS)ft_lstclear_bonus.c \
-	   $(PATH_SRCS)ft_lstiter_bonus.c
-
-
-
-
-
-
+	   $(PATH_SRCS)ft_lstlast_bonus.c $(PATH_SRCS)ft_lstadd_back_bonus.c $(PATH_SRCS)ft_lstdelone_bonus.c $(PATH_SRCS)ft_lstclear_bonus.c \
+	   $(PATH_SRCS)ft_lstiter_bonus.c $(PATH_SRCS)ft_lstmap_bonus.c
 
 OBJS = $(SRCS:.c=.o)
+
+OBJSB = $(SRCSB:.c=.o)
 
 all: $(NAME)
 
@@ -51,8 +47,13 @@ $(NAME):
 
 clean:
 	rm -f $(OBJS)
+	rm -f $(OBJSB)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+bonus: 
+	gcc $(FLAG) $(OPTION) $(SRCS) $(SRCSB)
+	ar rc $(NAME) $(OBJS) $(OBJSB)
