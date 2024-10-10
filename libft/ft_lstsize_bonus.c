@@ -7,12 +7,12 @@ int	ft_lstsize(t_list *lst)
 	if (!lst)
 		return (0);
 	i = 1;
-	while(lst->next)
+	while (lst->next)
 	{
 		lst = lst->next;
 		i++;
 	}
-	return(i);
+	return (i);
 }
 /*
 #include <stdio.h>
