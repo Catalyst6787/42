@@ -11,21 +11,11 @@
 /* ************************************************************************** */
 #include "header.h"
 
-int	ft_putnbr_c(int n)
+int	ft_putunsigned_c(unsigned int n)
 {
 	int c;
 
 	c = 0;
-	if (n == INT_MIN)
-	{
-		ft_putstr_c("-2147483648");
-		return (11);
-	}
-	if (n < 0)
-	{
-		c += ft_putchar_c('-');
-		n = -n;
-	}
 	if (n >= 10)
 	{
 		c += ft_putnbr_c(n / 10);

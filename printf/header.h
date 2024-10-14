@@ -3,12 +3,14 @@
 
 # include <stdarg.h>
 # include <stdlib.h>
+# include <limits.h>
 # include "./libft/includes/libft.h"
 
 int	ft_printf(char *s, ...);
-char	*ft_itoa_c(int nbr);
 int	ft_putchar_c(char c);
 int	ft_putstr_c(char *s);
 int	ft_putnbr_c(int n);
+int	ft_putunsigned_c(unsigned int n);
+int	ft_puthex_c(int n, unsigned int up);
 
 #endif

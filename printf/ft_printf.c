@@ -4,14 +4,26 @@ int	ft_choose_format(char f, va_list ptr)
 {
 	if (!f)
 		return (0);
-	if (f == 's')
-		return (ft_putstr_c(va_arg(ptr, char *)));
 	else if (f == 'c')
 		return (ft_putchar_c(va_arg(ptr, int)));
+	else if (f == 's')
+		return (ft_putstr_c(va_arg(ptr, char *)));
+	else if (f == 'p')
+		return (ft_puthex_c(va_arg(ptr, unsigned int), 0));
+	else if (f == 'd' || f == 'i')
+		return (ft_putnbr_c(va_arg(ptr, int)));
+	else if (f == 'u')
+		return (ft_putunsigned_c(va_arg(ptr, unsigned int)));
+	else if (f == 'x')
+		return (ft_puthex_c(va_arg(ptr, int), 0));
+	else if (f == 'X')
+		return (ft_puthex_c(va_arg(ptr, int), 1));
+	else if (f == '%')
+		return (ft_putchar_c('%'));
 	return (0);
 }
 
-int	ft_printf(char *s, ...)
+int	ft_printf(const char *s, ...)
 {
 	va_list	ptr;
 	int c = 0;
@@ -32,11 +44,49 @@ int	ft_printf(char *s, ...)
 	va_end(ptr);
 	return (c);
 }
-
+/*
+#include <limits.h>
+#include <stdio.h>
 int	main(void)
 {
-	ft_printf("print a string: %s", "'a string'");
+	int test = 42;
+	ft_printf("print a string: %s\n", "'a string'");
+	ft_printf("print an empty string: %s\n", "");
+	ft_printf("print a one char string: %s\n", "a");
+	ft_printf("printf a char: %c\n", 'X');
+	ft_printf("print a new line (actually two) :\n\n");
+	ft_printf("print an int with d: %d\n", -42);
+	ft_printf("print an int with i: %i\n", -42);
+	ft_printf("print int min: %i\n", INT_MIN);
+	ft_printf("print int max: %i\n", INT_MAX);
+	ft_printf("print an unsigned int: %u\n", 4294967295);
+	ft_printf("print an hexadecimal int: %x\n", 42);
+	ft_printf("print a negative HEXADECIMAL int: %X\n", -42);
+	ft_printf("print the adress of a void pointer in hexadecimal: %p\n", &test);
+	printf("compare with previous: %p\n", &test);
+
+
+
+	ft_printf("print a percent sign: %%\n");
+	ft_printf("print nothing: %\n");
+
+	//tests
+	//char *test = "test";
+	//printf("%p\n", test);
+	//printf("LONG_MIN: %ld\n", LONG_MIN);
 	return(0);
 }
 
 // gc ft_printf.c  -I./ -I./libft/includes -L./libft -lft && ./a.out
+
+
+ * • %c Prints a single character.
+• %s Prints a string (as defined by the common C convention).
+• %p The void * pointer argument has to be printed in hexadecimal format.
+• %d Prints a decimal (base 10) number.
+• %i Prints an integer in base 10.
+• %u Prints an unsigned decimal (base 10) number.
+• %x Prints a number in hexadecimal (base 16) lowercase format.
+• %X Prints a number in hexadecimal (base 16) uppercase format.
+• %% Prints a percent sign.
+*/
