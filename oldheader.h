@@ -1,12 +1,12 @@
-#ifndef HEADER_H
-# define HEADER_H
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
 # include <stdarg.h>
 # include <stdlib.h>
 # include <limits.h>
 # include "./libft/includes/libft.h"
 
-int	ft_printf(char *s, ...);
+int	ft_printf(const char *s, ...);
 int	ft_putchar_c(char c);
 int	ft_putstr_c(char *s);
 int	ft_putnbr_c(int n);

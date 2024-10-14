@@ -32,10 +32,10 @@ OBJS = $(SRCS:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME):
+	gcc $(FLAG) $(OPTION) $(SRCS)
 	ar rc $(NAME) $(OBJS)
-$(OBJS): $(SRCS)
-	gcc $(FLAG) -c -I $(HEADER) -I $(LIBFTH) $< -o $@
+
 clean:
 	rm -f $(OBJS)
 

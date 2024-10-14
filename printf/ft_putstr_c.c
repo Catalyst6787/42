@@ -9,7 +9,7 @@
 /*   Updated: 2024/10/07 18:20:36 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-#include "header.h"
+#include "ft_printf.h"
 
 int	ft_putstr_c(char *s)
 {
