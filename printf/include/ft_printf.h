@@ -6,7 +6,7 @@
 # include <limits.h>
 # include <unistd.h>
 
-int	t_printf(const char *s, ...);
+int	ft_printf(const char *s, ...);
 int	ft_putchar_c(char c);
 int	ft_putstr_c(char *s);
 int	ft_putnbr_c(int n);
