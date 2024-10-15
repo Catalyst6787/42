@@ -49,8 +49,14 @@ int	ft_printf(const char *s, ...)
 #include <stdio.h>
 int	main(void)
 {
+
+	
 	int test = 42;
 	int *ptest = &test;
+	ft_printf(" NULL %s NULL \n", NULL);
+	ft_printf("%p %p\n", 112, 0);
+
+
 	ft_printf("%p\n", (void*)ptest);
 	ft_printf("print a string: %s\n", "'a string'");
 	ft_printf("print an empty string: %s\n", "");
@@ -77,7 +83,7 @@ int	main(void)
 }
 
 // gc ft_printf.c  -I./ -I./libft/includes -L./libft -lft && ./a.out:w
-//
+*
 
 *
  * • %c Prints a single character.

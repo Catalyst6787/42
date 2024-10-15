@@ -4,10 +4,11 @@ int	ft_putlonghex_c(unsigned long n, unsigned int up)
 {
 	char *base;
 	char *baseup;
+	int c;
 
 	base = "0123456789abcdef";
 	baseup = "0123456789ABCDEF";
-	int c;
+
 	c = 0;
 	if (n >= 16)
 	{
