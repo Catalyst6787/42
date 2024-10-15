@@ -12,5 +12,6 @@ int	ft_putstr_c(char *s);
 int	ft_putnbr_c(int n);
 int	ft_putunsigned_c(unsigned int n);
 int	ft_puthex_c(int n, unsigned int up);
+int	ft_putlonghex_c(unsigned long n, unsigned int up);
 
 #endif

@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int	ft_puthex_c(int n, unsigned int up)
+int	ft_putlonghex_c(unsigned long n, unsigned int up)
 {
 	char *base;
 	char *baseup;
@@ -9,19 +9,9 @@ int	ft_puthex_c(int n, unsigned int up)
 	baseup = "0123456789ABCDEF";
 	int c;
 	c = 0;
-	if (n == INT_MIN)
-	{
-		ft_putstr_c("-80000000");
-		return (9);
-	}
-	if (n < 0)
-	{
-		c += ft_putchar_c('-');
-		n = -n;
-	}
 	if (n >= 16)
 	{
-		c += ft_puthex_c(n / 16, up);
+		c += ft_putlonghex_c(n / 16, up);
 		n = n % 16;
 	}
 	if (up)

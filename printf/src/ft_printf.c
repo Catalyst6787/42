@@ -9,7 +9,7 @@ int	ft_choose_format(char f, va_list ptr)
 	else if (f == 's')
 		return (ft_putstr_c(va_arg(ptr, char *)));
 	else if (f == 'p')
-		return (ft_puthex_c(va_arg(ptr, unsigned int), 0));
+		return (ft_putstr_c("0x") + ft_putlonghex_c(va_arg(ptr, unsigned long), 0));
 	else if (f == 'd' || f == 'i')
 		return (ft_putnbr_c(va_arg(ptr, int)));
 	else if (f == 'u')
@@ -50,6 +50,8 @@ int	ft_printf(const char *s, ...)
 int	main(void)
 {
 	int test = 42;
+	int *ptest = &test;
+	ft_printf("%p\n", (void*)ptest);
 	ft_printf("print a string: %s\n", "'a string'");
 	ft_printf("print an empty string: %s\n", "");
 	ft_printf("print a one char string: %s\n", "a");
@@ -62,13 +64,10 @@ int	main(void)
 	ft_printf("print an unsigned int: %u\n", 4294967295);
 	ft_printf("print an hexadecimal int: %x\n", 42);
 	ft_printf("print a negative HEXADECIMAL int: %X\n", -42);
-	ft_printf("print the adress of a void pointer in hexadecimal: %p\n", &test);
-	printf("compare with previous: %p\n", &test);
-
-
+	printf("compare with previous: %p\n", (void*)ptest);
 
 	ft_printf("print a percent sign: %%\n");
-	ft_printf("print nothing: %\n");
+	ft_printf("print nothing: %\n\n");
 
 	//tests
 	//char *test = "test";
@@ -77,9 +76,10 @@ int	main(void)
 	return(0);
 }
 
-// gc ft_printf.c  -I./ -I./libft/includes -L./libft -lft && ./a.out
+// gc ft_printf.c  -I./ -I./libft/includes -L./libft -lft && ./a.out:w
+//
 
-
+*
  * • %c Prints a single character.
 • %s Prints a string (as defined by the common C convention).
 • %p The void * pointer argument has to be printed in hexadecimal format.

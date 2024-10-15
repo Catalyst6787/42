@@ -6,6 +6,7 @@ SRCS = src/ft_printf.c \
        src/ft_putnbr_c.c \
        src/ft_putstr_c.c \
        src/ft_putunsigned_c.c \
+       src/ft_putlonghex_c.c
 
 OBJS = ${SRCS:.c=.o}
 
