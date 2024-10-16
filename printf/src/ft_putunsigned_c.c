@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putunsigned_c.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 18:20:55 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/07 18:53:29 by lfaure           ###   ########.fr       */
+/*   Created: 2024/10/15 17:57:00 by lfaure            #+#    #+#             */
+/*   Updated: 2024/10/15 17:57:45 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_putunsigned_c(unsigned int n)
 {
-	int c;
+	int	c;
 
 	c = 0;
 	if (n >= 10)

@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/15 17:56:41 by lfaure            #+#    #+#             */
+/*   Updated: 2024/10/15 17:57:40 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
-int	ft_choose_format(char f, va_list ptr)
+static int	ft_choose_format(char f, va_list ptr)
 {
 	if (!f)
 		return (0);
@@ -9,15 +21,15 @@ int	ft_choose_format(char f, va_list ptr)
 	else if (f == 's')
 		return (ft_putstr_c(va_arg(ptr, char *)));
 	else if (f == 'p')
-		return (ft_putstr_c("0x") + ft_putlonghex_c(va_arg(ptr, unsigned long), 0));
+		return (ft_putlonghex_c(va_arg(ptr, unsigned long), 0, 1));
 	else if (f == 'd' || f == 'i')
 		return (ft_putnbr_c(va_arg(ptr, int)));
 	else if (f == 'u')
 		return (ft_putunsigned_c(va_arg(ptr, unsigned int)));
 	else if (f == 'x')
-		return (ft_puthex_c(va_arg(ptr, int), 0));
+		return (ft_putunsignedhex_c(va_arg(ptr, unsigned int), 0));
 	else if (f == 'X')
-		return (ft_puthex_c(va_arg(ptr, int), 1));
+		return (ft_putunsignedhex_c(va_arg(ptr, unsigned int), 1));
 	else if (f == '%')
 		return (ft_putchar_c('%'));
 	return (0);
@@ -26,11 +38,13 @@ int	ft_choose_format(char f, va_list ptr)
 int	ft_printf(const char *s, ...)
 {
 	va_list	ptr;
-	int c = 0;
-	int i = 0;
-	
+	int		c;
+	int		i;
+
+	c = 0;
+	i = 0;
 	va_start(ptr, s);
-	while(s[i])
+	while (s[i])
 	{
 		if (s[i] == '%')
 		{
@@ -49,14 +63,15 @@ int	ft_printf(const char *s, ...)
 #include <stdio.h>
 int	main(void)
 {
-
+	ft_printf("%p\n", LONG_MIN);
+	printf("%p\n", LONG_MIN);
 	
 	int test = 42;
-	int *ptest = &test;
-	ft_printf(" NULL %s NULL \n", NULL);
-	ft_printf("%p %p\n", 112, 0);
-
-
+	ft_printf(" %p \n", NULL);
+	printf(" %p \n", NULL);
+	char *s = NULL;
+	ft_printf(" NULL %s NULL \n", s);
+	printf(" NULL %s NULL \n", s);
 	ft_printf("%p\n", (void*)ptest);
 	ft_printf("print a string: %s\n", "'a string'");
 	ft_printf("print an empty string: %s\n", "");
@@ -79,10 +94,13 @@ int	main(void)
 	//char *test = "test";
 	//printf("%p\n", test);
 	//printf("LONG_MIN: %ld\n", LONG_MIN);
+
+
 	return(0);
 }
 
-// gc ft_printf.c  -I./ -I./libft/includes -L./libft -lft && ./a.out:w
+
+* gc ft_printf.c  -I./ -I./libft/includes -L./libft -lft && ./a.out:w
 *
 
 *

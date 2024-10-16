@@ -1,12 +1,24 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/10/15 17:56:15 by lfaure            #+#    #+#              #
+#    Updated: 2024/10/15 17:57:49 by lfaure           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = libftprintf.a
 
 SRCS = src/ft_printf.c \
        src/ft_putchar_c.c \
-       src/ft_puthex_c.c \
        src/ft_putnbr_c.c \
        src/ft_putstr_c.c \
        src/ft_putunsigned_c.c \
-       src/ft_putlonghex_c.c
+       src/ft_putlonghex_c.c \
+       src/ft_putunsignedhex_c.c \
 
 OBJS = ${SRCS:.c=.o}
 

@@ -1,14 +1,15 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_putstr_c.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/07 18:11:04 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/07 18:20:36 by lfaure           ###   ########.fr       */
+/*   Created: 2024/10/15 17:56:57 by lfaure            #+#    #+#             */
+/*   Updated: 2024/10/15 17:57:44 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int	ft_putstr_c(char *s)
@@ -16,7 +17,7 @@ int	ft_putstr_c(char *s)
 	int	i;
 
 	if (s == NULL)
-		return(0);
+		return (ft_putstr_c("(null)"));
 	i = 0;
 	while (s[i])
 		ft_putchar_c(s[i++]);

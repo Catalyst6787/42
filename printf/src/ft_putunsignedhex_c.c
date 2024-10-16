@@ -1,29 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putunsignedhex_c.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/15 17:57:24 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/15 17:57:32 by lfaure           ###   ########.fr       */
+/*   Created: 2024/10/15 17:57:03 by lfaure            #+#    #+#             */
+/*   Updated: 2024/10/15 17:57:47 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+#include "ft_printf.h"
 
-# include <stdarg.h>
-# include <stdlib.h>
-# include <limits.h>
-# include <unistd.h>
+int	ft_putunsignedhex_c(unsigned int n, unsigned int up)
+{
+	char	*base;
+	char	*baseup;
+	int		c;
 
-int	ft_printf(const char *s, ...);
-int	ft_putchar_c(char c);
-int	ft_putstr_c(char *s);
-int	ft_putnbr_c(int n);
-int	ft_putunsigned_c(unsigned int n);
-int	ft_putlonghex_c(unsigned long n, unsigned int up, int a);
-int	ft_putunsignedhex_c(unsigned int n, unsigned int up);
-
-#endif
+	c = 0;
+	base = "0123456789abcdef";
+	baseup = "0123456789ABCDEF";
+	if (n >= 16)
+	{
+		c += ft_putunsignedhex_c(n / 16, up);
+		n = n % 16;
+	}
+	if (up)
+		return (c + ft_putchar_c(baseup[n]));
+	return (c + ft_putchar_c(base[n]));
+}
