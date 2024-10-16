@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/15 17:56:41 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/15 17:57:40 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/10/16 12:49:51 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ int	ft_printf(const char *s, ...)
 #include <stdio.h>
 int	main(void)
 {
+	ft_printf("%d\n", ft_printf("%p\n", NULL));
+	printf("%d\n", printf("%p\n", NULL));
 	ft_printf("%p\n", LONG_MIN);
 	printf("%p\n", LONG_MIN);
 	
