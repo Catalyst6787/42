@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:53:16 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/04 16:05:56 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/04 16:56:20 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	ft_strlen(const char *str)
 	
 }
 
-char	*ft_strdup(const char *src)
+char	*ft_strdup(const char *src) // pas forcement utile
 {
 	int		len;
 	char	*nstr;

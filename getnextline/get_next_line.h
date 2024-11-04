@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/04 16:07:14 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/04 16:56:32 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@
 #  define BUFFER_SIZE 10
 # endif
 
-int			main(void);
 char	*get_next_line(int fd);
 char		*ft_strljoin(char const *s1, char const *s2, size_t len);
 size_t		ft_strlen(const char *str);
