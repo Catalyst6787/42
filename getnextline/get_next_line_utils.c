@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:53:16 by lfaure            #+#    #+#             */
-/*   Updated: 2024/10/30 20:03:31 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/04 16:05:56 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,26 @@ size_t	ft_strlen(const char *str)
 	
 }
 
+char	*ft_strdup(const char *src)
+{
+	int		len;
+	char	*nstr;
+	int		i;
+
+	i = 0;
+	len = ft_strlen(src);
+	nstr = (char *)malloc(sizeof(*src) * (len + 1));
+	if (!nstr)
+		return (NULL);
+	while (src[i])
+	{
+		nstr[i] = src[i];
+		i++;
+	}
+	nstr[i] = '\0';
+	return (nstr);
+}
+
 char	*ft_strljoin(char const *s1, char const *s2, size_t len)
 {
 	size_t	totlen;
@@ -42,10 +62,10 @@ char	*ft_strljoin(char const *s1, char const *s2, size_t len)
 	nstr = malloc(sizeof(char) * (totlen + 1));
 	if (!nstr)
 		return (NULL);
-	while (s1[i])
+	while (s1 && s1[i])
 		nstr[j++] = s1[i++];
 	i = 0;
-	while (s2[i] && i < len)
+	while (s2 && s2[i] && i < len)
 		nstr[j++] = s2[i++];
 	nstr[j] = '\0';
 	return (nstr);
