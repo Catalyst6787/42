@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/04 17:03:05 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 12:49:32 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,14 +77,7 @@ char *get_next_line(int fd)
 	line = NULL;
 	if (fd < 0)
 		return(NULL);
-	if (!stat)
-	{
-		stat = malloc(1);
-		if (!stat)
-			return(NULL);
-		stat[0] = '\0';
-	}
-	if (check_line(stat, 1))
+	if (stat && check_line(stat, 1))
 	{
 		tmp = check_line(stat, 0);
 		stat = trim_stat(stat);
@@ -92,12 +85,14 @@ char *get_next_line(int fd)
 			return(NULL);
 		return(tmp);
 	}
-	else
-		line = stat;
-	while((chars_read = read(fd, buf, BUFFER_SIZE)))
+	while((chars_read = read(fd, buf, BUFFER_SIZE)) && chars_read > 0)
 	{
 		if (chars_read < 0)
+		{
+			free(stat);
+			stat = NULL;
 			return(NULL);
+		}
 		buf[chars_read] = '\0';
 		line = ft_strljoin(line, buf, BUFFER_SIZE +1);
 		if (!line)
@@ -114,14 +109,17 @@ char *get_next_line(int fd)
 			return(line);
 		}
 	}
-	return(NULL);
+	free(stat);
+	stat = NULL;
+	return(line);
+	//return(NULL);
 }
 /*
 int main(void)
 {
 	int fd;
 
-	fd = open("file.txt", O_RDONLY);
+	fd = open("./files/one_line_no_nl.txt", O_RDONLY);
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));

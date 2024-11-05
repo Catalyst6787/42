@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:53:16 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/04 16:56:20 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 12:45:02 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ char	*ft_strdup(const char *src) // pas forcement utile
 	return (nstr);
 }
 
-char	*ft_strljoin(char const *s1, char const *s2, size_t len)
+char	*ft_strljoin(char *s1, char const *s2, size_t len)
 {
 	size_t	totlen;
 	size_t	i;
@@ -68,6 +68,8 @@ char	*ft_strljoin(char const *s1, char const *s2, size_t len)
 	while (s2 && s2[i] && i < len)
 		nstr[j++] = s2[i++];
 	nstr[j] = '\0';
+	free(s1);
+	s1 = NULL;
 	return (nstr);
 }
 
