@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/05 15:29:18 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 16:15:14 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,6 @@ char	*get_next_line(int fd)
 	int			chars_read;
 	char		*line;
 	char		*tmp;
-	char		*tmp2;
 
 	chars_read = 1;
 	line = NULL;
@@ -90,7 +89,8 @@ char	*get_next_line(int fd)
 	}
 	else if (stat && stat[0])
 		line = ft_strdup(stat);
-	while ((chars_read = read(fd, buf, BUFFER_SIZE)) && chars_read > 0)
+	chars_read = read(fd, buf, BUFFER_SIZE);
+	while (chars_read > 0)
 	{
 		buf[chars_read] = '\0';
 		line = ft_strljoin(line, buf, BUFFER_SIZE +1);
@@ -98,33 +98,18 @@ char	*get_next_line(int fd)
 			return (NULL);
 		if (check_line(line, 1))
 		{
-			tmp = line;
-			tmp2 = stat;
+			free(stat);
 			stat = trim_line(line);
-			free(tmp2);
-			tmp2 = NULL;
 			if (!stat)
 				return (NULL);
-			else if (!stat[0])
-			{
-				free(stat);
-				stat = NULL;
-			}
-			line = check_line(line, 0);
-			free(tmp);
-			tmp = NULL;
-			return (line);
+			tmp = line;
+			return (line = check_line(line, 0), free(tmp), tmp = NULL, line);
 		}
+		chars_read = read(fd, buf, BUFFER_SIZE);
 	}
-	free(stat);
-	stat = NULL;
 	if (chars_read == -1)
-	{
-		free(line);
-		line = NULL;
-		return (NULL);
-	}
-	return (line);
+		return (free(stat), stat = NULL, free(line), line = NULL, NULL);
+	return (free(stat), stat = NULL, line);
 }
 /*
 int main(void)
