@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/05 18:16:41 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 18:28:42 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static char	*trim_line(char *line)
 	}
 	return (NULL);
 }
-
+/*
 char	*get_next_line2(int fd, char *buf, char **oldstat, char *line, char *tmp)
 {
 	int 		chars_read;
@@ -90,15 +90,17 @@ char	*get_next_line2(int fd, char *buf, char **oldstat, char *line, char *tmp)
 		}
 		chars_read = read(fd, buf, BUFFER_SIZE);
 	}
+	*oldstat = stat;
 	if (chars_read == -1)
 		return (free(stat), stat = NULL, free(line), line = NULL, NULL);
 	return (free(stat), stat = NULL, line);
 }
+*/
 char	*get_next_line(int fd)
 {
 	char		buf[BUFFER_SIZE + 1];
 	static char	*stat;
-	//int			chars_read;
+	int			chars_read;
 	char		*line;
 	char		*tmp;
 
@@ -116,8 +118,7 @@ char	*get_next_line(int fd)
 	}
 	if (stat && stat[0])
 		line = ft_strdup(stat); // si je veux grater une fonction
-	return(get_next_line2(fd, buf, &stat, line, tmp));
-	/*
+	//return(get_next_line2(fd, buf, &stat, line, tmp));
 	chars_read = read(fd, buf, BUFFER_SIZE);
 	while (chars_read > 0)
 	{
@@ -139,7 +140,6 @@ char	*get_next_line(int fd)
 	if (chars_read == -1)
 		return (free(stat), stat = NULL, free(line), line = NULL, NULL);
 	return (free(stat), stat = NULL, line);
-	*/
 }
 /*
 int main(void)
