@@ -6,10 +6,9 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:53:16 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/05 15:09:32 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 16:34:25 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "get_next_line.h"
 
@@ -18,15 +17,14 @@ size_t	ft_strlen(const char *str)
 	size_t	i;
 
 	if (!str)
-		return(0);
+		return (0);
 	i = 0;
 	while (str[i])
 		i++;
 	return (i);
-	
 }
 
-char	*ft_strdup(const char *src) // pas forcement utile
+char	*ft_strdup(const char *src)
 {
 	int		len;
 	char	*nstr;
@@ -80,14 +78,14 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 
 	i = 0;
 	if (start >= ft_strlen(s))
-		return (nstr = ft_calloc(1, sizeof(char)));
+		return (nstr = malloc(1 * sizeof(char)), nstr[0] = '\0', nstr);
 	if (len > ft_strlen(s + start))
 		len = ft_strlen(s + start);
 	if (!s)
 		return (NULL);
 	if (start > ft_strlen(s))
 		return (NULL);
-	nstr = ft_calloc(len + 1, sizeof(char));
+	nstr = malloc(len + 1 * sizeof(char));
 	if (!nstr)
 		return (NULL);
 	while (s[i] && i < len)
@@ -97,29 +95,4 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	nstr[i] = '\0';
 	return (nstr);
-}
-
-void	*ft_calloc(size_t count, size_t size)
-{
-	unsigned char	*str;
-
-	str = malloc(count * size);
-	if (!str)
-		return (NULL);
-	ft_bzero(str, count * size);
-	return (str);
-}
-
-void	ft_bzero(void *b, size_t n)
-{
-	unsigned char	*tmp_ptr;
-	unsigned char	c;
-
-	c = 0;
-	tmp_ptr = (unsigned char *) b;
-	while (n > 0)
-	{
-		*(tmp_ptr++) = (unsigned char) c;
-		n--;
-	}
 }

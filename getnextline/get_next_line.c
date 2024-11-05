@@ -6,13 +6,13 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/05 16:15:14 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 16:38:48 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char	*check_line(char *line, int no_alloc)
+static char	*check_line(char *line, int no_alloc)
 {
 	int	i;
 
@@ -30,7 +30,7 @@ char	*check_line(char *line, int no_alloc)
 	return (NULL);
 }
 
-char	*trim_stat(char *line)
+static char	*trim_stat(char *line)
 {
 	unsigned int	i;
 	char			*nline;
@@ -49,7 +49,7 @@ char	*trim_stat(char *line)
 	return (NULL);
 }
 
-char	*trim_line(char *line)
+static char	*trim_line(char *line)
 {
 	unsigned int	i;
 	char			*nline;
@@ -88,7 +88,7 @@ char	*get_next_line(int fd)
 		return (tmp);
 	}
 	else if (stat && stat[0])
-		line = ft_strdup(stat);
+		line = ft_strdup(stat); // si je veux grater une fonction
 	chars_read = read(fd, buf, BUFFER_SIZE);
 	while (chars_read > 0)
 	{
