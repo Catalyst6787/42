@@ -6,90 +6,91 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/05 15:05:53 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 15:29:18 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-char *check_line(char *line, int no_alloc)
+char	*check_line(char *line, int no_alloc)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i++] == '\n')
 		{
 			if (!no_alloc)
-				return(ft_substr(line, 0, i));
+				return (ft_substr(line, 0, i));
 			else
-				return("string");
+				return ("string");
 		}
 	}
-	return(NULL);
+	return (NULL);
 }
 
-char *trim_stat(char *line)
+char	*trim_stat(char *line)
 {
-	unsigned int i;
-	char *nline;
+	unsigned int	i;
+	char			*nline;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i++] == '\n')
 		{
 			nline = ft_substr(line, i, ft_strlen(line));
-			free(line); // to free the previous line
+			free(line);
 			line = NULL;
-			return(nline);
+			return (nline);
 		}
 	}
-	return(NULL); 
+	return (NULL);
 }
 
-char *trim_line(char *line)
+char	*trim_line(char *line)
 {
-	unsigned int i;
-	char *nline;
+	unsigned int	i;
+	char			*nline;
 
 	i = 0;
-	while(line[i])
+	while (line[i])
 	{
 		if (line[i++] == '\n')
 		{
 			nline = ft_substr(line, i, ft_strlen(line));
-			return(nline);
+			return (nline);
 		}
 	}
-	return(NULL); 
+	return (NULL);
 }
 
-char *get_next_line(int fd)
+char	*get_next_line(int fd)
 {
-	char buf[BUFFER_SIZE + 1];
-	static char *stat;
-	int	chars_read;
-	char *line;
-	char *tmp;
-	char	*tmp2;
-	
+	char		buf[BUFFER_SIZE + 1];
+	static char	*stat;
+	int			chars_read;
+	char		*line;
+	char		*tmp;
+	char		*tmp2;
+
+	chars_read = 1;
 	line = NULL;
 	tmp = NULL;
 	if (fd < 0)
-		return(NULL);
+		return (NULL);
 	if (stat && check_line(stat, 1))
 	{
 		tmp = check_line(stat, 0);
 		stat = trim_stat(stat);
 		if (!stat)
-			return(NULL);
-		return(tmp);
+			return (NULL);
+		return (tmp);
 	}
 	else if (stat && stat[0])
 		line = ft_strdup(stat);
-	while((chars_read = read(fd, buf, BUFFER_SIZE)) && chars_read > 0)
+	while ((chars_read = read(fd, buf, BUFFER_SIZE)) && chars_read > 0)
 	{
 		buf[chars_read] = '\0';
 		line = ft_strljoin(line, buf, BUFFER_SIZE +1);
@@ -103,7 +104,7 @@ char *get_next_line(int fd)
 			free(tmp2);
 			tmp2 = NULL;
 			if (!stat)
-				return(NULL);
+				return (NULL);
 			else if (!stat[0])
 			{
 				free(stat);
@@ -112,7 +113,7 @@ char *get_next_line(int fd)
 			line = check_line(line, 0);
 			free(tmp);
 			tmp = NULL;
-			return(line);
+			return (line);
 		}
 	}
 	free(stat);
@@ -123,8 +124,7 @@ char *get_next_line(int fd)
 		line = NULL;
 		return (NULL);
 	}
-	return(line);
-	//return(NULL);
+	return (line);
 }
 /*
 int main(void)
