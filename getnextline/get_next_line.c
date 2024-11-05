@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/05 16:38:48 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 17:30:27 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,28 @@ static char	*trim_line(char *line)
 	return (NULL);
 }
 
+char	*init_stat(char* line, int choose)
+{
+	static char	*dupstat;
+	dupstat = NULL;
+	if(choose == 0)
+	{
+		free(dupstat);
+		dupstat = NULL;
+	}
+	else if (choose == 1)
+	{
+		free(dupstat);
+		stat = ft_strdup(line);
+		free(line);
+		line = NULL;
+	}
+	else if (choose == 2)
+		return(dupstat);
+	else
+		return(NULL);
+}
+
 char	*get_next_line(int fd)
 {
 	char		buf[BUFFER_SIZE + 1];
@@ -74,9 +96,7 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*tmp;
 
-	chars_read = 1;
 	line = NULL;
-	tmp = NULL;
 	if (fd < 0)
 		return (NULL);
 	if (stat && check_line(stat, 1))
@@ -87,7 +107,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		return (tmp);
 	}
-	else if (stat && stat[0])
+	if (stat && stat[0])
 		line = ft_strdup(stat); // si je veux grater une fonction
 	chars_read = read(fd, buf, BUFFER_SIZE);
 	while (chars_read > 0)
