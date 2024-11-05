@@ -6,7 +6,7 @@
 /*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/05 12:49:32 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/05 15:05:53 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char *check_line(char *line, int no_alloc)
 	i = 0;
 	while(line[i])
 	{
-		if (line[i++] == '\n' && !no_alloc)
+		if (line[i++] == '\n')
 		{
 			if (!no_alloc)
 				return(ft_substr(line, 0, i));
@@ -73,8 +73,10 @@ char *get_next_line(int fd)
 	int	chars_read;
 	char *line;
 	char *tmp;
+	char	*tmp2;
 	
 	line = NULL;
+	tmp = NULL;
 	if (fd < 0)
 		return(NULL);
 	if (stat && check_line(stat, 1))
@@ -85,24 +87,28 @@ char *get_next_line(int fd)
 			return(NULL);
 		return(tmp);
 	}
+	else if (stat && stat[0])
+		line = ft_strdup(stat);
 	while((chars_read = read(fd, buf, BUFFER_SIZE)) && chars_read > 0)
 	{
-		if (chars_read < 0)
-		{
-			free(stat);
-			stat = NULL;
-			return(NULL);
-		}
 		buf[chars_read] = '\0';
 		line = ft_strljoin(line, buf, BUFFER_SIZE +1);
 		if (!line)
 			return (NULL);
-		if (check_line(line, 0))
+		if (check_line(line, 1))
 		{
 			tmp = line;
+			tmp2 = stat;
 			stat = trim_line(line);
+			free(tmp2);
+			tmp2 = NULL;
 			if (!stat)
 				return(NULL);
+			else if (!stat[0])
+			{
+				free(stat);
+				stat = NULL;
+			}
 			line = check_line(line, 0);
 			free(tmp);
 			tmp = NULL;
@@ -111,6 +117,12 @@ char *get_next_line(int fd)
 	}
 	free(stat);
 	stat = NULL;
+	if (chars_read == -1)
+	{
+		free(line);
+		line = NULL;
+		return (NULL);
+	}
 	return(line);
 	//return(NULL);
 }
@@ -119,7 +131,12 @@ int main(void)
 {
 	int fd;
 
-	fd = open("./files/one_line_no_nl.txt", O_RDONLY);
+	fd = open("./files/variable_nls.txt", O_RDONLY);
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
+	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
