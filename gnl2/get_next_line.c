@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 22:08:19 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 22:16:05 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,6 @@ char*	get_next_line(int fd)
 		get_stat(after_nl(get_stat(NULL, 2)), 1);
 		return(tmp);
 	}
-	else if (get_stat(NULL, 2))
-		tmp = ft_strjoin(get_stat(NULL, 2), "");
 	chars_read = read(fd, buf, BUFFER_SIZE);
 	while(chars_read > 0)
 	{
@@ -120,13 +118,18 @@ char*	get_next_line(int fd)
 		get_stat(tmp, 1);
 		chars_read = read(fd, buf, BUFFER_SIZE);
 	}
+	if (get_stat(NULL, 2))
+	{
+		tmp = ft_strjoin(get_stat(NULL, 2), "");
+		get_stat(NULL, 0);
+	}
 	return(get_stat(NULL, 3), tmp);
 }
 
 int main(void)
 {
 	int fd;
-	fd = open("./files/multiple_nl.txt", O_RDONLY);
+	fd = open("./files/variable_nls.txt", O_RDONLY);
 	
 	char* returnvalue;
 
