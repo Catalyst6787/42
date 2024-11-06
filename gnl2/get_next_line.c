@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 21:20:44 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 22:08:19 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,10 @@ char	*after_nl(char *line)
 		return(NULL);
 	while(line[i])
 	{
-		if (line[i] == '\n')
+		if (line[i] == '\n' && line[i + 1])
 			return(ft_substr(line, i + 1, ft_strlen(line)));
+		else if (line[i] == '\n')
+			return(NULL);
 		i++;
 	}
 	return(NULL);
@@ -121,7 +123,6 @@ char*	get_next_line(int fd)
 	return(get_stat(NULL, 3), tmp);
 }
 
-/*
 int main(void)
 {
 	int fd;
@@ -150,5 +151,4 @@ int main(void)
 
 
 }
-*/
 
