@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:53:16 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 22:35:56 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 22:41:41 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,4 +70,22 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	nstr[i] = '\0';
 	return (nstr);
+}
+
+int	checkline(char *line)
+{
+	int	i;
+
+	i = 0;
+	if (!line)
+		return (-1);
+	while (line[i])
+	{
+		if (line[i] == '\n' && line[i + 1])
+			return (2);
+		else if (line[i] == '\n')
+			return (1);
+		i++;
+	}
+	return (0);
 }

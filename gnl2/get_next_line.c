@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 22:39:13 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 22:44:28 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,24 +34,6 @@ char	*get_stat(char *s1, int c)
 	else if (c == 3)
 		stat = NULL;
 	return (stat);
-}
-
-int	checkline(char *line)
-{
-	int	i;
-
-	i = 0;
-	if (!line)
-		return (-1);
-	while (line[i])
-	{
-		if (line[i] == '\n' && line[i + 1])
-			return (2);
-		else if (line[i] == '\n')
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 char	*until_nl(char *line, int freeline)
