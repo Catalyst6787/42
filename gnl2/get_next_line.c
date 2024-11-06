@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 22:16:05 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 22:18:24 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ char*	get_next_line(int fd)
 	}
 	return(get_stat(NULL, 3), tmp);
 }
-
+/*
 int main(void)
 {
 	int fd;
@@ -155,3 +155,4 @@ int main(void)
 
 }
 
+*/
