@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 22:18:24 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 22:23:25 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,8 @@ char*	get_next_line(int fd)
 		get_stat(tmp, 1);
 		chars_read = read(fd, buf, BUFFER_SIZE);
 	}
+	if (chars_read == -1)
+		return(free(tmp), tmp = NULL, get_stat(NULL, 0), NULL);
 	if (get_stat(NULL, 2))
 	{
 		tmp = ft_strjoin(get_stat(NULL, 2), "");
