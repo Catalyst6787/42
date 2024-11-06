@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:53:16 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 12:43:08 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 22:35:56 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,26 +22,6 @@ size_t	ft_strlen(const char *str)
 	while (str[i])
 		i++;
 	return (i);
-}
-
-char	*ft_strdup(const char *src)
-{
-	int		len;
-	char	*nstr;
-	int		i;
-
-	i = 0;
-	len = ft_strlen(src);
-	nstr = (char *)malloc(sizeof(*src) * (len + 1));
-	if (!nstr)
-		return (NULL);
-	while (src[i])
-	{
-		nstr[i] = src[i];
-		i++;
-	}
-	nstr[i] = '\0';
-	return (nstr);
 }
 
 char	*ft_strjoin(char const *s1, char const *s2)
@@ -91,4 +71,3 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	nstr[i] = '\0';
 	return (nstr);
 }
-
