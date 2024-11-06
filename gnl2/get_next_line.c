@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 15:55:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 16:16:58 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,8 @@ char*	get_stat(char* s1, int c)
 	}
 	else if (c == 2)
 		return(stat);
-	else if (c == 4)
-		stat = NULL;
 	else if (c == 3)
-		if (!stat)
-			get_stat(NULL, 0);
+		stat = NULL;
 	return(stat);
 
 }
@@ -101,14 +98,14 @@ char*	get_next_line(int fd)
 	char	*tmp;
 	
 	tmp = NULL;
-	get_stat(NULL, 3);
 	if (get_stat(NULL, 2) && checkline(get_stat(NULL, 2)))
 	{
 		tmp = until_nl(get_stat(NULL, 2), 0);
 		get_stat(after_nl(get_stat(NULL, 2)), 1);
-		//get_stat(NULL, 0);
 		return(tmp);
 	}
+	else if (get_stat(NULL, 2))
+		tmp = ft_strjoin(get_stat(NULL, 2), "");
 	chars_read = read(fd, buf, BUFFER_SIZE);
 	while(chars_read > 0)
 	{
@@ -121,14 +118,14 @@ char*	get_next_line(int fd)
 		get_stat(tmp, 1);
 		chars_read = read(fd, buf, BUFFER_SIZE);
 	}
-	return(get_stat(NULL, 4), tmp);
+	return(get_stat(NULL, 3), tmp);
 }
 
-
+/*
 int main(void)
 {
 	int fd;
-	/*
+	
 	printf("test checkline: \n");
 	printf("empty: %d\n", checkline(""));
 	printf("NULL: %d\n", checkline(NULL));
@@ -162,22 +159,22 @@ int main(void)
 	printf("get value: %s\n", get_stat(NULL, 2));
 	printf("free: %s\n", get_stat(NULL, 0));
 	printf("get value: %s\n", get_stat(NULL, 2));
-	*/
+	
 
-	fd = open("./files/variable_nls.txt", O_RDONLY);
+	fd = open("./files/42_with_nl", O_RDONLY);
 
 	char* returnvalue;
-	/*
+	
 	while((returnvalue = get_next_line(fd)) && returnvalue)
 	{
 		printf("%s", returnvalue);
 		free(returnvalue);
 		returnvalue = NULL;
 	}
-	*/
+	
 	int i = 0;
 	char	*tmp;
-	while(i != 20)
+	while(i != 2)
 	{
 		returnvalue = get_next_line(fd);
 		printf("%s", returnvalue);
@@ -191,7 +188,10 @@ int main(void)
 			}
 		i++;
 	}
-	/*	
+
+	printf("\n");
+
+		
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
@@ -205,5 +205,6 @@ int main(void)
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
-	*/
+	
 }
+*/
