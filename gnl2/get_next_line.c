@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/06 21:09:33 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/06 21:10:51 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ char*	get_next_line(int fd)
 	return(get_stat(NULL, 3), tmp);
 }
 
-/*
+
 int main(void)
 {
 	int fd;
@@ -162,7 +162,7 @@ int main(void)
 	printf("free: %s\n", get_stat(NULL, 0));
 	printf("get value: %s\n", get_stat(NULL, 2));
 	*/
-/*
+
 	fd = open("./files/multiple_nl.txt", O_RDONLY);
 	
 	char* returnvalue;
@@ -174,7 +174,7 @@ int main(void)
 		returnvalue = NULL;
 	}
 	*/
-/*
+
 	int i = 0;
 	char	*tmp;
 	while(i != 10)
@@ -209,6 +209,6 @@ int main(void)
 	printf("%s", get_next_line(fd));
 	printf("%s", get_next_line(fd));
 	*/	
-/*
+
 }
-*/
+
