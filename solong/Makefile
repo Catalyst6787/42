@@ -5,16 +5,16 @@ CFLAGS = -Wall -Wextra -Werror -fsanitize=address  # Compilation flags
 
 # Check system type and adjust includes and flags accordingly
 ifeq ($(shell uname), Linux)
-    INCLUDES =  -I/usr/include -Imlx
-    MLX_FLAGS = -Lmlx -lmlx -L/usr/lib/X11 -lXext -lX11
     MLX_DIR = ./mlx-linux
+    MLX_LIB = $(MLX_DIR)/libmlx_$(shell uname).a
+    INCLUDES = -I/usr/include -Imlx
+    MLX_FLAGS = $(MLX_LIB) -L/usr/lib/X11 -lXext -lX11
 else
     MLX_DIR = ./mlx
+    MLX_LIB = $(MLX_DIR)/libmlx_$(shell uname).a
     INCLUDES = -Imlx
     MLX_FLAGS = -Lmlx -lmlx -framework OpenGL -framework AppKit
 endif
-
-MLX_LIB = $(MLX_DIR)/libmlx_$(shell uname).a
 
 # List of source files
 SRC = main.c # Include main.c and all other .c files in the directory
