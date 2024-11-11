@@ -21,25 +21,6 @@ void my_mlx_pixel_put(t_data *data, int x, int y, int color)
     *(unsigned int*)dst = color;
 }
 
-int update_screen(void *param)
-{
-    static int ticks = 0;
-    t_data *img = (t_data*)param;
-
-    if (ticks++ > 50 && !img->first_dots_shown) {  // wait for ~5 seconds (50 * 100ms = 5s)
-        img->first_dots_shown = 1;
-        
-        // Update the screen with more dots
-        my_mlx_pixel_put(img, 5, 11, 0xf9f9f9);
-        my_mlx_pixel_put(img, 5, 13, 0xf9f9f9);
-        my_mlx_pixel_put(img, 5, 15, 0xf9f9f9);
-        
-        mlx_put_image_to_window(img->img, img->img, 0, 0); // Refresh window with new dots
-    }
-
-    return 0;
-}
-
 int main(void)
 {
     void    *mlx;
@@ -65,7 +46,7 @@ int main(void)
     mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 
     // Start the event loop with the update function
-    mlx_loop_hook(mlx, update_screen, &img);
+    //mlx_loop_hook(mlx, update_screen, &img);
 
     mlx_loop(mlx);
     
@@ -73,6 +54,3 @@ int main(void)
     free(mlx);
     return 0;
 }
-
-}
-
