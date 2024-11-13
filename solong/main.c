@@ -40,25 +40,28 @@ int	get_map(t_data *d, char *map_name)
 	int		fd;
 
 	fd = open(map_name, O_RDONLY);
+	if (fd < 0)
+		return(0);
 	d->map = malloc(sizeof(char**));
+	d->map[0] = malloc(sizeof(char*));
 	tmp = get_next_line(fd);
 	while(tmp[i])
 	{
 		if(tmp[i] == '\n')
 		{
-			y++;
 			d->map[y] = malloc(sizeof(char*));
 			if (!d->map[y])
 				return(free(d->map), end_program(d), 0);
 			x = 0;
+			y++;
 		}
 		else
 		{
-			x++;
 			d->map[x][y] = (char)malloc(sizeof(char));
 			if (!d->map[y][x])
 				return(free(d->map), end_program(d), 0);
 			d->map[x][y] = tmp[i];
+			x++;
 		}
 		i++;
 		if(!tmp[i])
@@ -70,6 +73,18 @@ int	get_map(t_data *d, char *map_name)
 	}
 	return(free(tmp), 1);
 }
+
+void free_map(t_data *d)
+{
+    int y = 0;
+    while (d->map[y])
+    {
+        free(d->map[y]);  // Free each row
+        y++;
+    }
+    free(d->map);  // Free the map array
+}
+
 
 void	print_map(t_data *d)
 {
@@ -107,7 +122,7 @@ int	main(void)
     if (!d.win)
         return (free(d.mlx), 1);
 	
-	get_map(&d, "assets/map1.ber");
+	get_map(&d, "maps/map1.ber");
 	print_map(&d);
 
     d.img = mlx_new_image(d.mlx, d.win_l, d.win_h);
