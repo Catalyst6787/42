@@ -61,15 +61,25 @@ int end_program(t_data *d)
 	exit(0);
 }
 
+
+
 int	main(void)
 {
     t_data  d;
 
 	d.win_l = 1920;
 	d.win_h = 1080;
+	d.asset_width = 32;
+	d.asset_height = 32;
+
     d.mlx = mlx_init();
     if (!d.mlx)
         return (1);
+
+	d.graph = malloc(sizeof(t_graph));
+	if (!d.graph)
+    	return (free(d.mlx), 1);
+
     d.win = mlx_new_window(d.mlx, d.win_l, d.win_h, "Hello world!");
     if (!d.win)
         return (free(d.mlx), 1);
@@ -80,8 +90,16 @@ int	main(void)
     my_mlx_pixel_put(&d, 5, 5, 0xf9f9f9);
     my_mlx_pixel_put(&d, 5, 7, 0xf9f9f9);
     my_mlx_pixel_put(&d, 5, 9, 0xf9f9f9);
+	
+	d.graph->floor = mlx_xpm_file_to_image(d.mlx, "./assets/Floor1.xpm", &d.asset_width, &d.asset_height);
+	if (!d.graph->floor)
+	{
+    	free(d.graph);
+    	free(d.mlx);
+    	return (1);
+	}
 
-    mlx_put_image_to_window(d.mlx, d.win, d.img, 0, 0);
+	mlx_put_image_to_window(d.mlx, d.win, d.graph->floor, 0, 0);
 
 	mlx_hook(d.win, ON_DESTROY, 0, end_program, &d); // end program on window close
 	mlx_hook(d.win, 2, 0, key_handler, &d);

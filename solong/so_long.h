@@ -14,6 +14,16 @@
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
 
+typedef struct s_graph
+{
+	void	*wall;
+	void	*floor;
+	void	*collect;
+	void	*exit_closed;
+	void	*exit_opned;
+	void	*player;
+}	t_graph;
+
 typedef struct s_data {
 	void	*mlx;
 	void	*win;
@@ -24,6 +34,12 @@ typedef struct s_data {
 	int		endian;
 	int		win_l;
 	int		win_h;
+	void	*floor;
+	void	*wall;
+	void	*player;
+	int		asset_width;
+	int		asset_height;
+	t_graph	*graph;
 }	t_data;
 
 void    my_mlx_pixel_put(t_data *d, int x, int y, int color);

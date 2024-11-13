@@ -1,7 +1,7 @@
 # Define necessary variables
 NAME = so_long   # Replace with your desired executable name
 CC = gcc            # Compiler, you can change this to clang if desired
-CFLAGS = -Wall -Wextra -Werror -fsanitize=address  # Compilation flags
+CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address  # Compilation flags
 
 # Check system type and adjust includes and flags accordingly
 ifeq ($(shell uname), Linux)
