@@ -17,7 +17,7 @@ else
 endif
 
 # List of source files
-SRC = main.c # Include main.c and all other .c files in the directory
+SRC = $(wildcard *.c) # Include main.c and all other .c files in the directory
 
 # Object files are the .o files corresponding to each source file
 OBJS = $(SRC:.c=.o)

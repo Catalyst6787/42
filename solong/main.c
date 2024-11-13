@@ -9,28 +9,7 @@ void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
     	*(unsigned int*)dst = color;
 	}
 }
-/*
-int move_little_pixel(t_data *d, int direction)
-{
-	static int y;
-	static int x;
 
-	if (!y)
-		y = 10;
-	if (!x)
-		x = 10;
-	mlx_put_image_to_window(d->mlx, d->win, d->img, 0, 0);
-	if (direction == 0)
-		my_mlx_pixel_put(d, x, y--, 0xf9f9f9);
-	else if (direction == 2)
-		my_mlx_pixel_put(d, x++, y, 0xf9f9f9);
-	else if (direction == 1)
-		my_mlx_pixel_put(d, x, y++, 0xf9f9f9);
-	else if (direction == 3)
-		my_mlx_pixel_put(d, x--, y, 0xf9f9f9);
-	return(0);
-}
-*/
 int	key_handler(int key, t_data *d)
 {
 	(void)d;
@@ -40,28 +19,70 @@ int	key_handler(int key, t_data *d)
 		mlx_hook(d->win, 0, 0, close, &d);
 		return(end_program(d));
 	}
-	/*
-	if (key == 13)
-		move_little_pixel(d, 0);
-	else if (key == 0)
-		move_little_pixel(d, 3);
-	else if (key == 1)
-		move_little_pixel(d, 1);
-	else if (key == 2)
-		move_little_pixel(d, 2);
-	*/
 	return(1);
 }
 
 //free everything here
 int end_program(t_data *d)
 {
+	free(d->graph);
 	mlx_destroy_image(d->mlx, d->img);
 	mlx_destroy_window(d->mlx, d->win);
 	exit(0);
 }
 
+int	get_map(t_data *d, char *map_name)
+{
+	char	*tmp;
+	int 	i = 0;
+	int 	x = 0;
+	int 	y = 0;
+	int		fd;
 
+	fd = open(map_name, O_RDONLY);
+	d->map = malloc(sizeof(char**));
+	tmp = get_next_line(fd);
+	while(tmp[i])
+	{
+		if(tmp[i] == '\n')
+		{
+			y++;
+			d->map[y] = malloc(sizeof(char*));
+			if (!d->map[y])
+				return(free(d->map), end_program(d), 0);
+			x = 0;
+		}
+		else
+		{
+			x++;
+			d->map[x][y] = (char)malloc(sizeof(char));
+			if (!d->map[y][x])
+				return(free(d->map), end_program(d), 0);
+			d->map[x][y] = tmp[i];
+		}
+		i++;
+		if(!tmp[i])
+		{
+			free(tmp);
+			tmp = get_next_line(fd);
+			i = 0;
+		}
+	}
+	return(free(tmp), 1);
+}
+
+void	print_map(t_data *d)
+{
+	int x = 0;
+	int y = 0;
+	while(d->map[y])
+	{
+		while(d->map[y][x])
+			printf("%d", d->map[x++][y]); // TODO replace printf w ft_printf
+		x = 0;
+		y++;
+	}
+}
 
 int	main(void)
 {
@@ -71,6 +92,8 @@ int	main(void)
 	d.win_h = 1080;
 	d.asset_width = 32;
 	d.asset_height = 32;
+
+
 
     d.mlx = mlx_init();
     if (!d.mlx)
@@ -83,6 +106,9 @@ int	main(void)
     d.win = mlx_new_window(d.mlx, d.win_l, d.win_h, "Hello world!");
     if (!d.win)
         return (free(d.mlx), 1);
+	
+	get_map(&d, "assets/map1.ber");
+	print_map(&d);
 
     d.img = mlx_new_image(d.mlx, d.win_l, d.win_h);
     d.img_addr = mlx_get_data_addr(d.img, &d.bits_per_pixel, &d.line_length, &d.endian);
