@@ -22,7 +22,7 @@ typedef struct s_graph
 	void	*floor;
 	void	*collect;
 	void	*exit_closed;
-	void	*exit_opned;
+	void	*exit_opened;
 	void	*player;
 }	t_graph;
 
@@ -36,19 +36,39 @@ typedef struct s_data {
 	int		endian;
 	int		win_l;
 	int		win_h;
-	void	*floor;
-	void	*wall;
-	void	*player;
 	int		asset_width;
 	int		asset_height;
 	char	**map;
+	int		map_h;
+	int		map_l;
 	t_graph	*graph;
 }	t_data;
 
-void    my_mlx_pixel_put(t_data *d, int x, int y, int color);
-int key_handler(int key, t_data *d);
-int end_program(t_data *d);
-int main(void);
+// MAIN
+void	my_mlx_pixel_put(t_data *d, int x, int y, int color);
+int		key_handler(int key, t_data *d);
+int		end_program(t_data *d);
+int		main(void);
+
+// INIT
+int		init_struct(t_data *d);
+int		init_graph(t_data *d);
+int		init_mlx(t_data *d);
+int		init_assets(t_data *d);
+
+// MAP
+int		count_all_rows(t_data *d, char *map_str);
+int		create_map(t_data *d, char *map_str);
+int		get_map(t_data *d, char *map_name);
+void	free_map(t_data *d);
+
+// RENDER
+void	aff_asset(t_data *d, int y, int x);
+int render_map(t_data *d);
+
+// DEBUG
+int		print_key_debug(int key, t_data *d);
+void	print_map_debug(t_data *d);
 
 // GNL
 # ifndef BUFFER_SIZE
