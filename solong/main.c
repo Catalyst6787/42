@@ -59,11 +59,10 @@ int	main(void)
 
 	mlx_hook(d.win, ON_DESTROY, 0, end_program, &d); // end program on window close
 	mlx_hook(d.win, 2, 0, print_key_debug, &d);
-	mlx_loop_hook(d.win, 2, 0, render_map(&d));
+	
+	mlx_loop(d.mlx);
 
-    mlx_loop(d.mlx);
-    
-    mlx_destroy_window(d.mlx, d.win);
-    free(d.mlx);
-    return 0;
+	mlx_destroy_window(d.mlx, d.win);
+	free(d.mlx);
+	return 0;
 }

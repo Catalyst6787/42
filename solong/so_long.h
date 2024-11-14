@@ -16,6 +16,11 @@
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
 
+// SYNC
+#define MLX_SYNC_IMAGE_WRITABLE		1
+#define MLX_SYNC_WIN_FLUSH_CMD		2
+#define MLX_SYNC_WIN_CMD_COMPLETED	3
+
 typedef struct s_graph
 {
 	void	*wall;
