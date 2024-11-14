@@ -6,8 +6,7 @@ void	aff_asset(t_data *d, int y, int x)
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->floor, y * d->asset_height, x * d->asset_width);
 	if (d->map[y][x] == '1')
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->wall, y * d->asset_height, x * d->asset_width);
-	if (d->map[y][x] == 'P')
-		mlx_put_image_to_window(d->mlx, d->win, d->graph->player, y * d->asset_height, x * d->asset_width);
+	mlx_put_image_to_window(d->mlx, d->win, d->graph->player, d->player_y * d->asset_height, d->player_x * d->asset_width);
 }
 
 int render_map(t_data *d)

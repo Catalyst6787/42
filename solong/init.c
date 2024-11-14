@@ -16,6 +16,8 @@ int	init_struct(t_data *d)
 	d->map = NULL;
 	d->map_h = 0;
 	d->map_l = 0;
+	d->player_y = 0;
+	d->player_x = 0;
 	return(init_graph(d));
 }
 

@@ -94,3 +94,33 @@ void free_map(t_data *d)
     }
     free(d->map);  // Free the map array
 }
+
+int	check_map(t_data *d)
+{
+	int y = 0;
+	int x = 0;
+	int player_found;
+	player_found = 0;
+	while(d->map[y]) // find loc of player add more checks TODO
+	{
+		while(d->map[y][x])
+		{
+			if (d->map[y][x] == 'P')
+			{
+				player_found++;
+				d->player_y = y;
+				d->player_x = x;
+				d->map[y][x] = '0';
+			}
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+	if (!player_found)
+		return(printf("no player was found"), 0);
+	else if (player_found > 1)
+		return(printf("too many players"), 0);
+	else
+		return(1);
+}

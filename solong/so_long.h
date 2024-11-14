@@ -41,6 +41,8 @@ typedef struct s_data {
 	char	**map;
 	int		map_h;
 	int		map_l;
+	int		player_y;
+	int		player_x;
 	t_graph	*graph;
 }	t_data;
 
@@ -61,10 +63,14 @@ int		count_all_rows(t_data *d, char *map_str);
 int		create_map(t_data *d, char *map_str);
 int		get_map(t_data *d, char *map_name);
 void	free_map(t_data *d);
+int		check_map(t_data *d);
 
 // RENDER
 void	aff_asset(t_data *d, int y, int x);
 int render_map(t_data *d);
+
+// MOVE
+void	move(t_data *d, char way);
 
 // DEBUG
 int		print_key_debug(int key, t_data *d);

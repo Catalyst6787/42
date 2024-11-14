@@ -18,6 +18,15 @@ int	key_handler(int key, t_data *d)
 		mlx_hook(d->win, 0, 0, close, &d);
 		return(end_program(d));
 	}
+	else if (key == 13)
+		move(d, 'U');
+	else if (key == 0)
+		move(d, 'L');
+	else if (key == 1)
+		move(d, 'D');
+	else if (key == 2)
+		move(d, 'R');
+	render_map(d);
 	return(1);
 }
 
@@ -44,10 +53,13 @@ int	main(void)
 	if(!init_assets(&d))
 		return(end_program(&d), 0);
 	
+	if (!check_map(&d))
+		return(end_program(&d), 0);
 	render_map(&d);
 
 	mlx_hook(d.win, ON_DESTROY, 0, end_program, &d); // end program on window close
 	mlx_hook(d.win, 2, 0, print_key_debug, &d);
+	mlx_loop_hook(d.win, 2, 0, render_map(&d));
 
     mlx_loop(d.mlx);
     
