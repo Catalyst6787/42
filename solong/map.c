@@ -89,7 +89,7 @@ int get_map(t_data *d, char *map_name)
 		tmp = get_next_line(fd);
 	}
 	if (!count_all_rows(d, map_str))
-		return(free(map_str), 0);
+		return(0);
 	return(create_map(d, map_str));
 }
 

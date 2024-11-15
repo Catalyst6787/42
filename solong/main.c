@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	if(!init_struct(&d))
 		return(end_program(&d), 0);
 	if(!get_map(&d, argv[1]))
-		return(end_program(&d), 0);
+		return(0);
 	d.win_h = d.map_h * d.asset_height;
 	d.win_l = d.map_l * d.asset_width;
 	if(!init_mlx(&d))
