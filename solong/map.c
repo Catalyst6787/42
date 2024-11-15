@@ -6,7 +6,7 @@ int count_all_rows(t_data *d, char *map_str)
 	int row_length = 0;
 	int	row_nbr = 0;
 	d->map_l = 0;
-	while(map_str[i])
+	while(map_str && map_str[i])
 	{
 		while(map_str[i] && map_str[i] != '\n')
 		{
@@ -18,11 +18,20 @@ int count_all_rows(t_data *d, char *map_str)
 		else if (d->map_l != row_length)
 			return(0);
 		row_nbr++;
-		i++;
+		if (map_str[i])
+			i++;
 		row_length = 0;
 	}
 	d->map_h = row_nbr;
 	return(1);
+}
+
+int	fill_map(t_data *d, int y, int x, char c)
+{
+	if(c && c != '\n')
+		return(d->map[y][x] = c, 1);
+	else
+		return (0);
 }
 
 int	create_map(t_data *d, char *map_str)
@@ -30,35 +39,35 @@ int	create_map(t_data *d, char *map_str)
 	int i = 0;
 	int y = 0;
 	int x = 0;
+
+	if(!map_str)
+		return(0);
 	d->map = malloc(sizeof(char*) * (d->map_h + 1));
 	if (!d->map)
 		return(0);
-	while(y < d->map_h)
+	d->map[d->map_h] = NULL;
+	while(d->map[y])
 	{
-		d->map[y] = malloc(sizeof(char) * (d->map_l + 1)); // Segfault here on sd pass TODO
+		d->map[y] = malloc(sizeof(char) * d->map_l + 1);
 		if (!d->map[y])
-			return(free_map(d), 0);
+			return(0);
+		d->map[y][d->map_l] = '\0';
 		y++;
 	}
-	d->map[y] = malloc(1);
-	if (!d->map[y])
-		return(free_map(d), 0);
-	d->map[y] = 0;
 	y = 0;
-	while(map_str[i] && d->map[y] && d->map[y][x])
+	while(d->map[y])
 	{
-		if (map_str[i] != '\n')
-			d->map[y][x++] = map_str[i];
-		else
+		while(d->map[y][x] && map_str[i] && d->map[y][x] != '\n')
 		{
-			d->map[y][x] = 0;
-			y++;
-			x = 0;
+			fill_map(d, y, x, map_str[i]);
+			x++;
+			i++;
 		}
-		i++;
+		if (map_str[i] == '\n')
+			i++;
+		x = 0;
+		y++;
 	}
-	free(map_str);
-	map_str = NULL;
 	return(1);
 }
 

@@ -16,10 +16,11 @@
 # define ON_EXPOSE 12
 # define ON_DESTROY 17
 
-// SYNC
-#define MLX_SYNC_IMAGE_WRITABLE		1
-#define MLX_SYNC_WIN_FLUSH_CMD		2
-#define MLX_SYNC_WIN_CMD_COMPLETED	3
+# define UP 13
+# define LEFT 0
+# define DOWN 1
+# define RIGHT 2
+
 
 typedef struct s_graph
 {
@@ -48,6 +49,7 @@ typedef struct s_data {
 	int		map_l;
 	int		player_y;
 	int		player_x;
+	int		all_c_found;
 	t_graph	*graph;
 }	t_data;
 
@@ -55,7 +57,7 @@ typedef struct s_data {
 void	my_mlx_pixel_put(t_data *d, int x, int y, int color);
 int		key_handler(int key, t_data *d);
 int		end_program(t_data *d);
-int		main(void);
+int		main(int argc, char **argvs);
 
 // INIT
 int		init_struct(t_data *d);
@@ -69,13 +71,14 @@ int		create_map(t_data *d, char *map_str);
 int		get_map(t_data *d, char *map_name);
 void	free_map(t_data *d);
 int		check_map(t_data *d);
+int		fill_map(t_data *d, int y, int x, char c);
 
 // RENDER
 void	aff_asset(t_data *d, int y, int x);
 int render_map(t_data *d);
 
 // MOVE
-void	move(t_data *d, char way);
+void	move(t_data *d, int way);
 
 // DEBUG
 int		print_key_debug(int key, t_data *d);

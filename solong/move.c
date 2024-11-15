@@ -1,13 +1,13 @@
 #include "so_long.h"
 
-void	move(t_data *d, char way)
+void	move(t_data *d, int way)
 {
-	if (way == 'U' && d->map[d->player_y - 1][d->player_x] != '1')
+	if (way == UP && d->map[d->player_y - 1][d->player_x] != '1')
 		d->player_y--;
-	else if (way == 'D' && d->map[d->player_y + 1][d->player_x] != '1')
+	else if (way == DOWN && d->map[d->player_y + 1][d->player_x] != '1')
 		d->player_y++;
-	else if(way == 'L' && d->map[d->player_y][d->player_x - 1] != '1')
+	else if(way == LEFT && d->map[d->player_y][d->player_x - 1] != '1')
 		d->player_x--;
-	else if(way == 'R' && d->map[d->player_y][d->player_x + 1] != '1')
+	else if(way == RIGHT && d->map[d->player_y][d->player_x + 1] != '1')
 		d->player_x++;
 }

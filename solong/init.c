@@ -2,6 +2,8 @@
 
 int	init_struct(t_data *d)
 {
+	if(!init_graph(d))
+		return(end_program(d), 0);
 	d->mlx = NULL;
 	d->win = NULL;
 	d->img = NULL;
@@ -9,8 +11,8 @@ int	init_struct(t_data *d)
 	d->bits_per_pixel = 0;
 	d->line_length = 0;
 	d->endian =0;
-	d->win_l = 1920;
-	d->win_h = 1080;
+	d->win_l = 0;
+	d->win_h = 0;
 	d->asset_width = 32;
 	d->asset_height = 32;
 	d->map = NULL;
@@ -18,7 +20,8 @@ int	init_struct(t_data *d)
 	d->map_l = 0;
 	d->player_y = 0;
 	d->player_x = 0;
-	return(init_graph(d));
+	d->all_c_found = 0;
+	return(1);
 }
 
 int	init_graph(t_data *d)
@@ -55,6 +58,15 @@ int	init_assets(t_data *d)
 	if (!d->graph->player)
 		return (0);
 	d->graph->wall = mlx_xpm_file_to_image(d->mlx, "./assets/Wall1.xpm", &d->asset_width, &d->asset_height);
+	if (!d->graph->wall)
+		return (0);
+	d->graph->collect = mlx_xpm_file_to_image(d->mlx, "./assets/Collect.xpm", &d->asset_width, &d->asset_height);
+	if (!d->graph->wall)
+		return (0);
+	d->graph->exit_closed = mlx_xpm_file_to_image(d->mlx, "./assets/Exit_closed.xpm", &d->asset_width, &d->asset_height);
+	if (!d->graph->wall)
+		return (0);
+	d->graph->exit_opened = mlx_xpm_file_to_image(d->mlx, "./assets/Exit_opened.xpm", &d->asset_width, &d->asset_height);
 	if (!d->graph->wall)
 		return (0);
 	return(1);

@@ -1,3 +1,4 @@
+/*
 #include "so_long.h"
 
 # ifndef MAPL
@@ -39,7 +40,7 @@ void fill_walls(char map[MAPL][MAPH])
 	while(y < MAPH)
 		map[MAPL - 1][y++] = 'H';
 }
-/*
+
 void print_map(char map[MAPL][MAPH])
 {
 	int x = 0;
@@ -53,7 +54,6 @@ void print_map(char map[MAPL][MAPH])
 		y++;
 	}
 }
-*/
 
 void fill_map(char map[MAPL][MAPH])
 {
@@ -114,7 +114,7 @@ int floodfill(char map[MAPL][MAPH],int  x,int y)
 		return (1);
 		return(0);
 }
-/*
+
 int	main(void)
 {
 	char map[MAPL][MAPH] = {0};

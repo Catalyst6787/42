@@ -12,20 +12,20 @@ void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
 
 int	key_handler(int key, t_data *d)
 {
-	(void)d;
 	if (key == 53 || key == 12)
 	{
 		mlx_hook(d->win, 0, 0, close, &d);
 		return(end_program(d));
 	}
-	else if (key == 13)
-		move(d, 'L');
-	else if (key == 0)
-		move(d, 'U');
-	else if (key == 1)
-		move(d, 'R');
-	else if (key == 2)
-		move(d, 'D');
+	else if (key == UP)
+		move(d, UP);
+	else if (key == LEFT)
+		move(d, LEFT);
+	else if (key == DOWN)
+		move(d, DOWN);
+	else if (key == RIGHT)
+		move(d, RIGHT);
+	
 	render_map(d);
 	return(1);
 }
@@ -41,25 +41,31 @@ int end_program(t_data *d)
 	exit(0);
 }
 
-int	main(void)
+int	main(int argc, char **argv)
 {
+	if (argc < 2)
+		return(0);
     t_data  d;
 	if(!init_struct(&d))
 		return(end_program(&d), 0);
+	if(!get_map(&d, argv[1]))
+		return(end_program(&d), 0);
+	d.win_h = d.map_h * d.asset_height;
+	d.win_l = d.map_l * d.asset_width;
 	if(!init_mlx(&d))
 		return(end_program(&d), 0);
-	if(!get_map(&d, "maps/map1.ber"))
-		return(end_program(&d), 0);
+	
 	if(!init_assets(&d))
 		return(end_program(&d), 0);
 	
+	print_map_debug(&d);
+
 	if (!check_map(&d))
 		return(end_program(&d), 0);
 	render_map(&d);
 
 	mlx_hook(d.win, ON_DESTROY, 0, end_program, &d); // end program on window close
 	mlx_hook(d.win, 2, 0, key_handler, &d);
-	
 	mlx_loop(d.mlx);
 
 	mlx_destroy_window(d.mlx, d.win);
