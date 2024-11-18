@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:26 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 11:55:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:07:15 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,6 @@ int	init_struct(t_data *d)
 	d->map = NULL;
 	d->map_h = 0;
 	d->map_l = 0;
-	//d->player_y = 0;
-	//d->player_x = 0;
-	//d->all_c_found = 0;
-	//d->player_found = 0;
 	return(1);
 }
 

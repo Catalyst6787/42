@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 12:02:08 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:07:58 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,8 +131,8 @@ int	count_features(t_data *d)
 				d->d2->player_x = x;
 				d->map[y][x] = '0';
 			}
-			//else if (d->map[y][x] == 'E')
-			//	d->exit_found++;
+			else if (d->map[y][x] == 'E')
+				d->d2->exit_found++;
 			x++;
 		}
 		x = 0;
@@ -148,10 +148,10 @@ int	check_map(t_data *d)
 		return(printf("no player was found"), 0);
 	else if (d->d2->player_found > 1)
 		return(printf("too many players"), 0);
-	//else if (!d->exit_found)
-	//	return(printf("no exit was found"), 0);
-	//else if (d->exit_found > 1)	
-	//	return(printf("too many exits"), 0);
+	else if (!d->d2->exit_found)
+		return(printf("no exit was found"), 0);
+	else if (d->d2->exit_found > 1)	
+		return(printf("too many exits"), 0);
 	else
 		return(1);
 }
