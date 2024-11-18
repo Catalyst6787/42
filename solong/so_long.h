@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:21:32 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 10:39:46 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int		end_program(t_data *d);
 int		main(int argc, char **argvs);
 
 // INIT
+int		init_all(t_data *d, char **argv);
 int		init_struct(t_data *d);
 int		init_graph(t_data *d);
 int		init_mlx(t_data *d);
