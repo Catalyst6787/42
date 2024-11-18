@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/11/18 10:20:38 by lfaure            #+#    #+#              #
+#    Updated: 2024/11/18 10:20:41 by lfaure           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 # Define necessary variables
 NAME = so_long   # Replace with your desired executable name
 CC = gcc            # Compiler, you can change this to clang if desired
