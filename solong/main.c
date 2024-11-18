@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:41:34 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 10:51:50 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	key_handler(int key, t_data *d)
 }
 
 //free everything here
-int end_program(t_data *d)
+int	end_program(t_data *d)
 {
 	free(d->graph);
 	free(d->mlx);
@@ -54,11 +54,20 @@ int end_program(t_data *d)
 	exit(0);
 }
 
+int	start_hook(t_data *d)
+{
+	mlx_hook(d->win, ON_DESTROY, 0, end_program, d); // end program on window close
+	mlx_hook(d->win, 2, 0, key_handler, d);
+	mlx_loop(d->mlx);
+	return(1);
+}
+
 int	main(int argc, char **argv)
 {
 	if (argc < 2)
 		return(0);
-    t_data  *d = malloc(sizeof(t_data));
+
+	t_data	*d = malloc(sizeof(t_data));
 	if (!init_all(d, argv))
 		return(0);
 
@@ -68,9 +77,7 @@ int	main(int argc, char **argv)
 		return(end_program(d), 0);
 	render_map(d);
 
-	mlx_hook(d->win, ON_DESTROY, 0, end_program, d); // end program on window close
-	mlx_hook(d->win, 2, 0, key_handler, d);
-	mlx_loop(d->mlx);
+	start_hook(d);
 
 	mlx_destroy_window(d->mlx, d->win);
 	free(d->mlx);
