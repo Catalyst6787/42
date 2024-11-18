@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 12:20:57 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:56:10 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,8 @@ int	count_features(t_data *d)
 				d->d2->exit_found++;
 			else if (d->map[y][x] == 'C')
 				d->d2->nbr_of_c++;
+			else if (d->map[y][x] != '1' && d->map[y][x] != '0') // return 0 when unkknow char
+				return(0);
 			x++;
 		}
 		x = 0;
@@ -143,10 +145,45 @@ int	count_features(t_data *d)
 	return(1);
 }
 
+int	check_edges(t_data *d)
+{
+	int y = 0;
+	int x = 0;
+
+	while(d->map[y] && d->map[y][0])
+	{
+		if (d->map[y][0] != '1')
+			return(0);
+		y++;
+	}
+	y = 0;
+	while(d->map[y] && d->map[y][d->map_l - 1])
+	{
+		if (d->map[y][d->map_l - 1] != '1')
+			return(0);
+		y++;
+	}
+	while(d->map[0] && d->map[0][x])
+	{
+		if (d->map[0][x] != '1')
+			return(0);
+		x++;
+	}
+	x = 0;
+	while(d->map[d->map_h - 1] && d->map[d->map_h - 1][x])
+	{
+		if (d->map[d->map_h - 1][x] != '1')
+			return(0);
+		x++;
+	}
+	return(1);
+}
+
 int	check_map(t_data *d)
 {
-	count_features(d);
-	if (!d->d2->player_found)
+	if (!count_features(d))
+		return(printf("map contains unknow char\n"), 0);
+	else if (!d->d2->player_found)
 		return(printf("no player was found\n"), 0);
 	else if (d->d2->player_found > 1)
 		return(printf("too many players\n"), 0);
@@ -156,6 +193,15 @@ int	check_map(t_data *d)
 		return(printf("too many exits\n"), 0);
 	else if (d->d2->nbr_of_c <= 0)
 		return(printf("no collectibles on map\n"), 0);
+	else if (!check_edges(d))
+		return(printf("Missing Wall around map\n"), 0);
+	else if (!floodfill(d->map, d->d2->player_y, d->d2->player_x))
+	{
+		return(printf("Player can't reach exit\n"), 0);
+	}
 	else
+	{
+		replace_f(d);
 		return(1);
+	}
 }

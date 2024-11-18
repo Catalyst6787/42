@@ -6,94 +6,57 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:20:21 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:57:07 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-/*
+
 #include "so_long.h"
 
-# ifndef MAPL
-#  define MAPL 80
-# endif
-
-# ifndef MAPH
-#  define MAPH 40
-#endif
-
-# ifndef STARTX
-#  define STARTX 1
-#endif
-
-# ifndef STARTY
-#  define STARTY 1
-#endif
-
-typedef struct exitspot {
-	int x;
-	int y;
-} exitspot;
-
-void fill_walls(char map[MAPL][MAPH])
+void fill_walls(char **map)
 {
-	int x = 0;
 	int y = 0;
-
-	while(x < MAPL)
-		map[x++][0] = 'H';
-	x = 0;
-	while(x < MAPL)
-		map[x++][MAPH - 1] = 'H';
-	x = 0;
-
+	int x = 0;
 	while(y < MAPH)
-		map[0][y++] = 'H';
+		map[y++][0] = '1';
 	y = 0;
 	while(y < MAPH)
-		map[MAPL - 1][y++] = 'H';
+		map[y++][MAPL - 1] = '1';
+	y = 0;
+	while(x < MAPL)
+		map[0][x++] = '1';
+	x = 0;
+	while(x < MAPL)
+		map[MAPH - 1][x++] = '1';
 }
 
-void print_map(char map[MAPL][MAPH])
+void fill_map_rnd(char **map)
 {
 	int x = 0;
 	int y = 0;
 	while(y < MAPH)
 	{
-		while(x < MAPL)
-			printf("%c", map[x++][y]);
-		x = 0;
-		printf("\n");
-		y++;
-	}
-}
-
-void fill_map(char map[MAPL][MAPH])
-{
-	int x = 0;
-	int y = 0;
-	while(y < MAPH)
-	{
-		while(x < MAPL && map[x][y] != 'S')
-			map[x++][y] = '_';
+		while(x < MAPL && map[y][x] != 'P')
+			map[y][x++] = '0';
 		x = 0;
 		y++;
 	}
 }
 
-void fill_rnd(char map[MAPL][MAPH])
+void fill_rnd(char **map)
 {
 	srand(time(NULL));   // Initialization, should only be called once.
 	//printf("%d\n", (rand() % 5));
 	(void)map;
 
-	int x = 1;
 	int y = 1;
+	int x = 1;
 	while(y < MAPH - 1)
 	{
-		while(x < MAPL - 1 && map[x][y] != 'S')
+		while(x < MAPL - 1 && map[y][x] != 'P')
 		{
 			if ((rand() % 4) == 3)
-				map[x][y] = 'W';
+				map[y][x] = '1';
 			x++;
 		}
 		x = 1;
@@ -102,59 +65,98 @@ void fill_rnd(char map[MAPL][MAPH])
 
 }
 
-int floodfill(char map[MAPL][MAPH],int  x,int y)
+int floodfill(char **map,int  x,int y)
 {
 	//print_map(map);
-	if (map[x][y] == 'X')
+	if (map[x][y] == 'E')
 		return(1);
-	map[x][y] = 'F';
-	if ((map[x + 1][y] == 'X') && (floodfill(map, x + 1, y)))
+	if (map[x][y] != 'P')
+		map[x][y] = 'F';
+	if ((map[x + 1][y] == 'E') && (floodfill(map, x + 1, y)))
 		return (1);
-	else if ((map[x][y + 1] == 'X') && (floodfill(map, x, y + 1)))
+	else if ((map[x][y + 1] == 'E') && (floodfill(map, x, y + 1)))
 		return (1);
-	else if ((map[x - 1][y] == 'X') && (floodfill(map, x - 1, y)))
+	else if ((map[x - 1][y] == 'E') && (floodfill(map, x - 1, y)))
 		return (1);
-	else if ((map[x][y - 1] == 'X') && (floodfill(map, x, y - 1)))
+	else if ((map[x][y - 1] == 'E') && (floodfill(map, x, y - 1)))
 		return (1);
-	else if ((map[x + 1][y] == '_') && (floodfill(map, x + 1, y)))
+	else if ((map[x + 1][y] == '0') && (floodfill(map, x + 1, y)))
 		return (1);
-	else if ((map[x][y + 1] == '_') && (floodfill(map, x, y + 1)))
+	else if ((map[x][y + 1] == '0') && (floodfill(map, x, y + 1)))
 		return (1);
-	else if ((map[x - 1][y] == '_') && (floodfill(map, x - 1, y)))
+	else if ((map[x - 1][y] == '0') && (floodfill(map, x - 1, y)))
 		return (1);
-	else if ((map[x][y - 1] == '_') && (floodfill(map, x, y - 1)))
+	else if ((map[x][y - 1] == '0') && (floodfill(map, x, y - 1)))
 		return (1);
-		return(0);
+	return(0);
 }
 
-int	main(void)
+int	create_rnd_map(t_data *d)
 {
-	char map[MAPL][MAPH] = {0};
+	int y = 0;
+	
+	d->map = malloc(sizeof(char*) * (MAPH + 1));
+	if (!d->map)
+		return(0);
+	d->map[MAPH] = NULL;
+	while(d->map[y])
+	{
+		d->map[y] = malloc(sizeof(char) * MAPL + 1);
+		if (!d->map[y])
+			return(0);
+		d->map[y][MAPL] = '\0';
+		y++;
+	}
+	return(1);
+}
 
+void replace_f(t_data *d)
+{
+	int x = 0;
+	int y = 0;
+	while(d->map[y])
+	{
+		while(d->map[y][x])
+		{
+			if (d->map[y][x] == 'F')
+				d->map[y][x] = '0';
+			x++;
+		}
+		x = 0;
+		y++;
+	}
+}
 
-	exitspot exitpoint;
+int	get_rnd_map(t_data *d)
+{
 
-	exitpoint.x = 5;
-	exitpoint.y = 5;
+	create_rnd_map(d);
 
-	printf("exit is located at coordinates y = %d, x = %d.\n\n", exitpoint.y, exitpoint.x);
+	d->d2->exit_y = 5;
+	d->d2->exit_x = 5;
+
+	printf("exit is located at coordinates y = %d, x = %d.\n\n", d->d2->exit_y, d->d2->exit_x);
 	//print_map(map);
 	//printf("\n");
-	fill_map(map);
-	print_map(map);
+	fill_map_rnd(d->map);
+	print_map_debug(d);
 	printf("\n");
-	fill_walls(map);
-	print_map(map);
+	fill_walls(d->map);
+	print_map_debug(d);
 	printf("\n");
-	fill_rnd(map);
-	print_map(map);
+	fill_rnd(d->map);
+	print_map_debug(d);
 	printf("\n");
-	map[STARTX][STARTY] = 'S';
-	// map[MAPL - STARTX - 1][MAPH - STARTY - 1] = 'X'; // map in bottom right
-	map[MAPL - (MAPL / 2)][MAPH - (MAPH / 2)] = 'X'; // map in middle
-	print_map(map);
+	d->map[STARTX][STARTY] = 'P';
+	d->map[MAPL - STARTX - 1][MAPH - STARTY - 1] = 'E'; // Exit in bottom right
+	d->map[STARTX + 2][STARTY + 2] = 'C';
+	//d->map[MAPL / 2)][MAPH / 2)] = 'E'; // exit in middle
+	print_map_debug(d);
 	
-	printf("%d\n", floodfill(map, STARTX, STARTY));
-	print_map(map);
+	printf("%d\n", floodfill(d->map, STARTX, STARTY));
+	replace_f(d);
+	print_map_debug(d);
+	d->map_h = MAPH;
+	d->map_l = MAPL;
+	return(1);
 }
-*/

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 12:16:38 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 14:54:01 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,25 @@
 # define DOWN 1
 # define RIGHT 2
 
+// RND
+
+# ifndef MAPL
+#  define MAPL 10
+# endif
+
+# ifndef MAPH
+#  define MAPH 10
+#endif
+
+# ifndef STARTX
+#  define STARTX 5
+#endif
+
+# ifndef STARTY
+#  define STARTY 5
+#endif
+
+// DATA
 
 typedef struct s_graph
 {
@@ -51,6 +70,8 @@ typedef struct s_data2 {
 	int		nbr_of_c;
 	int		player_found;
 	int		exit_found;
+	int		exit_y;
+	int		exit_x;
 }	t_data2;
 
 typedef struct s_data {
@@ -102,6 +123,15 @@ int render_map(t_data *d);
 
 // MOVE
 void	move(t_data *d, int way);
+
+// RND
+int	get_rnd_map(t_data *d);
+int	create_rnd_map(t_data *d);
+int floodfill(char **map,int  x,int y);
+void fill_rnd(char **map);
+void fill_map_rnd(char **map);
+void fill_walls(char **map);
+void replace_f(t_data *d);
 
 // DEBUG
 int		print_key_debug(int key, t_data *d);
