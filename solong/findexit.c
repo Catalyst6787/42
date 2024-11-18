@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 15:31:27 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 16:39:52 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,23 +139,23 @@ int	get_rnd_map(t_data *d)
 	//print_map(map);
 	//printf("\n");
 	fill_map_rnd(d->map);
-	print_map_debug(d);
+	//print_map_debug(d);
 	printf("\n");
 	fill_walls(d->map);
-	print_map_debug(d);
+	//print_map_debug(d);
 	printf("\n");
 	fill_rnd(d->map);
-	print_map_debug(d);
+	//print_map_debug(d);
 	printf("\n");
 	d->map[STARTY][STARTX] = 'P';
 	d->map[MAPH - STARTY - 1][MAPL - STARTX - 1] = 'E'; // Exit in bottom right
 	d->map[STARTY + 2][STARTX + 2] = 'C';
 	//d->map[MAPL / 2)][MAPH / 2)] = 'E'; // exit in middle
-	print_map_debug(d);
+	//print_map_debug(d);
 	
 	printf("%d\n", floodfill(d->map, STARTY, STARTX));
 	replace_f(d);
-	print_map_debug(d);
+	//print_map_debug(d);
 	d->map_h = MAPH;
 	d->map_l = MAPL;
 	return(1);
