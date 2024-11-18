@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 14:57:07 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 15:31:27 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,28 +65,28 @@ void fill_rnd(char **map)
 
 }
 
-int floodfill(char **map,int  x,int y)
+int floodfill(char **map,int  y,int x)
 {
 	//print_map(map);
-	if (map[x][y] == 'E')
+	if (map[y][x] == 'E')
 		return(1);
-	if (map[x][y] != 'P')
-		map[x][y] = 'F';
-	if ((map[x + 1][y] == 'E') && (floodfill(map, x + 1, y)))
+	if (map[y][x] != 'P')
+		map[y][x] = 'F';
+	if ((map[y + 1][x] == 'E') && (floodfill(map, y + 1, x)))
 		return (1);
-	else if ((map[x][y + 1] == 'E') && (floodfill(map, x, y + 1)))
+	else if ((map[y][x + 1] == 'E') && (floodfill(map, y, x + 1)))
 		return (1);
-	else if ((map[x - 1][y] == 'E') && (floodfill(map, x - 1, y)))
+	else if ((map[y - 1][x] == 'E') && (floodfill(map, y - 1, x)))
 		return (1);
-	else if ((map[x][y - 1] == 'E') && (floodfill(map, x, y - 1)))
+	else if ((map[y][x - 1] == 'E') && (floodfill(map, y, x - 1)))
 		return (1);
-	else if ((map[x + 1][y] == '0') && (floodfill(map, x + 1, y)))
+	else if ((map[y + 1][x] == '0') && (floodfill(map, y + 1, x)))
 		return (1);
-	else if ((map[x][y + 1] == '0') && (floodfill(map, x, y + 1)))
+	else if ((map[y][x + 1] == '0') && (floodfill(map, y, x + 1)))
 		return (1);
-	else if ((map[x - 1][y] == '0') && (floodfill(map, x - 1, y)))
+	else if ((map[y - 1][x] == '0') && (floodfill(map, y - 1, x)))
 		return (1);
-	else if ((map[x][y - 1] == '0') && (floodfill(map, x, y - 1)))
+	else if ((map[y][x - 1] == '0') && (floodfill(map, y, x - 1)))
 		return (1);
 	return(0);
 }
@@ -147,13 +147,13 @@ int	get_rnd_map(t_data *d)
 	fill_rnd(d->map);
 	print_map_debug(d);
 	printf("\n");
-	d->map[STARTX][STARTY] = 'P';
-	d->map[MAPL - STARTX - 1][MAPH - STARTY - 1] = 'E'; // Exit in bottom right
-	d->map[STARTX + 2][STARTY + 2] = 'C';
+	d->map[STARTY][STARTX] = 'P';
+	d->map[MAPH - STARTY - 1][MAPL - STARTX - 1] = 'E'; // Exit in bottom right
+	d->map[STARTY + 2][STARTX + 2] = 'C';
 	//d->map[MAPL / 2)][MAPH / 2)] = 'E'; // exit in middle
 	print_map_debug(d);
 	
-	printf("%d\n", floodfill(d->map, STARTX, STARTY));
+	printf("%d\n", floodfill(d->map, STARTY, STARTX));
 	replace_f(d);
 	print_map_debug(d);
 	d->map_h = MAPH;
