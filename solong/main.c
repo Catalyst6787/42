@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:51:50 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 11:47:57 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,9 @@ int	main(int argc, char **argv)
 	if (argc < 2)
 		return(0);
 
-	t_data	*d = malloc(sizeof(t_data));
+	t_data	*d = malloc(sizeof(t_data)); // + (sizeof(void*) * 3) + (sizeof(int) * 15) + (sizeof(char**)) + sizeof(t_graph));
+	if (!d)
+		return(end_program(d), 0);
 	if (!init_all(d, argv))
 		return(0);
 

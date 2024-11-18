@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:20:45 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:02:08 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int count_all_rows(t_data *d, char *map_str)
 		if (row_nbr == 0)
 			d->map_l = row_length;
 		else if (d->map_l != row_length)
-			return(0);
+			return(printf("mismatched row length"), 0);
 		row_nbr++;
 		if (map_str[i])
 			i++;
@@ -116,32 +116,42 @@ void free_map(t_data *d)
     free(d->map);  // Free the map array
 }
 
-int	check_map(t_data *d)
+int	count_features(t_data *d)
 {
 	int y = 0;
 	int x = 0;
-	int player_found;
-	player_found = 0;
-	while(d->map[y]) // find loc of player add more checks TODO
+	while(d->map[y]) // count player and exit find loc of player
 	{
 		while(d->map[y][x])
 		{
 			if (d->map[y][x] == 'P')
 			{
-				player_found++;
-				d->player_y = y;
-				d->player_x = x;
+				d->d2->player_found++;
+				d->d2->player_y = y;
+				d->d2->player_x = x;
 				d->map[y][x] = '0';
 			}
+			//else if (d->map[y][x] == 'E')
+			//	d->exit_found++;
 			x++;
 		}
 		x = 0;
 		y++;
 	}
-	if (!player_found)
+	return(1);
+}
+
+int	check_map(t_data *d)
+{
+	count_features(d);
+	if (!d->d2->player_found)
 		return(printf("no player was found"), 0);
-	else if (player_found > 1)
+	else if (d->d2->player_found > 1)
 		return(printf("too many players"), 0);
+	//else if (!d->exit_found)
+	//	return(printf("no exit was found"), 0);
+	//else if (d->exit_found > 1)	
+	//	return(printf("too many exits"), 0);
 	else
 		return(1);
 }

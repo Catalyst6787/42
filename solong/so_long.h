@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:46:52 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:01:16 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,14 @@ typedef struct s_graph
 	void	*player;
 }	t_graph;
 
+typedef struct s_data2 {
+	int		player_y;
+	int		player_x;
+	int		all_c_found;
+	int		player_found;
+	int		exit_found;
+}	t_data2;
+
 typedef struct s_data {
 	void	*mlx;
 	void	*win;
@@ -59,9 +67,8 @@ typedef struct s_data {
 	char	**map;
 	int		map_h;
 	int		map_l;
-	int		player_y;
-	int		player_x;
-	int		all_c_found;
+
+	t_data2	*d2;
 	t_graph	*graph;
 }	t_data;
 
@@ -73,6 +80,7 @@ int		start_hook(t_data *d);
 int		main(int argc, char **argvs);
 
 // INIT
+int	init_data2(t_data *d);
 int		init_all(t_data *d, char **argv);
 int		init_struct(t_data *d);
 int		init_graph(t_data *d);

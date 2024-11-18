@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:26 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:38:38 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 11:55:43 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	init_struct(t_data *d)
 {
 	if(!init_graph(d))
 		return(end_program(d), 0);
+	if(!init_data2(d))
+		return(end_program(d), 0);
 	d->mlx = NULL;
 	d->win = NULL;
 	d->img = NULL;
@@ -46,9 +48,23 @@ int	init_struct(t_data *d)
 	d->map = NULL;
 	d->map_h = 0;
 	d->map_l = 0;
-	d->player_y = 0;
-	d->player_x = 0;
-	d->all_c_found = 0;
+	//d->player_y = 0;
+	//d->player_x = 0;
+	//d->all_c_found = 0;
+	//d->player_found = 0;
+	return(1);
+}
+
+int	init_data2(t_data *d)
+{
+	d->d2 = malloc(sizeof(t_data2));
+	if (!d->d2)
+		return (0);
+	d->d2->player_y = 0;
+	d->d2->player_x = 0;
+	d->d2->all_c_found = 0;
+	d->d2->player_found = 0;
+	d->d2->exit_found = 0;
 	return(1);
 }
 

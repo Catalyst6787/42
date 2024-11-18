@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:53 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:20:54 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:04:16 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	aff_asset(t_data *d, int y, int x)
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->floor, x * d->asset_width, y * d->asset_height);
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->collect, x * d->asset_width, y * d->asset_height);
 	}
-	else if (d->map[y][x] == 'E' && !d->all_c_found)
+	else if (d->map[y][x] == 'E' && !d->d2->all_c_found)
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->exit_closed, x * d->asset_width, y * d->asset_height);
-	else if (d->map[y][x] == 'E' && d->all_c_found)
+	else if (d->map[y][x] == 'E' && d->d2->all_c_found)
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->exit_opened, x * d->asset_width, y * d->asset_height);
 }
 
@@ -43,6 +43,6 @@ int render_map(t_data *d) // test
 		x = 0;
 		y++;
 	}
-	mlx_put_image_to_window(d->mlx, d->win, d->graph->player, d->player_x * d->asset_width, d->player_y * d->asset_height);
+	mlx_put_image_to_window(d->mlx, d->win, d->graph->player, d->d2->player_x * d->asset_width, d->d2->player_y * d->asset_height);
 	return(1);
 }
