@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 12:01:16 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:16:38 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ typedef struct s_data2 {
 	int		player_y;
 	int		player_x;
 	int		all_c_found;
+	int		nbr_of_c;
 	int		player_found;
 	int		exit_found;
 }	t_data2;

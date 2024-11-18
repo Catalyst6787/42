@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 12:07:58 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:20:57 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ int	count_features(t_data *d)
 			}
 			else if (d->map[y][x] == 'E')
 				d->d2->exit_found++;
+			else if (d->map[y][x] == 'C')
+				d->d2->nbr_of_c++;
 			x++;
 		}
 		x = 0;
@@ -145,13 +147,15 @@ int	check_map(t_data *d)
 {
 	count_features(d);
 	if (!d->d2->player_found)
-		return(printf("no player was found"), 0);
+		return(printf("no player was found\n"), 0);
 	else if (d->d2->player_found > 1)
-		return(printf("too many players"), 0);
+		return(printf("too many players\n"), 0);
 	else if (!d->d2->exit_found)
-		return(printf("no exit was found"), 0);
+		return(printf("no exit was found\n"), 0);
 	else if (d->d2->exit_found > 1)	
-		return(printf("too many exits"), 0);
+		return(printf("too many exits\n"), 0);
+	else if (d->d2->nbr_of_c <= 0)
+		return(printf("no collectibles on map\n"), 0);
 	else
 		return(1);
 }

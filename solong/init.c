@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:26 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 12:07:15 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/18 12:17:21 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ int	init_data2(t_data *d)
 	d->d2->player_y = 0;
 	d->d2->player_x = 0;
 	d->d2->all_c_found = 0;
+	d->d2->nbr_of_c = 0;
 	d->d2->player_found = 0;
 	d->d2->exit_found = 0;
 	return(1);
