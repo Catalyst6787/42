@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:26 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 14:29:50 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 09:39:09 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ int init_all(t_data *d, char **argv)
 		return(end_program(d), 0);
 	if (argv[1][0] == 'R')
 	{
-		if(!get_rnd_map(d))
+		if(!get_rnd_loop(d))
 			return(0);
 	}
 	else
 	{
 		if (!get_map(d, argv[1]))
 			return(0);
-		d->win_h = d->map_h * d->asset_height;
-		d->win_l = d->map_l * d->asset_width;
 	}
+	d->win_h = d->map_h * d->asset_height;
+	d->win_l = d->map_l * d->asset_width;
 	if(!init_mlx(d))
 		return(end_program(d), 0);
 	if(!init_assets(d))

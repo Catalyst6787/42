@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 16:39:52 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 09:59:50 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int floodfill(char **map,int  y,int x)
 	//print_map(map);
 	if (map[y][x] == 'E')
 		return(1);
-	if (map[y][x] != 'P')
+	if (map[y][x] != 'P' && map[y][x] != 'C')
 		map[y][x] = 'F';
 	if ((map[y + 1][x] == 'E') && (floodfill(map, y + 1, x)))
 		return (1);
@@ -130,16 +130,15 @@ void replace_f(t_data *d)
 int	get_rnd_map(t_data *d)
 {
 
-	create_rnd_map(d);
+	if(!create_rnd_map(d))
+		return(printf("Couldnt malloc the map"), 0);
 
 	d->d2->exit_y = 5;
 	d->d2->exit_x = 5;
 
 	printf("exit is located at coordinates y = %d, x = %d.\n\n", d->d2->exit_y, d->d2->exit_x);
-	//print_map(map);
-	//printf("\n");
 	fill_map_rnd(d->map);
-	//print_map_debug(d);
+	print_map_debug(d);
 	printf("\n");
 	fill_walls(d->map);
 	//print_map_debug(d);
@@ -147,16 +146,32 @@ int	get_rnd_map(t_data *d)
 	fill_rnd(d->map);
 	//print_map_debug(d);
 	printf("\n");
-	d->map[STARTY][STARTX] = 'P';
-	d->map[MAPH - STARTY - 1][MAPL - STARTX - 1] = 'E'; // Exit in bottom right
-	d->map[STARTY + 2][STARTX + 2] = 'C';
+	
 	//d->map[MAPL / 2)][MAPH / 2)] = 'E'; // exit in middle
 	//print_map_debug(d);
 	
 	printf("%d\n", floodfill(d->map, STARTY, STARTX));
 	replace_f(d);
+	d->map[STARTY][STARTX] = 'P';
+	d->map[MAPH - 2][MAPL - 2] = 'E'; // Exit in bottom right
+	d->map[STARTY + 2][STARTX + 2] = 'C';
 	//print_map_debug(d);
 	d->map_h = MAPH;
 	d->map_l = MAPL;
+	return(1);
+}
+
+int get_rnd_loop(t_data *d)
+{
+	while(get_rnd_map(d) && !check_map(d))
+	{
+		free_map(d);
+		d->d2->exit_found = 0;
+		d->d2->nbr_of_c = 0;
+		d->d2->player_found = 0;
+	}
+	d->d2->exit_found = 0;
+	//d->d2->nbr_of_c = 0;
+	//d->d2->player_found = 0;
 	return(1);
 }

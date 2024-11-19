@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 14:54:01 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 10:16:34 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@
 // RND
 
 # ifndef MAPL
-#  define MAPL 10
+#  define MAPL 40 //  max  80 recommended 40
 # endif
 
 # ifndef MAPH
-#  define MAPH 10
+#  define MAPH 40 // max 43 recommended 40
 #endif
 
 # ifndef STARTX
-#  define STARTX 5
+#  define STARTX 2
 #endif
 
 # ifndef STARTY
-#  define STARTY 5
+#  define STARTY 2
 #endif
 
 // DATA
@@ -125,6 +125,7 @@ int render_map(t_data *d);
 void	move(t_data *d, int way);
 
 // RND
+int get_rnd_loop(t_data *d);
 int	get_rnd_map(t_data *d);
 int	create_rnd_map(t_data *d);
 int floodfill(char **map,int  x,int y);
