@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 14:56:10 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:50:41 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int count_all_rows(t_data *d, char *map_str)
 		if (row_nbr == 0)
 			d->map_l = row_length;
 		else if (d->map_l != row_length)
-			return(printf("mismatched row length"), 0);
+			return(ft_printf("mismatched row length"), 0);
 		row_nbr++;
 		if (map_str[i])
 			i++;
@@ -182,22 +182,22 @@ int	check_edges(t_data *d)
 int	check_map(t_data *d)
 {
 	if (!count_features(d))
-		return(printf("map contains unknow char\n"), 0);
+		return(ft_printf("map contains unknow char\n"), 0);
 	else if (!d->d2->player_found)
-		return(printf("no player was found\n"), 0);
+		return(ft_printf("no player was found\n"), 0);
 	else if (d->d2->player_found > 1)
-		return(printf("too many players\n"), 0);
+		return(ft_printf("too many players\n"), 0);
 	else if (!d->d2->exit_found)
-		return(printf("no exit was found\n"), 0);
+		return(ft_printf("no exit was found\n"), 0);
 	else if (d->d2->exit_found > 1)	
-		return(printf("too many exits\n"), 0);
+		return(ft_printf("too many exits\n"), 0);
 	else if (d->d2->nbr_of_c <= 0)
-		return(printf("no collectibles on map\n"), 0);
+		return(ft_printf("no collectibles on map\n"), 0);
 	else if (!check_edges(d))
-		return(printf("Missing Wall around map\n"), 0);
+		return(ft_printf("Missing Wall around map\n"), 0);
 	else if (!floodfill(d->map, d->d2->player_y, d->d2->player_x))
 	{
-		return(printf("Player can't reach exit\n"), 0);
+		return(ft_printf("Player can't reach exit\n"), 0);
 	}
 	else
 	{

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:48 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 10:52:38 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:50:43 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	get_events(t_data *d)
 	}
 	if (d->map[d->d2->player_y][d->d2->player_x] == 'E' && d->d2->nbr_of_c == 0)
 	{
-		return(printf("--- You Win!! ---\n--- Game Over ---\n"), 0);
+		return(ft_printf("--- You Win!! ---\n--- Game Over ---\n"), 0);
 	}
 	return(1);
 }

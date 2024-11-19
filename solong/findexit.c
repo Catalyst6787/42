@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 11:09:33 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:50:29 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void fill_map_rnd(char **map)
 void fill_rnd(char **map)
 {
 	srand(time(NULL));   // Initialization, should only be called once.
-	//printf("%d\n", (rand() % 5));
+	//ft_printf("%d\n", (rand() % 5));
 	(void)map;
 
 	int y = 1;
@@ -55,8 +55,10 @@ void fill_rnd(char **map)
 	{
 		while(x < MAPL - 1 && map[y][x] != 'P')
 		{
-			if ((rand() % 4) == 3)
+			if ((rand() % 4) == 1)
 				map[y][x] = '1';
+			else if ((rand() % 100) == 1)
+				map[y][x] = 'C';
 			x++;
 		}
 		x = 1;
@@ -72,6 +74,8 @@ int floodfill(char **map,int  y,int x)
 		return(1);
 	if (map[y][x] != 'P' && map[y][x] != 'C')
 		map[y][x] = 'F';
+	else if (map[y][x] == 'C')
+		map[y][x] = 'X';
 	if ((map[y + 1][x] == 'E') && (floodfill(map, y + 1, x)))
 		return (1);
 	else if ((map[y][x + 1] == 'E') && (floodfill(map, y, x + 1)))
@@ -80,13 +84,21 @@ int floodfill(char **map,int  y,int x)
 		return (1);
 	else if ((map[y][x - 1] == 'E') && (floodfill(map, y, x - 1)))
 		return (1);
-	else if ((map[y + 1][x] == '0' || map[y + 1][x] == 'C') && (floodfill(map, y + 1, x)))
+	else if ((map[y + 1][x] == '0') && (floodfill(map, y + 1, x)))
 		return (1);
-	else if ((map[y][x + 1] == '0' || map[y][x + 1] == 'C') && (floodfill(map, y, x + 1)))
+	else if ((map[y][x + 1] == '0') && (floodfill(map, y, x + 1)))
 		return (1);
-	else if ((map[y - 1][x] == '0' || map[y - 1][x] == 'C') && (floodfill(map, y - 1, x)))
+	else if ((map[y - 1][x] == '0') && (floodfill(map, y - 1, x)))
 		return (1);
-	else if ((map[y][x - 1] == '0' || map[y][x - 1] == 'C') && (floodfill(map, y, x - 1)))
+	else if ((map[y][x - 1] == '0') && (floodfill(map, y, x - 1)))
+		return (1);
+	else if ((map[y + 1][x] == 'C') && (floodfill(map, y + 1, x)))
+		return (1);
+	else if ((map[y][x + 1] == 'C') && (floodfill(map, y, x + 1)))
+		return (1);
+	else if ((map[y - 1][x] == 'C') && (floodfill(map, y - 1, x)))
+		return (1);
+	else if ((map[y][x - 1] == 'C') && (floodfill(map, y, x - 1)))
 		return (1);
 	return(0);
 }
@@ -120,6 +132,8 @@ void replace_f(t_data *d)
 		{
 			if (d->map[y][x] == 'F')
 				d->map[y][x] = '0';
+			else if (d->map[y][x] == 'X')
+				d->map[y][x] = 'C';
 			x++;
 		}
 		x = 0;
@@ -131,26 +145,26 @@ int	get_rnd_map(t_data *d)
 {
 
 	if(!create_rnd_map(d))
-		return(printf("Couldnt malloc the map"), 0);
+		return(ft_printf("Couldnt malloc the map"), 0);
 
 	d->d2->exit_y = 5;
 	d->d2->exit_x = 5;
 
-	printf("exit is located at coordinates y = %d, x = %d.\n\n", d->d2->exit_y, d->d2->exit_x);
+	ft_printf("exit is located at coordinates y = %d, x = %d.\n\n", d->d2->exit_y, d->d2->exit_x);
 	fill_map_rnd(d->map);
-	print_map_debug(d);
-	printf("\n");
+	//print_map_debug(d);
+	//ft_printf("\n");
 	fill_walls(d->map);
 	//print_map_debug(d);
-	printf("\n");
+	//ft_printf("\n");
 	fill_rnd(d->map);
 	//print_map_debug(d);
-	printf("\n");
+	//ft_printf("\n");
 	
 	//d->map[MAPL / 2)][MAPH / 2)] = 'E'; // exit in middle
 	//print_map_debug(d);
 	
-	printf("%d\n", floodfill(d->map, STARTY, STARTX));
+	ft_printf("%d\n", floodfill(d->map, STARTY, STARTX));
 	replace_f(d);
 	d->map[STARTY][STARTX] = 'P';
 	d->map[MAPH - 2][MAPL - 2] = 'E'; // Exit in bottom right

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:53 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 12:13:32 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:50:45 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	aff_asset(t_data *d, int y, int x)
 	else if (d->map[y][x] == 'E' && d->d2->nbr_of_c == 0)
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->exit_opened, x * d->asset_width, y * d->asset_height);
 	else
-		printf("problem in aff asset");
+		ft_printf("problem in aff asset");
 }
 
 int render_map(t_data *d) // test

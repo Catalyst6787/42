@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:13:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/13 17:24:59 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:50:32 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,7 +129,7 @@ int main(void)
 	while(i != 10)
 	{
 		returnvalue = get_next_line(fd);
-		printf("%s", returnvalue);
+		ft_printf("%s", returnvalue);
 		free(returnvalue);
 		returnvalue = NULL;
 		if (i == 11)
@@ -141,7 +141,7 @@ int main(void)
 		i++;
 	}
 
-	printf("\n");
+	ft_printf("\n");
 
 
 }

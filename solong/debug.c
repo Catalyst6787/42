@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:14 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 10:20:16 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 13:50:25 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 int print_key_debug(int key, t_data *d)
 {
 	(void)d;
-	printf("EVENT! Key pressed: %d\n", key);
+	ft_printf("EVENT! Key pressed: %d\n", key);
 	if (key == 53 || key == 12)
 	{
 		mlx_hook(d->win, 0, 0, close, &d);
@@ -30,8 +30,8 @@ void	print_map_debug(t_data *d)
 	while(d->map[y])
 	{
 		while(d->map[y][x])
-			printf("%c", d->map[y][x++]); // TODO replace printf w ft_printf
-		printf("\n");
+			ft_printf("%c", d->map[y][x++]); // TODO replace ft_printf w ft_ft_printf
+		ft_printf("\n");
 		x = 0;
 		y++;
 	}
