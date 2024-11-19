@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 13:50:29 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 15:06:53 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -169,6 +169,7 @@ int	get_rnd_map(t_data *d)
 	d->map[STARTY][STARTX] = 'P';
 	d->map[MAPH - 2][MAPL - 2] = 'E'; // Exit in bottom right
 	d->map[STARTY + 2][STARTX + 2] = 'C';
+	d->map[2][MAPL - 2] = 'M';
 	//print_map_debug(d);
 	d->map_h = MAPH;
 	d->map_l = MAPL;

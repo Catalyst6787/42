@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 14:19:01 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:56:40 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,13 @@ int		check_map(t_data *d);
 int		fill_map(t_data *d, int y, int x, char c);
 
 // RENDER
-void	aff_asset(t_data *d, int y, int x);
+int	aff_asset(t_data *d, int y, int x);
 int render_map(t_data *d);
 
 // MOVE
 int	get_events(t_data *d);
 int	move(t_data *d, int way);
+int	move_monster(t_data *d, int y, int x);
 
 // RND
 int get_rnd_loop(t_data *d);

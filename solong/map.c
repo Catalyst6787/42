@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 13:50:41 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:52:15 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ int	count_features(t_data *d)
 				d->d2->exit_found++;
 			else if (d->map[y][x] == 'C')
 				d->d2->nbr_of_c++;
-			else if (d->map[y][x] != '1' && d->map[y][x] != '0') // return 0 when unkknow char
+			else if (d->map[y][x] != '1' && d->map[y][x] != '0' && d->map[y][x] != 'M') // return 0 when unkknow char
 				return(0);
 			x++;
 		}

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:48 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 13:50:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 15:03:09 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,24 @@ int	get_events(t_data *d)
 		return(ft_printf("--- You Win!! ---\n--- Game Over ---\n"), 0);
 	}
 	return(1);
+}
+
+int	move_monster(t_data *d, int y, int x)
+{
+	if (d->d2->player_y == y && d->d2->player_x == x)
+		return(1);
+	else if ((d->d2->player_y - 1 == y && d->d2->player_x == x) 
+	|| (d->d2->player_x - 1 == x && d->d2->player_y == y)
+	|| (d->d2->player_y + 1 == y && d->d2->player_x == x)
+	|| (d->d2->player_x + 1 == x && d->d2->player_y == y))
+		return(1);
+	else if (d->d2->player_y > y && d->map[y + 1][x] == '0')
+		return(d->map[y + 1][x] = 'M', d->map[y][x] = '0', 0);
+	else if (d->d2->player_y < y && d->map[y - 1][x] == '0')
+		return(d->map[y - 1][x] = 'M', d->map[y][x] = '0', 0);
+	else if (d->d2->player_x > x && d->map[y][x + 1] == '0')
+		return(d->map[y][x + 1] = 'M', d->map[y][x] = '0', 0);
+	else if (d->d2->player_x < x && d->map[y][x - 1] == '0')
+		return(d->map[y][x - 1] = 'M', d->map[y][x] = '0', 0);
+	return(0);
 }
