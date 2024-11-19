@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 13:54:11 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:20:02 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void	my_mlx_pixel_put(t_data *d, int x, int y, int color)
 {
-    char *dst;
+	char *dst;
 	if (x >= 0 && x <= d->win_l && y >= 0 && y <= d->win_h) // prevents putting pixel outside of window 
 	{
 		dst = d->img_addr + (y * d->line_length + x * (d->bits_per_pixel / 8)); // calculate offset in winlen
-    	*(unsigned int*)dst = color;
+		*(unsigned int*)dst = color;
 	}
 }
 
@@ -41,8 +41,8 @@ int	key_handler(int key, t_data *d)
 		return(end_program(d), 0);
 	render_map(d);
 	ft_printf("Nbr of moves: %d\n", d->d2->total_moves);
-	mlx_string_put(d->mlx, d->win, 10, 10, 1000, "NUMBER OF MOVES:");
-	mlx_string_put(d->mlx, d->win, 10, 20, 1000, ft_itoa(d->d2->total_moves));
+	mlx_string_put(d->mlx, d->win, 10, 10, 0, "NUMBER OF MOVES:");
+	mlx_string_put(d->mlx, d->win, 10, 20, 0, ft_itoa(d->d2->total_moves));
 	return(1);
 }
 

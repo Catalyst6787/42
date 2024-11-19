@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 13:51:57 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:19:01 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ typedef struct s_graph
 	void	*exit_closed;
 	void	*exit_opened;
 	void	*player;
+	void	*monster;
 }	t_graph;
 
 typedef struct s_data2 {

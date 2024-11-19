@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:26 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 10:48:56 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 14:18:49 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	init_graph(t_data *d)
 	d->graph->exit_closed = NULL;
 	d->graph->exit_opened = NULL;
 	d->graph->player = NULL;
+	d->graph->monster = NULL;
 	return(1);
 }
 
@@ -105,7 +106,7 @@ int	init_assets(t_data *d)
 	d->graph->floor = mlx_xpm_file_to_image(d->mlx, "./assets/Floor1.xpm", &d->asset_width, &d->asset_height);
 	if (!d->graph->floor)
 		return (0);
-	d->graph->player = mlx_xpm_file_to_image(d->mlx, "./assets/Player.xpm", &d->asset_width, &d->asset_height);
+	d->graph->player = mlx_xpm_file_to_image(d->mlx, "./assets/Player1.xpm", &d->asset_width, &d->asset_height);
 	if (!d->graph->player)
 		return (0);
 	d->graph->wall = mlx_xpm_file_to_image(d->mlx, "./assets/Wall1.xpm", &d->asset_width, &d->asset_height);
@@ -118,6 +119,9 @@ int	init_assets(t_data *d)
 	if (!d->graph->wall)
 		return (0);
 	d->graph->exit_opened = mlx_xpm_file_to_image(d->mlx, "./assets/Exit_opened.xpm", &d->asset_width, &d->asset_height);
+	if (!d->graph->wall)
+		return (0);
+	d->graph->monster = mlx_xpm_file_to_image(d->mlx, "./assets/Monster.xpm", &d->asset_width, &d->asset_height);
 	if (!d->graph->wall)
 		return (0);
 	return(1);
