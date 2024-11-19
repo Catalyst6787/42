@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 10:48:10 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 12:10:33 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 # define SO_LONG_H
 
 #include "mlx/mlx.h"
+#include "printf/include/ft_printf.h"
+#include "printf/libft/libft.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -139,6 +141,10 @@ void replace_f(t_data *d);
 // DEBUG
 int		print_key_debug(int key, t_data *d);
 void	print_map_debug(t_data *d);
+
+// UTILS
+size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
+char	*ft_itoa(int n);
 
 // GNL
 # ifndef BUFFER_SIZE

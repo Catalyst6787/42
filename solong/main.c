@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 11:26:00 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 12:12:00 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,9 @@ int	key_handler(int key, t_data *d)
 	if (!get_events(d))
 		return(end_program(d), 0);
 	render_map(d);
-	printf("Nbr of moves: %d\n", d->d2->total_moves);
-	mlx_string_put(d->mlx, d->win, 10, 10, 64567, d->d2->total_moves);
+	ft_printf("Nbr of moves: %d\n", d->d2->total_moves);
+	mlx_string_put(d->mlx, d->win, 10, 10, 64567, "NUMBER OF MOVES:");
+	mlx_string_put(d->mlx, d->win, 10, 20, 64567, ft_itoa(d->d2->total_moves));
 	return(1);
 }
 
