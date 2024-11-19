@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/18 16:41:12 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 11:01:27 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,15 +30,17 @@ int	key_handler(int key, t_data *d)
 		return(end_program(d));
 	}
 	else if (key == UP)
-		move(d, UP);
+		d->d2->total_moves += move(d, UP);
 	else if (key == LEFT)
-		move(d, LEFT);
+		d->d2->total_moves += move(d, LEFT);
 	else if (key == DOWN)
-		move(d, DOWN);
+		d->d2->total_moves += move(d, DOWN);
 	else if (key == RIGHT)
-		move(d, RIGHT);
-	
+		d->d2->total_moves += move(d, RIGHT);
+	if (!get_events(d))
+		return(end_program(d), 0);
 	render_map(d);
+	printf("Nbr of moves: %d\n", d->d2->total_moves);
 	return(1);
 }
 

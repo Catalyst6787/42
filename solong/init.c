@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:26 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 09:39:09 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 10:48:56 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int	init_data2(t_data *d)
 	d->d2->exit_found = 0;
 	d->d2->exit_y = 0;
 	d->d2->exit_x = 0;
+	d->d2->total_moves = 0;
 	return(1);
 }
 

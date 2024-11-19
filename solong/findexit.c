@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 09:59:50 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/19 11:09:33 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,13 @@ int floodfill(char **map,int  y,int x)
 		return (1);
 	else if ((map[y][x - 1] == 'E') && (floodfill(map, y, x - 1)))
 		return (1);
-	else if ((map[y + 1][x] == '0') && (floodfill(map, y + 1, x)))
+	else if ((map[y + 1][x] == '0' || map[y + 1][x] == 'C') && (floodfill(map, y + 1, x)))
 		return (1);
-	else if ((map[y][x + 1] == '0') && (floodfill(map, y, x + 1)))
+	else if ((map[y][x + 1] == '0' || map[y][x + 1] == 'C') && (floodfill(map, y, x + 1)))
 		return (1);
-	else if ((map[y - 1][x] == '0') && (floodfill(map, y - 1, x)))
+	else if ((map[y - 1][x] == '0' || map[y - 1][x] == 'C') && (floodfill(map, y - 1, x)))
 		return (1);
-	else if ((map[y][x - 1] == '0') && (floodfill(map, y, x - 1)))
+	else if ((map[y][x - 1] == '0' || map[y][x - 1] == 'C') && (floodfill(map, y, x - 1)))
 		return (1);
 	return(0);
 }
@@ -171,7 +171,6 @@ int get_rnd_loop(t_data *d)
 		d->d2->player_found = 0;
 	}
 	d->d2->exit_found = 0;
-	//d->d2->nbr_of_c = 0;
-	//d->d2->player_found = 0;
+	d->d2->nbr_of_c = 0;
 	return(1);
 }
