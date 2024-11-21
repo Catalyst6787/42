@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 12:17:10 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:10:02 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,13 +38,26 @@ int	key_handler(int key, t_data *d)
 	return (1);
 }
 
+void	free_assets(t_data *d)
+{
+	free(d->graph->floor);
+	free(d->graph->player);
+	free(d->graph->wall);
+	free(d->graph->collect);
+	free(d->graph->exit_closed);
+	free(d->graph->exit_opened);
+	free(d->graph->monster);
+}
+
 //free everything here
 int	end_program(t_data *d)
 {
+	free_assets(d);
 	free(d->graph);
-	free(d->mlx);
+	free(d->d2);
 	free_map(d);
 	mlx_destroy_window(d->mlx, d->win);
+	free(d->mlx);
 	free(d);
 	exit(0);
 }

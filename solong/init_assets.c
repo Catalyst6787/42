@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:31:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 13:31:15 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:03:04 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,15 +16,15 @@ static int	init_assets2(t_data *d)
 {
 	d->graph->exit_closed = mlx_xpm_file_to_image(d->mlx,
 			"./assets/Exit_closed.xpm", &d->asset_width, &d->asset_height);
-	if (!d->graph->wall)
+	if (!d->graph->exit_closed)
 		return (0);
 	d->graph->exit_opened = mlx_xpm_file_to_image(d->mlx,
 			"./assets/Exit_opened.xpm", &d->asset_width, &d->asset_height);
-	if (!d->graph->wall)
+	if (!d->graph->exit_opened)
 		return (0);
 	d->graph->monster = mlx_xpm_file_to_image(d->mlx,
 			"./assets/Monster.xpm", &d->asset_width, &d->asset_height);
-	if (!d->graph->wall)
+	if (!d->graph->monster)
 		return (0);
 	return (1);
 }
@@ -45,7 +45,7 @@ int	init_assets(t_data *d)
 		return (0);
 	d->graph->collect = mlx_xpm_file_to_image(d->mlx,
 			"./assets/Collect.xpm", &d->asset_width, &d->asset_height);
-	if (!d->graph->wall)
+	if (!d->graph->collect)
 		return (0);
 	return (init_assets2(d));
 }

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 12:13:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:11:48 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,7 @@ typedef struct s_data {
 void	my_mlx_pixel_put(t_data *d, int x, int y, int color);
 int		key_handler(int key, t_data *d);
 int		end_program(t_data *d);
+void	free_assets(t_data *d);
 int		start_hook(t_data *d);
 int		main(int argc, char **argvs);
 
