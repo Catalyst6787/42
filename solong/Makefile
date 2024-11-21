@@ -6,7 +6,7 @@
 #    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/18 10:20:38 by lfaure            #+#    #+#              #
-#    Updated: 2024/11/19 12:07:54 by lfaure           ###   ########.fr        #
+#    Updated: 2024/11/21 14:53:08 by lfaure           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,8 @@ PRINTF_LIB = $(PRINTF_DIR)/libftprintf.a
 PRINTF_FLAGS = -L$(PRINTF_DIR) -lftprintf
 
 # Modify the $(NAME) rule to link libft.a (if necessary)
-$(NAME): $(OBJS) $(MLX_LIB) $(PRINTF_LIB)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS) $(PRINTF_FLAGS)
+#$(NAME): $(OBJS) $(MLX_LIB) $(PRINTF_LIB)
+#	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(MLX_FLAGS) $(PRINTF_FLAGS)
 
 # List of source files
 SRC = $(wildcard *.c) # Include main.c and all other .c files in the directory
@@ -68,5 +68,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 
+norme:
+	@norminette $(SRC)
 # Rebuild everything from scratch
 re: fclean all
