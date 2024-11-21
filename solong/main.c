@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 15:10:02 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:19:08 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,12 @@ int	start_hook(t_data *d)
 	return (1);
 }
 
+//srand fn is only used forr the bonus
 int	main(int argc, char **argv)
 {
 	t_data	*d;
 
+	srand(time(NULL));
 	d = malloc(sizeof(t_data));
 	if (argc < 2)
 		return (0);

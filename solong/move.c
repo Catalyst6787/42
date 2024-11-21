@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:48 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 14:35:01 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:46:57 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ int	move_monster(t_data *d, int y, int x)
 	else if (d->d2->player_x > x && d->map[y][x + 1] == '0')
 		return (d->map[y][x + 1] = 'M', d->map[y][x] = '0', 0);
 	else if (d->d2->player_x < x && d->map[y][x - 1] == '0')
+		return (d->map[y][x - 1] = 'M', d->map[y][x] = '0', 0);
+	else if ((rand() % 4 == 1) && d->map[y + 1][x] == '0')
+		return (d->map[y + 1][x] = 'M', d->map[y][x] = '0', 0);
+	else if ((rand() % 4 == 1) && d->map[y - 1][x] == '0')
+		return (d->map[y - 1][x] = 'M', d->map[y][x] = '0', 0);
+	else if ((rand() % 4 == 1) && d->map[y][x + 1] == '0')
+		return (d->map[y][x + 1] = 'M', d->map[y][x] = '0', 0);
+	else if (d->map[y][x - 1] == '0')
 		return (d->map[y][x - 1] = 'M', d->map[y][x] = '0', 0);
 	return (0);
 }

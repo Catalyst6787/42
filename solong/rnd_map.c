@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:13:20 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 13:13:26 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:18:50 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	fill_rnd(char **map)
 	int	y;
 	int	x;
 
-	srand(time(NULL));
 	y = 1;
 	x = 1;
 	while (y < MAPH - 1)

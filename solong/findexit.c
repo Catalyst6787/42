@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 13:10:14 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 15:45:12 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ int	get_rnd_map(t_data *d)
 	floodfill(d->map, STARTY, STARTX);
 	replace_f(d);
 	d->map[STARTY][STARTX] = 'P';
-	d->map[MAPH - 2][MAPL - 2] = 'E';
-	d->map[STARTY + 2][STARTX + 2] = 'C';
-	d->map[2][MAPL - 2] = 'M';
+	d->map[rand() % (MAPH - 2)][rand() % (MAPL - 2)] = 'E';
+	d->map[rand() % (MAPH - 2)][rand() % (MAPL - 2)] = 'M';
 	d->map_h = MAPH;
 	d->map_l = MAPL;
 	return (1);
