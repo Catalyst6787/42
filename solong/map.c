@@ -6,40 +6,46 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 13:43:58 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 14:19:47 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int	count_all_rows(t_data *d, char *map_str)
+static int	count_all_rows2(t_data *d, char *map_str, int rl, int rn)
 {
 	int	i;
-	int	row_length;
-	int	row_nbr;
 
 	i = 0;
-	row_length = 0;
-	row_nbr = 0;
-	d->map_l = 0;
 	while (map_str && map_str[i])
 	{
 		while (map_str[i] && map_str[i] != '\n')
 		{
 			i++;
-			row_length++;
+			rl++;
 		}
-		if (row_nbr == 0)
-			d->map_l = row_length;
-		else if (d->map_l != row_length)
+		if (rn == 0)
+			d->map_l = rl;
+		else if (d->map_l != rl)
 			return (ft_printf("mismatched row length"), 0);
-		row_nbr++;
+		rn++;
 		if (map_str[i])
 			i++;
-		row_length = 0;
+		rl = 0;
 	}
-	d->map_h = row_nbr;
+	d->map_h = rn;
 	return (1);
+}
+
+int	count_all_rows(t_data *d, char *map_str)
+{
+	int	rl;
+	int	rn;
+
+	rl = 0;
+	rn = 0;
+	d->map_l = 0;
+	return (count_all_rows2(d, map_str, rl, rn));
 }
 
 int	fill_map(t_data *d, int y, int x, char c)
@@ -50,13 +56,32 @@ int	fill_map(t_data *d, int y, int x, char c)
 		return (0);
 }
 
-int	create_map(t_data *d, char *map_str)
+static int	create_map2(t_data *d, char *map_str, int y, int x)
 {
 	int	i;
+
+	i = 0;
+	while (d->map[y])
+	{
+		while (d->map[y][x] && map_str[i] && d->map[y][x] != '\n')
+		{
+			fill_map(d, y, x, map_str[i]);
+			x++;
+			i++;
+		}
+		if (map_str[i] == '\n')
+			i++;
+		x = 0;
+		y++;
+	}
+	return (1);
+}
+
+int	create_map(t_data *d, char *map_str)
+{
 	int	y;
 	int	x;
 
-	i = 0;
 	y = 0;
 	x = 0;
 	if (!map_str)
@@ -74,20 +99,7 @@ int	create_map(t_data *d, char *map_str)
 		y++;
 	}
 	y = 0;
-	while (d->map[y])
-	{
-		while (d->map[y][x] && map_str[i] && d->map[y][x] != '\n')
-		{
-			fill_map(d, y, x, map_str[i]);
-			x++;
-			i++;
-		}
-		if (map_str[i] == '\n')
-			i++;
-		x = 0;
-		y++;
-	}
-	return (1);
+	return (create_map2(d, map_str, y, x));
 }
 
 int	get_map(t_data *d, char *map_name)
@@ -130,6 +142,24 @@ void	free_map(t_data *d)
 	free(d->map);
 }
 
+static int	which_feature(t_data *d, char c, int y, int x)
+{
+	if (c == 'P')
+	{
+	d->d2->player_found++;
+	d->d2->player_y = y;
+	d->d2->player_x = x;
+	d->map[y][x] = '0';
+	}
+	else if (c == 'E')
+		d->d2->exit_found++;
+	else if (c == 'C')
+		d->d2->nbr_of_c++;
+	else if (c != '1' && c != '0' && c != 'M')
+		return (0);
+	return (1);
+}
+
 int	count_features(t_data *d)
 {
 	int	y;
@@ -141,19 +171,7 @@ int	count_features(t_data *d)
 	{
 		while (d->map[y][x])
 		{
-			if (d->map[y][x] == 'P')
-			{
-				d->d2->player_found++;
-				d->d2->player_y = y;
-				d->d2->player_x = x;
-				d->map[y][x] = '0';
-			}
-			else if (d->map[y][x] == 'E')
-				d->d2->exit_found++;
-			else if (d->map[y][x] == 'C')
-				d->d2->nbr_of_c++;
-			else if (d->map[y][x] != '1'
-			&& d->map[y][x] != '0' && d->map[y][x] != 'M')
+			if (!which_feature(d, d->map[y][x], y, x))
 				return (0);
 			x++;
 		}
