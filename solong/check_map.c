@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 14:27:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 16:58:14 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:21:01 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ static int	which_feature(t_data *d, char c, int y, int x)
 		d->d2->exit_found++;
 	else if (c == 'C')
 		d->d2->nbr_of_c++;
-	else if (c == 'M')
-		d->d2->monster_found++;
-	else if (c != '1' && c != '0')
+	else if (c != '1' && c != '0' && c != 'M')
 		return (0);
 	return (1);
 }
@@ -106,8 +104,6 @@ int	check_map(t_data *d)
 		return (ft_printf("too many players\n"), 0);
 	else if (!d->d2->exit_found)
 		return (ft_printf("no exit was found\n"), 0);
-	else if (d->d2->monster_found > 1)
-		return (ft_printf("More than one Monster\n"), 0);
 	else if (d->d2->exit_found > 1)
 		return (ft_printf("too many exits\n"), 0);
 	else if (d->d2->nbr_of_c <= 0)

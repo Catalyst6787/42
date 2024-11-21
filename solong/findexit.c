@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:18 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 15:45:12 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 17:19:40 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,10 +57,6 @@ int	get_rnd_map(t_data *d)
 {
 	if (!create_rnd_map(d))
 		return (ft_printf("Couldnt malloc the map"), 0);
-	d->d2->exit_y = 5;
-	d->d2->exit_x = 5;
-	ft_printf("exit is located at coordinates y =");
-	ft_printf("%d, x = %d.\n\n", d->d2->exit_y, d->d2->exit_x);
 	fill_map_rnd(d->map);
 	fill_walls(d->map);
 	fill_rnd(d->map);
