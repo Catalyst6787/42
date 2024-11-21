@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:44 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 14:52:15 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 12:03:48 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -196,9 +196,7 @@ int	check_map(t_data *d)
 	else if (!check_edges(d))
 		return(ft_printf("Missing Wall around map\n"), 0);
 	else if (!floodfill(d->map, d->d2->player_y, d->d2->player_x))
-	{
 		return(ft_printf("Player can't reach exit\n"), 0);
-	}
 	else
 	{
 		replace_f(d);
