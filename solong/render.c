@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:53 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 14:58:34 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 11:55:31 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int	aff_asset(t_data *d, int y, int x)
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->exit_opened, x * d->asset_width, y * d->asset_height);
 	else if (d->map[y][x] == 'M')
 	{
+		mlx_put_image_to_window(d->mlx, d->win, d->graph->floor, x * d->asset_width, y * d->asset_height);
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->monster, x * d->asset_width, y * d->asset_height);
-		if(move_monster(d, y, x))
-			return(ft_printf("Eaten by monster! Game Over!"),end_program(d), 0);
+		//mlx_put_image_to_window(d->mlx, d->win, d->graph->floor, x * d->asset_width, y * d->asset_height); // put a sleep here to have the monster be visible a raction of a second
 	}
 	else
 		return(ft_printf("problem in aff asset"), 0);

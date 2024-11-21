@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 14:56:40 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 11:51:25 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ typedef struct s_data2 {
 	int		exit_y;
 	int		exit_x;
 	int		total_moves;
+	int		monster_moved;
 }	t_data2;
 
 typedef struct s_data {
@@ -129,6 +130,7 @@ int render_map(t_data *d);
 int	get_events(t_data *d);
 int	move(t_data *d, int way);
 int	move_monster(t_data *d, int y, int x);
+int handle_monster(t_data *d);
 
 // RND
 int get_rnd_loop(t_data *d);

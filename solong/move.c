@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:48 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 15:03:09 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 11:51:52 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,23 @@ int	move_monster(t_data *d, int y, int x)
 		return(d->map[y][x + 1] = 'M', d->map[y][x] = '0', 0);
 	else if (d->d2->player_x < x && d->map[y][x - 1] == '0')
 		return(d->map[y][x - 1] = 'M', d->map[y][x] = '0', 0);
+	return(0);
+}
+
+int handle_monster(t_data *d)
+{
+	int	y = 0;
+	int	x = 0;
+	while(d->map[y])
+	{
+		while (d->map[y][x])
+		{
+			if (d->map[y][x] == 'M')
+				return(move_monster(d, y, x));
+			x++;
+		}
+		x = 0;
+		y++;
+	}
 	return(0);
 }

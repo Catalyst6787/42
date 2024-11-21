@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/19 14:46:10 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 11:51:51 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@ int	key_handler(int key, t_data *d)
 		d->d2->total_moves += move(d, RIGHT);
 	if (!get_events(d))
 		return(end_program(d), 0);
+	if (handle_monster(d))
+		return(ft_printf("Eaten by monster! Game Over!"),end_program(d), 0);
 	render_map(d);
 	ft_printf("Nbr of moves: %d\n", d->d2->total_moves);
 	mlx_string_put(d->mlx, d->win, 10, 10, 0, "NUMBER OF MOVES:");
