@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 13:31:02 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 15:03:04 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 16:23:25 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,18 @@ static int	init_assets2(t_data *d)
 	d->graph->monster = mlx_xpm_file_to_image(d->mlx,
 			"./assets/Monster.xpm", &d->asset_width, &d->asset_height);
 	if (!d->graph->monster)
+		return (0);
+	d->graph->monster2 = mlx_xpm_file_to_image(d->mlx,
+			"./assets/AngryMonster.xpm", &d->asset_width, &d->asset_height);
+	if (!d->graph->monster2)
+		return (0);
+	d->graph->monster3 = mlx_xpm_file_to_image(d->mlx,
+			"./assets/SuprisedMonster.xpm", &d->asset_width, &d->asset_height);
+	if (!d->graph->monster3)
+		return (0);
+	d->graph->monster4 = mlx_xpm_file_to_image(d->mlx,
+			"./assets/RunningMonster.xpm", &d->asset_width, &d->asset_height);
+	if (!d->graph->monster4)
 		return (0);
 	return (1);
 }

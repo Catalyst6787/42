@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 10:20:53 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/21 14:43:26 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/21 16:29:23 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,18 @@ static int	aff_assets2(t_data *d, int y, int x)
 	{
 		mlx_put_image_to_window(d->mlx, d->win, d->graph->floor,
 			x * d->asset_width, y * d->asset_height);
-		mlx_put_image_to_window(d->mlx, d->win, d->graph->monster,
-			x * d->asset_width, y * d->asset_height);
+		if (rand() % 2)
+			mlx_put_image_to_window(d->mlx, d->win,
+				d->graph->monster, x * d->asset_width, y * d->asset_height);
+		else if (rand() % 2)
+			mlx_put_image_to_window(d->mlx, d->win,
+				d->graph->monster4, x * d->asset_width, y * d->asset_height);
+		else if (rand() % 2)
+			mlx_put_image_to_window(d->mlx, d->win,
+				d->graph->monster2, x * d->asset_width, y * d->asset_height);
+		else
+			mlx_put_image_to_window(d->mlx, d->win,
+				d->graph->monster3, x * d->asset_width, y * d->asset_height);
 	}
 	else
 		return (ft_printf("problem in aff asset"), 0);
