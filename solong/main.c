@@ -79,7 +79,7 @@ int	main(int argc, char **argv)
 	srand(time(NULL));
 	d = malloc(sizeof(t_data));
 	if (argc < 2)
-		return (0);
+		return (printf("Provide path to a map or R for a random map\n"), 0);
 	if (!d)
 		return (end_program(d), 0);
 	ft_printf("Welcome to Monster_Station!\nGenerating Level...\n");

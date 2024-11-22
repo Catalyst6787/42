@@ -79,7 +79,7 @@ int	get_map(t_data *d, char *map_name)
 	fd = open(map_name, O_RDONLY);
 	tmp = get_next_line(fd);
 	if (!tmp)
-		return (0);
+		return (printf("Provided map does not exist\n"), 0);
 	while (tmp)
 	{
 		addr = map_str;
