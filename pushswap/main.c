@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:17:31 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/25 13:11:52 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/25 13:27:55 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,16 @@ t_stack	*lst_new(int content)
 	return (elem);
 }
 
-t_stack	*lst_add_back(t_stack *st, t_stack *elem)
+t_stack	*lst_add_back(t_stack *list, t_stack *elem)
 {
-	t_stack *current;
-	current = st;
-	while(current->next)
+	if (!list)
+		return (elem);
+	while(list->next)
 	{
-		current = current->next;
+		list = list->next;
 	}
-	current->next = elem;
-	return (elem);
+	list->next = elem;
+	return (list);
 }
 void free_list(t_stack *list)
 {
@@ -57,12 +57,14 @@ void print_list(t_stack *list)
 
 int	main(int ac, char **av)
 {
+	int	i;
+
 	if (ac < 2)
 		return (ft_printf("Not enough arguments"), 0);
 	t_stack	*st_a;
 	st_a = lst_new(atoi(av[1]));
-	int			i;
-
+	if (!st_a)
+		return (printf("Memory allocation failed\n"), 0);
 	i = 2;
 	while (av[i])
 	{
@@ -71,4 +73,5 @@ int	main(int ac, char **av)
 	}
 	print_list(st_a);
 	free_list(st_a);
+	return (1);
 }
