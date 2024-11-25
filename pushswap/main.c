@@ -3,19 +3,72 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lfaure <marvin@42lausanne.ch>              +#+  +:+       +#+        */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/22 16:17:31 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/22 16:37:52 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/25 13:11:52 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "header.h"
 
-int	main(void)
+t_stack	*lst_new(int content)
 {
-	t_list_a	*st_a;
+	t_stack	*elem;
 
-	ft_lstadd_back(&st_a, st_a->next);
-	ft_printf("%s\n", ft_itoa(42));
+	elem = malloc(sizeof(t_stack));
+	if (!elem)
+		return (NULL);
+	elem->nbr = content;
+	elem->next = NULL;
+	return (elem);
+}
+
+t_stack	*lst_add_back(t_stack *st, t_stack *elem)
+{
+	t_stack *current;
+	current = st;
+	while(current->next)
+	{
+		current = current->next;
+	}
+	current->next = elem;
+	return (elem);
+}
+void free_list(t_stack *list)
+{
+    t_stack *tmp;
+    while (list)
+    {
+        tmp = list;
+        list = list->next;
+        free(tmp);
+    }
+}
+void print_list(t_stack *list)
+{
+    while (list)
+    {
+        printf("%d -> ", list->nbr);
+        list = list->next;
+    }
+    printf("NULL\n");
+}
+
+int	main(int ac, char **av)
+{
+	if (ac < 2)
+		return (ft_printf("Not enough arguments"), 0);
+	t_stack	*st_a;
+	st_a = lst_new(atoi(av[1]));
+	int			i;
+
+	i = 2;
+	while (av[i])
+	{
+		lst_add_back(st_a, lst_new(ft_atoi(av[i])));
+		i++;
+	}
+	print_list(st_a);
+	free_list(st_a);
 }

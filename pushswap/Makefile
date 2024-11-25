@@ -25,8 +25,8 @@ $(PRINTF_LIB):
 $(LIBFT_LIB):
 	@make -C $(LIBFT_DIR)
 
-$(NAME): $(OBJS) $(MLX_LIB) $(PRINTF_LIB) $(LIBFT_LIB)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(INCLUDES) $(PRINTF_LIB) $(LIBFT_LIB)
+$(NAME): $(OBJS) $(PRINTF_LIB) $(LIBFT_LIB)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) $(PRINTF_LIB) $(LIBFT_LIB) $(INCLUDES)
 
 clean:
 	rm -f $(OBJS)
@@ -36,7 +36,7 @@ clean:
 fclean: clean
 	rm -f $(NAME)
 	@make fclean -C $(LIBFT_DIR)
-	@make fclean -C $(LIBFT_DIR)
+	@make fclean -C $(PRINTF_DIR)
 
 norme:
 	@norminette $(SRC)
