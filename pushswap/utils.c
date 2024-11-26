@@ -9,6 +9,7 @@ t_stack	*lst_new(int content)
 		return (NULL);
 	elem->nbr = content;
 	elem->next = NULL;
+	elem->prev = NULL;
 	return (elem);
 }
 
@@ -19,12 +20,13 @@ t_stack	*lst_add_back(t_stack *list, t_stack *elem)
 	if (!list)
 		return (elem);
 	temp = list;
-	while(temp->next)
+	while (temp->next)
 	{
 		temp = temp->next;
 	}
-	temp->next->prev = temp;
 	temp->next = elem;
+	elem->prev = temp;
+	elem->next = NULL;
 	return (list);
 }
 
@@ -33,7 +35,10 @@ void	lst_add_front(t_stack **lst, t_stack *new)
 	if (new)
 	{
 		new->next = *lst;
+		if (*lst)
+			(*lst)->prev = new;
 		*lst = new;
+		new->prev = NULL;
 	}
 }
 
@@ -59,14 +64,27 @@ void free_list(t_stack *list)
 		free(tmp);
 	}
 }
+
 void print_list(t_stack *list)
 {
 	while (list)
 	{
-		printf("%d -> ", list->nbr);
+		ft_printf("%d -> ", list->nbr);
 		list = list->next;
 	}
-	printf("NULL\n");
+	ft_printf("NULL\n");
+}
+
+void rev_print_list(t_stack *list)
+{
+	while (list->next)
+		list = list->next;
+	while (list)
+	{
+		ft_printf("%d -> ", list->nbr);
+		list = list->prev;
+	}
+	ft_printf("NULL\n");
 }
 
 t_stack *copy_list(t_stack *list)

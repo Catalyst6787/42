@@ -41,6 +41,7 @@ void print_list(t_stack *list);
 t_stack *copy_list(t_stack *list);
 void	lst_add_front(t_stack **lst, t_stack *new);
 t_stack	*del_head(t_stack *list);
+void rev_print_list(t_stack *list);
 
 
 //OPERATIONS
