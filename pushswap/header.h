@@ -31,11 +31,24 @@ typedef struct s_stack
 #  define BUFFER_SIZE 10
 # endif
 
-// MAIN
 
+// UTILS
 t_stack	*lst_new(int content);
 t_stack	*lst_add_back(t_stack *st, t_stack *elem);
+void free_list(t_stack *list);
+void print_list(t_stack *list);
+t_stack *copy_list(t_stack *list);
+t_stack *lst_add_front(t_stack *list, t_stack *elem);
+
+//OPERATIONS
+int	swap(t_stack *st);
+int	sswap(t_stack *st_a, t_stack *st_b);
+int	push(t_stack *st_from, t_stack *st_to);
+t_stack	*del_head(t_stack *list);
+
+// MAIN
 int		main(int ac, char **av);
+
 
 // GNL
 
