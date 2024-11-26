@@ -23,16 +23,16 @@ int	main(int ac, char **av)
 	//sswap(st_a, st_b);
 	//push(&st_a, &st_b);
 	//rotate(st_a);
-	//revrotate(st_a);
+	revrotate(st_a);
 
-	rev_print_list(st_og);
+	//rev_print_list(st_og);
 
-	//ft_printf("st_og:\n");
-	//print_list(st_og);
-	//ft_printf("st_a:\n");
-	//print_list(st_a);
-	//ft_printf("st_b:\n");
-	//print_list(st_b);
+	ft_printf("st_og:\n");
+	print_list(st_og);
+	ft_printf("st_a:\n");
+	print_list(st_a);
+	ft_printf("st_b:\n");
+	print_list(st_b);
 
 	free_list(st_og);
 	free_list(st_a);

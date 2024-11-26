@@ -51,3 +51,21 @@ int	rotate(t_stack *st)
 	return (1);
 }
 
+int revrotate(t_stack *st)
+{
+	int tmp;
+
+	if (!st || !st->next)
+		return (0);
+	while (st->next)
+		st = st->next;
+	tmp = st->nbr;
+	while(st->prev)
+	{
+		st->prev->nbr = st->nbr;
+		st = st->prev;
+	}
+	st->nbr = tmp;
+	return (1);
+}
+
