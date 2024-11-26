@@ -14,23 +14,26 @@ t_stack	*lst_new(int content)
 
 t_stack	*lst_add_back(t_stack *list, t_stack *elem)
 {
+	t_stack *temp;
+
 	if (!list)
 		return (elem);
-	while(list->next)
+	temp = list;
+	while(temp->next)
 	{
-		list = list->next;
+		temp = temp->next;
 	}
-	list->next = elem;
+	temp->next = elem;
 	return (list);
 }
 
-t_stack	*lst_add_front(t_stack *list, t_stack *elem)
+void	lst_add_front(t_stack **lst, t_stack *new)
 {
-	if (!elem)
-		return (0);
-	elem->next = list;
-	list = elem;
-	return (list);
+	if (new)
+	{
+		new->next = *lst;
+		*lst = new;
+	}
 }
 
 t_stack	*del_head(t_stack *list)

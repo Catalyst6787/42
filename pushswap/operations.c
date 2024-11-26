@@ -22,11 +22,14 @@ int	sswap(t_stack *st_a, t_stack *st_b)
 	return(1);
 }
 
-int	push(t_stack *st_from, t_stack *st_to)
+void push(t_stack **st_a, t_stack **st_b)
 {
-	if (!st_from || !st_to)
-		return (0);
-	lst_add_front(st_to, lst_new(st_from->nbr));
-	del_head(st_from);
-	return(1);
+	t_stack *tmp;
+
+	if (*st_a == NULL)
+		return;  // Nothing to push
+	tmp = *st_a;
+	*st_a = (*st_a)->next;
+	tmp->next = *st_b;
+	*st_b = tmp;
 }

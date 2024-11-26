@@ -38,12 +38,12 @@ t_stack	*lst_add_back(t_stack *st, t_stack *elem);
 void free_list(t_stack *list);
 void print_list(t_stack *list);
 t_stack *copy_list(t_stack *list);
-t_stack *lst_add_front(t_stack *list, t_stack *elem);
+void	lst_add_front(t_stack **lst, t_stack *new);
 
 //OPERATIONS
 int	swap(t_stack *st);
 int	sswap(t_stack *st_a, t_stack *st_b);
-int	push(t_stack *st_from, t_stack *st_to);
+void push(t_stack **st_a, t_stack **st_b);
 t_stack	*del_head(t_stack *list);
 
 // MAIN
