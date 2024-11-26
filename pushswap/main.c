@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*																			*/
-/*														:::	  ::::::::   */
-/*   main.c											 :+:	  :+:	:+:   */
-/*													+:+ +:+		 +:+	 */
-/*   By: lfaure <lfaure@student.42lausanne.ch>	  +#+  +:+	   +#+		*/
-/*												+#+#+#+#+#+   +#+		   */
-/*   Created: 2024/11/22 16:17:31 by lfaure			#+#	#+#			 */
-/*   Updated: 2024/11/25 13:56:14 by lfaure		   ###   ########.fr	   */
-/*																			*/
-/* ************************************************************************** */
-
 #include "header.h"
 
 int	main(int ac, char **av)
@@ -31,7 +19,8 @@ int	main(int ac, char **av)
 	t_stack *st_a = copy_list(st_og);
 	t_stack *st_b = NULL;
 	
-	push(&st_a, &st_b);
+	//push(&st_a, &st_b);
+	rotate(st_a);
 
 	ft_printf("st_og:\n");
 	print_list(st_og);

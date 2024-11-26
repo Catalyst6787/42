@@ -22,14 +22,32 @@ int	sswap(t_stack *st_a, t_stack *st_b)
 	return(1);
 }
 
-void push(t_stack **st_a, t_stack **st_b)
+int	push(t_stack **st_a, t_stack **st_b)
 {
 	t_stack *tmp;
 
 	if (*st_a == NULL)
-		return;  // Nothing to push
+		return (0);  // Nothing to push
 	tmp = *st_a;
 	*st_a = (*st_a)->next;
 	tmp->next = *st_b;
 	*st_b = tmp;
+	return (1);
 }
+
+int	rotate(t_stack *st)
+{
+	int	tmp;
+
+	tmp = st->nbr;
+	if (!st || !st->next)
+		return (0); 
+	while (st->next)
+	{
+		st->nbr = st->next->nbr;
+		st = st->next;
+	}
+	st->nbr = tmp;
+	return (1);
+}
+

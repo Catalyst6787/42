@@ -39,12 +39,15 @@ void free_list(t_stack *list);
 void print_list(t_stack *list);
 t_stack *copy_list(t_stack *list);
 void	lst_add_front(t_stack **lst, t_stack *new);
+t_stack	*del_head(t_stack *list);
+
 
 //OPERATIONS
 int	swap(t_stack *st);
 int	sswap(t_stack *st_a, t_stack *st_b);
-void push(t_stack **st_a, t_stack **st_b);
-t_stack	*del_head(t_stack *list);
+int	push(t_stack **st_a, t_stack **st_b);
+int	rotate(t_stack *st);
+
 
 // MAIN
 int		main(int ac, char **av);
