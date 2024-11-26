@@ -23,6 +23,7 @@ t_stack	*lst_add_back(t_stack *list, t_stack *elem)
 	{
 		temp = temp->next;
 	}
+	temp->next->prev = temp;
 	temp->next = elem;
 	return (list);
 }

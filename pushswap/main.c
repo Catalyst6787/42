@@ -19,8 +19,11 @@ int	main(int ac, char **av)
 	t_stack *st_a = copy_list(st_og);
 	t_stack *st_b = NULL;
 	
+	//swap(st_a);
+	//sswap(st_a, st_b);
 	//push(&st_a, &st_b);
-	rotate(st_a);
+	//rotate(st_a);
+	revrotate(st_a);
 
 	ft_printf("st_og:\n");
 	print_list(st_og);

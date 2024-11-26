@@ -25,6 +25,7 @@ typedef struct s_stack
 {
 	int				nbr;
 	struct s_stack	*next;
+	struct s_stack	*prev;
 }	t_stack;
 
 # ifndef BUFFER_SIZE
@@ -47,6 +48,7 @@ int	swap(t_stack *st);
 int	sswap(t_stack *st_a, t_stack *st_b);
 int	push(t_stack **st_a, t_stack **st_b);
 int	rotate(t_stack *st);
+int	revrotate(t_stack *st);
 
 
 // MAIN
