@@ -115,3 +115,19 @@ t_stack *copy_list(t_stack *list)
 		}
 	return (copy);
 }
+
+int	check_sort(t_stack *st)
+{
+	int last;
+	
+	if (!st)
+		return(-1);
+	last = st->nbr;
+	while(st)
+	{
+		if (st->nbr < last)
+			return(0);
+		st = st->next;
+	}
+	return (1);
+}
