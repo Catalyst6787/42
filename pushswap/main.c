@@ -2,6 +2,8 @@
 
 int	main(int ac, char **av)
 {
+	// TODO -> SHOULD rewrite existing fn to use tail instaed of modyfing the stack
+
 	int	i;
 
 	if (ac < 2)
