@@ -127,6 +127,7 @@ int	check_sort(t_stack *st)
 	{
 		if (st->nbr < last)
 			return(0);
+		last = st->nbr;
 		st = st->next;
 	}
 	return (1);

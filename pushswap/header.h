@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/27 11:58:07 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/27 12:36:32 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	rev_rotate(t_stack *st);
 int r_rev_rotate(t_stack *st_a, t_stack *st_b);
 
 // SORT
-int	basic_sort(t_stack **st_a, t_stack **st_b);
+int	basic_sort(t_stack **st_a);
 
 // MAIN
 int		main(int ac, char **av);

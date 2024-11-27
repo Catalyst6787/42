@@ -19,8 +19,12 @@ int	main(int ac, char **av)
 	t_stack *st_a = copy_list(st_og);
 	t_stack *st_b = NULL;
 	
-	//push(&st_a, &st_b);
-	//push(&st_a, &st_b);
+	ft_printf("st_a:\n");
+	print_list(st_a);
+	basic_sort(&st_a);
+	ft_printf("st_a:\n");
+	print_list(st_a);
+
 
 	ft_printf("st_og:\n");
 	print_list(st_og);
