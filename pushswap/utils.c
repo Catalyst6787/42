@@ -132,3 +132,59 @@ int	check_sort(t_stack *st)
 	}
 	return (1);
 }
+
+int	is_highest(t_stack *st, int n)
+{
+	if (!st)
+		return(-1);
+	while(st)
+	{
+		if (st->nbr > n)
+			return(0);
+		st = st->next;
+	}
+	return(1);
+}
+
+int	is_lowest(t_stack *st, int n)
+{
+	if (!st)
+		return(-1);
+	while(st)
+	{
+		if (st->nbr < n)
+			return(0);
+		st = st->next;
+	}
+	return(1);
+}
+
+int	align(t_stack **st)
+{
+	int i;
+	t_stack *tail;
+
+	tail = *st;
+	i = 0;
+	if (!st)
+		return(-1);
+	while (tail && tail->next)
+	{
+		if (tail->nbr < tail->next->nbr)
+			break;
+		tail = tail->next;
+	}
+	tail = tail->next;
+	while (tail)
+	{
+		tail = tail->next;
+		i++;
+	}
+	while(i)
+	{
+		ft_printf("rrb\n");
+		rev_rotate(st);
+		i--;
+	}
+	return(1);
+}

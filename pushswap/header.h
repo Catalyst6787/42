@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/27 12:36:32 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/27 17:57:58 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,9 @@ void	lst_add_front(t_stack **lst, t_stack *new);
 t_stack	*del_head(t_stack *list);
 void rev_print_list(t_stack *list);
 int	check_sort(t_stack *st);
+int	is_highest(t_stack *st, int n);
+int	is_lowest(t_stack *st, int n);
+int	align(t_stack **st);
 
 
 //OPERATIONS
@@ -51,11 +54,12 @@ int	sswap(t_stack *st_a, t_stack *st_b);
 int	push(t_stack **st_a, t_stack **st_b);
 int	rotate(t_stack *st);
 int	r_rotate(t_stack *st_a, t_stack *st_b);
-int	rev_rotate(t_stack *st);
+int	rev_rotate(t_stack **st);
 int r_rev_rotate(t_stack *st_a, t_stack *st_b);
 
 // SORT
-int	basic_sort(t_stack **st_a);
+int swap_sort(t_stack **st_a, t_stack **st_b);
+int	dmb_sort(t_stack **st_a);
 
 // MAIN
 int		main(int ac, char **av);

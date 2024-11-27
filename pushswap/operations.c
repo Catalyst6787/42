@@ -65,29 +65,32 @@ int	r_rotate(t_stack *st_a, t_stack *st_b)
 	return(1);
 }
 
-int rev_rotate(t_stack *st)
+int rev_rotate(t_stack **st)
 {
 	int tmp;
+	t_stack *tail;
 
-	if (!st || !st->next)
+	if (!(*st) || !(*st)->next)
 		return (0);
-	while (st->next)
-		st = st->next;
-	tmp = st->nbr;
-	while(st->prev)
+
+	tail = *st;
+	while (tail->next)
+		tail = tail->next;
+	tmp = tail->nbr;
+	while(tail->prev)
 	{
-		st->nbr = st->prev->nbr;
-		st = st->prev;
+		tail->nbr = tail->prev->nbr;
+		tail = tail->prev;
 	}
-	st->nbr = tmp;
+	(*st)->nbr = tmp;
 	return (1);
 }
 
 int r_rev_rotate(t_stack *st_a, t_stack *st_b)
 {
-	if (!rev_rotate(st_a))
+	if (!rev_rotate(&st_a))
 		return (0);
-	if (!rev_rotate(st_b))
+	if (!rev_rotate(&st_b))
 		return (0);
 	return(1);
 }
