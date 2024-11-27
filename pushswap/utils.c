@@ -77,7 +77,7 @@ void print_list(t_stack *list)
 
 void rev_print_list(t_stack *list)
 {
-	while (list->next)
+	while (list && list->next)
 		list = list->next;
 	while (list)
 	{

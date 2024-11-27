@@ -19,12 +19,17 @@ int	main(int ac, char **av)
 	t_stack *st_a = copy_list(st_og);
 	t_stack *st_b = NULL;
 	
-	//swap(st_a);
-	//sswap(st_a, st_b);
-	//push(&st_a, &st_b);
-	//rotate(st_a);
-	//rev_print_list(st_og);
-	revrotate(st_a);
+	//rev_rotate(st_a);
+	push(&st_a, &st_b);
+	push(&st_a, &st_b);
+	push(&st_a, &st_b);
+	push(&st_a, &st_b);
+	push(&st_a, &st_b);
+
+	rotate(st_b);
+	rotate(st_b);
+	rotate(st_b);
+
 
 
 	ft_printf("st_og:\n");
@@ -33,6 +38,14 @@ int	main(int ac, char **av)
 	print_list(st_a);
 	ft_printf("st_b:\n");
 	print_list(st_b);
+
+	ft_printf("rev printed lists to debug:\n");
+	ft_printf("st_og:\n");
+	rev_print_list(st_og);
+	ft_printf("st_a:\n");
+	rev_print_list(st_a);
+	ft_printf("st_b:\n");
+	rev_print_list(st_b);
 
 	free_list(st_og);
 	free_list(st_a);

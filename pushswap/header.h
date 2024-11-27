@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/25 12:58:25 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/27 11:17:10 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,9 @@ int	swap(t_stack *st);
 int	sswap(t_stack *st_a, t_stack *st_b);
 int	push(t_stack **st_a, t_stack **st_b);
 int	rotate(t_stack *st);
-int	revrotate(t_stack *st);
+int	r_rotate(t_stack *st_a, t_stack *st_b);
+int	rev_rotate(t_stack *st);
+int r_rev_rotate(t_stack *st_a, t_stack *st_b);
 
 
 // MAIN
