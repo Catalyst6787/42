@@ -62,7 +62,7 @@ int revrotate(t_stack *st)
 	tmp = st->nbr;
 	while(st->prev)
 	{
-		st->prev->nbr = st->nbr;
+		st->nbr = st->prev->nbr;
 		st = st->prev;
 	}
 	st->nbr = tmp;

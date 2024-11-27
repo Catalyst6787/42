@@ -108,6 +108,7 @@ t_stack *copy_list(t_stack *list)
 		else
 		{
 			tail->next = new_elem;
+			new_elem->prev = tail;
 			tail = new_elem;
 		}
 		list = list->next;

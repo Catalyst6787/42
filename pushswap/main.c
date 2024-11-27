@@ -23,9 +23,9 @@ int	main(int ac, char **av)
 	//sswap(st_a, st_b);
 	//push(&st_a, &st_b);
 	//rotate(st_a);
+	//rev_print_list(st_og);
 	revrotate(st_a);
 
-	//rev_print_list(st_og);
 
 	ft_printf("st_og:\n");
 	print_list(st_og);
