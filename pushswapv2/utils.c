@@ -16,6 +16,29 @@ t_stack *lst_new(int nbr)
 	return(elem);
 }
 
+int	del_head(t_stack **st)
+{
+	t_stack *tail;
+
+	tail = *st;
+	if(!tail)
+		return(0);
+	(*st) = tail->next;
+	tail->next->prev = NULL;
+
+	free(tail);
+
+	tail = *st;
+	tail->id = 0;
+	tail = tail->next;
+	while(tail)
+	{
+		tail->id = (tail->prev->id + 1);
+		tail = tail->next;
+	}
+	return(1);
+}
+
 int	lst_add_back(t_stack **st, t_stack *elem)
 {
 	if (!elem)
@@ -32,6 +55,30 @@ int	lst_add_back(t_stack **st, t_stack *elem)
 	elem->prev = tail;
 	tail->next = elem;
 	elem->id = (tail->id + 1);
+
+	return(1);
+}
+
+int	lst_add_front(t_stack **st, t_stack *elem)
+{
+	if (!elem)
+		return(0);
+	t_stack *tail;
+
+	tail = *st;
+
+	if (!tail)
+		return (*st = elem, elem->id = 0, 1);
+	
+	tail->prev = elem;
+	elem->next = tail;
+	*st = elem;
+	elem->id = 0;
+	while(tail)
+	{
+		tail->id++;
+		tail = tail->next;
+	}
 
 	return(1);
 }

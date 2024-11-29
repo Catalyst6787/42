@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/29 15:35:26 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/29 16:46:28 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ typedef struct s_stack
 }	t_stack;
 
 // UTILS
-
 t_stack *lst_new(int nbr);
+int	del_head(t_stack **st);
 int	lst_add_back(t_stack **st, t_stack *elem);
+int	lst_add_front(t_stack **st, t_stack *elem);
 int	print_lst(t_stack **st);
 int printf_elem(t_stack *elem);
 int free_lst(t_stack **st);
@@ -43,15 +44,16 @@ int check_doubles(t_stack **st);
 
 
 // MAIN
-
 int	get_list(t_stack **st_og, char **av);
 int	main(int ac, char **av);
 
-
+//OPS
+int	swap(t_stack **st);
+int rotate(t_stack **st);
+int rev_rotate(t_stack **st);
 
 
 // GNL
-
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 10
 # endif

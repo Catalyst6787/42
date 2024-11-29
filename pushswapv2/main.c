@@ -24,18 +24,20 @@ int	main(int ac, char **av)
 
 	if (!get_list(&st_og, av))
 		return(0);
-	print_lst(&st_og);
 	set_optid(&st_og);
+	print_lst(&st_og);
+	
+	//swap(&st_og);
+	//del_head(&st_og);
+
+	//rotate(&st_og);
+	//rev_rotate(&st_og);
+
 	ft_printf("\n");
 	print_lst(&st_og);
 
-	ft_printf("size of list is: %d\n", size_list(&st_og));
-
-	ft_printf("doubles: %d\n", check_doubles(&st_og));
-
 	free_lst(&st_og);
-
-	print_lst(&st_og);
+	
 	(void)st_a;
 	(void)st_b;
 
