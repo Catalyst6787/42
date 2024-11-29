@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/29 15:30:18 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/11/29 15:35:26 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int printf_elem(t_stack *elem);
 int free_lst(t_stack **st);
 int	size_list(t_stack **st);
 int	set_optid(t_stack **st);
+int check_doubles(t_stack **st);
 
 
 // MAIN

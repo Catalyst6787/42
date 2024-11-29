@@ -89,6 +89,27 @@ int	size_list(t_stack **st)
 	return(tail->id + 1);
 }
 
+int check_doubles(t_stack **st)
+{
+	t_stack *tail;
+	t_stack *check;
+
+	tail = *st;
+	check = *st;
+	while(tail)
+	{
+		while(check)
+		{
+			if ((tail->nbr == check->nbr) && (tail->id != check->id))
+				return(0);
+			check = check->next;
+		}
+		check = *st;
+		tail = tail->next;
+	}
+	return(1);
+}
+
 int	set_optid(t_stack **st)
 {
 	t_stack	*tail;

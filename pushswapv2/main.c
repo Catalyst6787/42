@@ -31,6 +31,8 @@ int	main(int ac, char **av)
 
 	ft_printf("size of list is: %d\n", size_list(&st_og));
 
+	ft_printf("doubles: %d\n", check_doubles(&st_og));
+
 	free_lst(&st_og);
 
 	print_lst(&st_og);
