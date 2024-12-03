@@ -23,6 +23,8 @@ int	del_head(t_stack **st)
 	tail = *st;
 	if(!tail)
 		return(0);
+	if(!tail->next)
+		return ((*st) = NULL, free(tail), 0);
 	(*st) = tail->next;
 	tail->next->prev = NULL;
 
@@ -201,6 +203,37 @@ int	set_optid(t_stack **st)
 		}
 		tail = *st;
 		nbr++;
+	}
+	return(1);
+}
+
+t_stack *copy_elem(t_stack *elem)
+{
+	t_stack	*elem_copy;
+
+	elem_copy = malloc(sizeof(t_stack));
+	if (!elem_copy)
+		return(ft_printf("Malloc error in lst_new.\n"), NULL);
+	if (!elem)
+		return(elem_copy = NULL, elem_copy);
+	elem_copy->nbr = elem->nbr;
+	elem_copy->id = elem->id;
+	elem_copy->optid = elem->optid;
+	elem_copy->next = NULL;
+	elem_copy->prev = NULL;
+
+	return(elem_copy);
+}
+
+int	lst_copy(t_stack **st, t_stack **st_copy)
+{
+	t_stack *tail;
+
+	tail = *st;
+	while(tail)
+	{
+		lst_add_back(st_copy, copy_elem(tail));
+		tail = tail->next;
 	}
 	return(1);
 }

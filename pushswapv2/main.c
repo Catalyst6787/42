@@ -1,6 +1,6 @@
 #include "header.h"
 
-int	get_list(t_stack **st_og, char **av)
+int	get_list(t_stack **st, char **av)
 {
 	int	i;
 
@@ -8,7 +8,7 @@ int	get_list(t_stack **st_og, char **av)
 
 	while(av[i])
 	{
-		lst_add_back(st_og, lst_new(ft_atoi(av[i])));
+		lst_add_back(st, lst_new(ft_atoi(av[i])));
 		i++;
 	}
 	return (1);
@@ -22,25 +22,26 @@ int	main(int ac, char **av)
 	t_stack *st_a;
 	t_stack *st_b;
 
+	st_og = NULL;
+	st_a = NULL;
+	st_b = NULL;
 	if (!get_list(&st_og, av))
 		return(0);
 	set_optid(&st_og);
+	ft_printf("\nst_og:\n");
 	print_lst(&st_og);
 	
-	//swap(&st_og);
-	//del_head(&st_og);
+	ft_printf("\ndiff: %d\n", get_diff(&st_og));
+	//lst_copy(&st_og, &st_a);
 
-	//rotate(&st_og);
-	//rev_rotate(&st_og);
+	//ft_printf("\nst_a:\n");
+	//print_lst(&st_a);
 
-	ft_printf("\n");
-	print_lst(&st_og);
+	//ft_printf("\nst_b:\n");
+	//print_lst(&st_b);
 
 	free_lst(&st_og);
-	
-	(void)st_a;
-	(void)st_b;
-
-
+	free_lst(&st_a);
+	free_lst(&st_b);
 	return (1);
 }

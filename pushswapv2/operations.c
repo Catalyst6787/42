@@ -81,3 +81,19 @@ int rev_rotate(t_stack **st)
 	}
 	return(1);
 }
+
+int push(t_stack **st_from, t_stack **st_to)
+{
+	t_stack *tail_from;
+	//t_stack *tail_to;
+
+	tail_from = *st_from;
+	//tail_to = *st_to;
+
+	if (!tail_from)
+		return(ft_printf("\nNothing to push, NULL node\n"), 0);
+
+	lst_add_front(st_to, copy_elem(tail_from));
+	del_head(st_from);
+	return(1);
+}

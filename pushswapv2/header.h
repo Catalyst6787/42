@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/11/29 16:46:28 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/03 11:11:56 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,16 +41,23 @@ int free_lst(t_stack **st);
 int	size_list(t_stack **st);
 int	set_optid(t_stack **st);
 int check_doubles(t_stack **st);
+t_stack *copy_elem(t_stack *elem);
+int	lst_copy(t_stack **st, t_stack **st_copy);
 
 
 // MAIN
 int	get_list(t_stack **st_og, char **av);
 int	main(int ac, char **av);
+int	init_elem(t_stack **st);
 
 //OPS
 int	swap(t_stack **st);
 int rotate(t_stack **st);
 int rev_rotate(t_stack **st);
+int push(t_stack **st_from, t_stack **st_to);
+
+//BACKTRACKING
+int	get_diff(t_stack **st);
 
 
 // GNL
