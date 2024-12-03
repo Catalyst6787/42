@@ -30,10 +30,32 @@ int	main(int ac, char **av)
 	set_optid(&st_og);
 	ft_printf("\nst_og:\n");
 	print_lst(&st_og);
-	
-	ft_printf("\ndiff: %d\n", get_diff(&st_og));
-	//lst_copy(&st_og, &st_a);
 
+	ft_printf("\nrev_st_og:\n");
+	rev_print_lst(&st_og);
+
+	lst_copy(&st_og, &st_a);
+
+	swap(&st_a);
+
+	ft_printf("\nst_a:\n");
+	print_lst(&st_a);
+	ft_printf("\nrev_st_a:\n");
+	rev_print_lst(&st_a);
+	ft_printf("\ndiff: %d\n", get_diff_a(&st_a));
+
+	push(&st_a, &st_b);
+	push(&st_a, &st_b);
+	push(&st_a, &st_b);
+	push(&st_a, &st_b);
+	push(&st_a, &st_b);
+
+	ft_printf("\nst_b:\n");
+	print_lst(&st_b);
+	ft_printf("\ndiff: %d\n", get_diff_b(&st_b));
+
+	ft_printf("\nrev_st_b:\n");
+	rev_print_lst(&st_b);
 	//ft_printf("\nst_a:\n");
 	//print_lst(&st_a);
 

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/03 11:11:56 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/03 14:26:17 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ int	del_head(t_stack **st);
 int	lst_add_back(t_stack **st, t_stack *elem);
 int	lst_add_front(t_stack **st, t_stack *elem);
 int	print_lst(t_stack **st);
+int	rev_print_lst(t_stack **st);
 int printf_elem(t_stack *elem);
 int free_lst(t_stack **st);
 int	size_list(t_stack **st);
@@ -57,7 +58,9 @@ int rev_rotate(t_stack **st);
 int push(t_stack **st_from, t_stack **st_to);
 
 //BACKTRACKING
-int	get_diff(t_stack **st);
+int	get_diff_a(t_stack **st);
+int	get_diff_b(t_stack **st);
+
 
 
 // GNL

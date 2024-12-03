@@ -1,24 +1,26 @@
 #include "header.h"
 
-int	swap(t_stack **st)
+int swap(t_stack **st)
 {
-	t_stack *first;
-	t_stack *second;
-	
-	if (!(*st) || !((*st)->next))
+	t_stack *tail;
+	t_stack *new_head;
+	tail = *st;
+	new_head = (*st)->next;
+
+	if (!tail || !tail->next)
 		return(0);
-	first = *st;
-	second = first->next;
+	(*st) = new_head;
+	tail->next = new_head->next;
+	if (tail->next)
+		tail->next->prev = tail;
 
-	first->next = second->next;
-	first->prev = second;
-	second->prev = NULL;
-	second->next = first;
+	new_head->prev = NULL;
+	new_head->next = tail;
+	new_head->id = 0;
 
-	second->id = 0;
-	first->id = 1;
+	tail->prev = new_head;
+	tail->id = 1;
 
-	(*st) = second;
 	return(1);
 }
 
@@ -85,11 +87,8 @@ int rev_rotate(t_stack **st)
 int push(t_stack **st_from, t_stack **st_to)
 {
 	t_stack *tail_from;
-	//t_stack *tail_to;
 
 	tail_from = *st_from;
-	//tail_to = *st_to;
-
 	if (!tail_from)
 		return(ft_printf("\nNothing to push, NULL node\n"), 0);
 

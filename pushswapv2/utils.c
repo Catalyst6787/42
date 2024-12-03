@@ -26,17 +26,25 @@ int	del_head(t_stack **st)
 	if(!tail->next)
 		return ((*st) = NULL, free(tail), 0);
 	(*st) = tail->next;
-	tail->next->prev = NULL;
+	(*st)->prev = NULL;
 
 	free(tail);
+	tail = NULL;
 
 	tail = *st;
+	if (!tail)
+		ft_printf("tail is NULL");
 	tail->id = 0;
-	tail = tail->next;
-	while(tail)
+	if (tail->next)
 	{
-		tail->id = (tail->prev->id + 1);
 		tail = tail->next;
+		if (!tail->prev)
+			ft_printf("tail of previous is NULL");
+		while(tail)
+		{
+			tail->id = (tail->prev->id + 1);
+			tail = tail->next;
+		}
 	}
 	return(1);
 }
@@ -50,7 +58,13 @@ int	lst_add_back(t_stack **st, t_stack *elem)
 	tail = *st;
 
 	if (!tail)
-		return (*st = elem, elem->id = 0, 1);
+	{
+		*st = elem;
+		elem->id = 0;
+		elem->prev = NULL;
+		elem->next = NULL;
+		return (1);
+	}
 	while(tail->next)
 		tail = tail->next;
 
@@ -58,7 +72,7 @@ int	lst_add_back(t_stack **st, t_stack *elem)
 	tail->next = elem;
 	elem->id = (tail->id + 1);
 
-	return(1);
+	return (1);
 }
 
 int	lst_add_front(t_stack **st, t_stack *elem)
@@ -70,8 +84,13 @@ int	lst_add_front(t_stack **st, t_stack *elem)
 	tail = *st;
 
 	if (!tail)
-		return (*st = elem, elem->id = 0, 1);
-	
+	{
+		*st = elem;
+		elem->id = 0;
+		elem->prev = NULL;
+		elem->next = NULL;
+		return (1);
+	}
 	tail->prev = elem;
 	elem->next = tail;
 	*st = elem;
@@ -89,7 +108,6 @@ int	print_lst(t_stack **st)
 {
 	t_stack *tail;
 
-	
 	tail = *st;
 	if (!tail)
 		return(ft_printf("\nNULL node\n"), 0);
@@ -97,6 +115,23 @@ int	print_lst(t_stack **st)
 	{
 		printf_elem(tail);
 		tail = tail->next;
+	}
+	return (1);
+}
+
+int	rev_print_lst(t_stack **st)
+{
+	t_stack *tail;
+
+	tail = *st;
+	if (!tail)
+		return(ft_printf("\nNULL node\n"), 0);
+	while(tail->next)
+		tail = tail->next;
+	while(tail)
+	{
+		printf_elem(tail);
+		tail = tail->prev;
 	}
 	return (1);
 }
