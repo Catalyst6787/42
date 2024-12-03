@@ -1,6 +1,6 @@
 #include "header.h"
 
-int swap(t_stack **st)
+t_stack	**swap(t_stack **st)
 {
 	t_stack *tail;
 	t_stack *new_head;
@@ -21,10 +21,10 @@ int swap(t_stack **st)
 	tail->prev = new_head;
 	tail->id = 1;
 
-	return(1);
+	return(st);
 }
 
-int rotate(t_stack **st)
+t_stack	**rotate(t_stack **st)
 {
 	t_stack *tail;
 	t_stack *last;
@@ -52,10 +52,10 @@ int rotate(t_stack **st)
 		tail->id = (tail->prev->id + 1);
 		tail = tail->next;
 	}
-	return(1);
+	return(st);
 }
 
-int rev_rotate(t_stack **st)
+t_stack	**rev_rotate(t_stack **st)
 {
 	t_stack *tail;
 	t_stack *last;
@@ -81,7 +81,7 @@ int rev_rotate(t_stack **st)
 		tail->id = (tail->prev->id + 1);
 		tail = tail->next;
 	}
-	return(1);
+	return(st);
 }
 
 int push(t_stack **st_from, t_stack **st_to)

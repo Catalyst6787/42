@@ -272,3 +272,17 @@ int	lst_copy(t_stack **st, t_stack **st_copy)
 	}
 	return(1);
 }
+
+t_stack **lst_copy_new(t_stack **st)
+{
+	t_stack *st_copy;
+	t_stack *tail;
+
+	tail = *st;
+	while(tail)
+	{
+		lst_add_back(st_copy, copy_elem(tail));
+		tail = tail->next;
+	}
+	return(st_copy);
+}

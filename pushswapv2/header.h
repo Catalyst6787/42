@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/03 14:26:17 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/03 18:05:09 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,26 @@ typedef struct s_stack
 	struct s_stack	*prev;
 }	t_stack;
 
+typedef struct s_tree
+{
+	int level;
+	//struct s_tree	prev;
+	struct s_stack	*st_a;
+	struct s_stack	*st_b;
+	int diff;
+	struct s_tree	sa;
+	struct s_tree	sb;
+	struct s_tree	ss;
+	struct s_tree	pa;
+	struct s_tree	pb;
+	struct s_tree	ra;
+	struct s_tree	rb;
+	struct s_tree	rr;
+	struct s_tree	rra;
+	struct s_tree	rrb;
+	struct s_tree	rrr;
+}	t_tree;
+
 // UTILS
 t_stack *lst_new(int nbr);
 int	del_head(t_stack **st);
@@ -44,6 +64,7 @@ int	set_optid(t_stack **st);
 int check_doubles(t_stack **st);
 t_stack *copy_elem(t_stack *elem);
 int	lst_copy(t_stack **st, t_stack **st_copy);
+t_stack **lst_copy_new(t_stack **st);
 
 
 // MAIN
@@ -60,6 +81,9 @@ int push(t_stack **st_from, t_stack **st_to);
 //BACKTRACKING
 int	get_diff_a(t_stack **st);
 int	get_diff_b(t_stack **st);
+int get_tot_diff(t_stack **st_a, t_stack **st_b);
+int init_tree(t_tree **root, t_stack **st_a, t_stack **st_b);
+void	free_tree(t_tree **branch);
 
 
 
