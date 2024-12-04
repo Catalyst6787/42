@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 	print_lst(&st_a);
 	ft_printf("\ndiff: %d\n", get_diff_a(&st_a));
 
-	free_tree(&tree);
+	
 	init_tree(&tree, &st_a, &st_b);
 	branch_out(NULL, &tree, &st_a, &st_b, 0, 1);
 

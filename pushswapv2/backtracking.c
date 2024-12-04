@@ -14,8 +14,6 @@ int	get_diff_a(t_stack **st)
 	t_stack	*tail;
 	
 	tail = *st;
-	if (!tail)
-		return(-1);
 	totdiff = 0;
 	while(tail)
 	{
@@ -33,8 +31,6 @@ int	get_diff_b(t_stack **st)
 	
 	listsize = size_list(st);
 	tail = *st;
-	if (!tail)
-		return(-1);
 	totdiff = 0;
 	while(tail)
 	{
@@ -52,14 +48,14 @@ int get_tot_diff(t_stack **st_a, t_stack **st_b)
 	diff_a = get_diff_a(st_a);
 	diff_b = get_diff_b(st_b);
 
-	if (diff_a < 0 || diff_b < 0)
-		return(ft_printf("\ngot diff on nonexistent stack.\n"), -1);
 	return(diff_a + diff_b);
 }
 
 void	init_tree(t_tree **root, t_stack **st_a, t_stack **st_b)
 {
 	(*root) = malloc(sizeof(t_tree));
+	if (!(*root))
+		return ;
 	(*root)->lvl = 0;
 	(*root)->prev = NULL;
 	(*root)->st_a = st_a;
@@ -107,9 +103,13 @@ void	free_tree(t_tree **branch)
 
 void	branch_out(t_tree **prev, t_tree **branch, t_stack **st_a, t_stack **st_b, int lvl, int max)
 {
-	t_tree *br;
-	br = *branch;
+	ft_printf("\nbranch\n");
+	t_tree	*br;
 	br = malloc(sizeof(t_tree));
+	branch = &br;
+
+	//t_tree *br;
+	br = *branch;
 	t_stack *st_a_pa;
 	t_stack *st_b_pa;
 	t_stack *st_a_pb;
@@ -178,6 +178,8 @@ void	branch_out(t_tree **prev, t_tree **branch, t_stack **st_a, t_stack **st_b, 
 	else
 		br->rr = NULL;
 }
+
+
 /*
 t_tree **get_best_branch(t_tree **branch)
 {

@@ -65,6 +65,7 @@ int	lst_add_back(t_stack **st, t_stack *elem)
 		elem->next = NULL;
 		return (1);
 	}
+
 	while(tail->next)
 		tail = tail->next;
 
@@ -279,8 +280,9 @@ t_stack **lst_copy_new(t_stack **st)
 {
 	t_stack **st_copy;
 	t_stack *tail;
+	st_copy = malloc(sizeof(t_stack));
+	(*st_copy) = NULL;
 
-	st_copy = NULL;
 	tail = *st;
 	while(tail)
 	{
