@@ -103,7 +103,9 @@ void	free_tree(t_tree **branch)
 
 void	branch_out(t_tree **prev, t_tree **branch, t_stack **st_a, t_stack **st_b, int lvl, int max)
 {
-	ft_printf("\nbranch\n");
+	if (lvl >= max)
+		return ;
+	ft_printf("%d\n", lvl);
 	t_tree	*br;
 	br = malloc(sizeof(t_tree));
 	branch = &br;
@@ -121,18 +123,16 @@ void	branch_out(t_tree **prev, t_tree **branch, t_stack **st_a, t_stack **st_b, 
 	br->diff = get_tot_diff(br->st_a, br->st_b);
 	br->prev = prev;
 
-	if (lvl >= max)
-		return ;
 	if (st_a)
-		branch_out(branch, br->sa, swap(lst_copy_new(br->st_a)), st_b, lvl++, max);
+		branch_out(branch, br->sa, swap(lst_copy_new(st_a)), lst_copy_new(st_b), lvl + 1, max);
 	else
 		br->sa = NULL;
 	if (st_b)
-		branch_out(branch, br->sb, st_a, swap(lst_copy_new(br->st_b)), lvl++, max);
+		branch_out(branch, br->sb, lst_copy_new(st_a), swap(lst_copy_new(st_b)), lvl + 1, max);
 	else
 		br->sb = NULL;
 	if (st_a && st_b)
-		branch_out(branch, br->ss, swap(lst_copy_new(br->st_a)), swap(lst_copy_new(br->st_b)), lvl++, max);
+		branch_out(branch, br->ss, swap(lst_copy_new(st_a)), swap(lst_copy_new(st_b)), lvl + 1, max);
 	else
 		br->ss = NULL;
 	if (st_b)
@@ -140,7 +140,7 @@ void	branch_out(t_tree **prev, t_tree **branch, t_stack **st_a, t_stack **st_b, 
 		lst_copy(st_b, &st_b_pa);
 		lst_copy(st_a, &st_a_pa);
 		push(&st_b_pa, &st_a_pa);
-		branch_out(branch, br->pa, &st_a_pa, &st_b_pa, lvl++, max);
+		branch_out(branch, br->pa, &st_a_pa, &st_b_pa, lvl + 1, max);
 	}
 	else
 		br->pa = NULL;
@@ -149,32 +149,32 @@ void	branch_out(t_tree **prev, t_tree **branch, t_stack **st_a, t_stack **st_b, 
 		lst_copy(st_a, &st_a_pb);
 		lst_copy(st_b, &st_b_pb);
 		push(&st_a_pb, &st_b_pb);
-		branch_out(branch, br->pb, &st_a_pb, &st_b_pb, lvl++, max);
+		branch_out(branch, br->pb, &st_a_pb, &st_b_pb, lvl + 1, max);
 	}
 	else
 		br->pa = NULL;
 	if (st_a)
-		branch_out(branch, br->ra, rotate(lst_copy_new(st_a)), st_b, lvl++, max);
+		branch_out(branch, br->ra, rotate(lst_copy_new(st_a)), lst_copy_new(st_b), lvl + 1, max);
 	else
 		br->ra = NULL;
 	if (st_b)
-		branch_out(branch, br->rb, st_a, rotate(lst_copy_new(st_b)), lvl++, max);
+		branch_out(branch, br->rb, lst_copy_new(st_a), rotate(lst_copy_new(st_b)), lvl + 1, max);
 	else
 		br->rb = NULL;
 	if (st_a && st_b)
-		branch_out(branch, br->rr, rotate(lst_copy_new(st_a)), rotate(lst_copy_new(st_b)), lvl++, max);
+		branch_out(branch, br->rr, rotate(lst_copy_new(st_a)), rotate(lst_copy_new(st_b)), lvl + 1, max);
 	else
 		br->rr = NULL;
 	if (st_a)
-		branch_out(branch, br->rra, rev_rotate(lst_copy_new(st_a)), st_b, lvl++, max);
+		branch_out(branch, br->rra, rev_rotate(lst_copy_new(st_a)), lst_copy_new(st_b), lvl + 1, max);
 	else
 		br->ra = NULL;
 	if (st_b)
-		branch_out(branch, br->rrb, st_a, rev_rotate(lst_copy_new(st_b)), lvl++, max);
+		branch_out(branch, br->rrb, lst_copy_new(st_a), rev_rotate(lst_copy_new(st_b)), lvl + 1, max);
 	else
 		br->rb = NULL;
 	if (st_a && st_b)
-		branch_out(branch, br->rrr, rev_rotate(lst_copy_new(st_a)), rev_rotate(lst_copy_new(st_b)), lvl++, max);
+		branch_out(branch, br->rrr, rev_rotate(lst_copy_new(st_a)), rev_rotate(lst_copy_new(st_b)), lvl + 1, max);
 	else
 		br->rr = NULL;
 }

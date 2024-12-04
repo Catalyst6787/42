@@ -14,9 +14,7 @@ int	get_list(t_stack **st, char **av)
 	return (1);
 }
 
-// CURENTLY WHEN BACKTRACKING, 
-// ONLY MODIFIED LISTS ARE COPIED BEFORE PUTTING THEM IN THE NEXT BRANCH. 
-// IF ENCOUNTERING PROBLEMS TRY CHANGING THAT BEHAVIOUR
+
 int	main(int ac, char **av)
 {
 	if (ac < 2)
