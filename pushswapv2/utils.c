@@ -168,6 +168,8 @@ int	size_list(t_stack **st)
 	t_stack *tail;
 
 	tail = *st;
+	if (!tail)
+		return(0);
 	while(tail->next)
 		tail = tail->next;
 	return(tail->id + 1);
@@ -275,9 +277,10 @@ int	lst_copy(t_stack **st, t_stack **st_copy)
 
 t_stack **lst_copy_new(t_stack **st)
 {
-	t_stack *st_copy;
+	t_stack **st_copy;
 	t_stack *tail;
 
+	st_copy = NULL;
 	tail = *st;
 	while(tail)
 	{

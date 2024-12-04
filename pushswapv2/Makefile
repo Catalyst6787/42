@@ -1,5 +1,5 @@
 NAME = push_swap
-CC = cc
+CC = gcc
 CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
 
 PRINTF_DIR = ./printf

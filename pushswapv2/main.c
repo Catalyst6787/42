@@ -24,6 +24,7 @@ int	main(int ac, char **av)
 	t_stack *st_og;
 	t_stack *st_a;
 	t_stack *st_b;
+	t_tree *tree;
 
 	st_og = NULL;
 	st_a = NULL;
@@ -34,37 +35,19 @@ int	main(int ac, char **av)
 	ft_printf("\nst_og:\n");
 	print_lst(&st_og);
 
-	ft_printf("\nrev_st_og:\n");
-	rev_print_lst(&st_og);
-
 	lst_copy(&st_og, &st_a);
-
-	swap(&st_a);
-
 	ft_printf("\nst_a:\n");
 	print_lst(&st_a);
-	ft_printf("\nrev_st_a:\n");
-	rev_print_lst(&st_a);
 	ft_printf("\ndiff: %d\n", get_diff_a(&st_a));
 
-	push(&st_a, &st_b);
-	push(&st_a, &st_b);
-	push(&st_a, &st_b);
-	push(&st_a, &st_b);
-	push(&st_a, &st_b);
+	free_tree(&tree);
+	init_tree(&tree, &st_a, &st_b);
+	branch_out(NULL, &tree, &st_a, &st_b, 0, 1);
 
-	ft_printf("\nst_b:\n");
-	print_lst(&st_b);
-	ft_printf("\ndiff: %d\n", get_diff_b(&st_b));
-
-	ft_printf("\nrev_st_b:\n");
-	rev_print_lst(&st_b);
-	//ft_printf("\nst_a:\n");
-	//print_lst(&st_a);
-
-	//ft_printf("\nst_b:\n");
-	//print_lst(&st_b);
-
+	print_lst((*(get_best_branch(&tree)))->st_a);
+	print_lst((*(get_best_branch(&tree)))->st_b);
+	
+	free_tree(&tree);
 	free_lst(&st_og);
 	free_lst(&st_a);
 	free_lst(&st_b);
