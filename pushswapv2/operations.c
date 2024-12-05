@@ -4,6 +4,9 @@ t_stack	**swap(t_stack **st)
 {
 	t_stack *tail;
 	t_stack *new_head;
+
+	if (!st || !*st)
+		return(NULL);
 	tail = *st;
 	new_head = (*st)->next;
 
@@ -86,6 +89,8 @@ t_stack	**rev_rotate(t_stack **st)
 
 int push(t_stack **st_from, t_stack **st_to)
 {
+	if (!st_from || !(*st_from))
+		return(0);
 	t_stack *tail_from;
 
 	tail_from = *st_from;

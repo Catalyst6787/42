@@ -84,7 +84,8 @@ int	get_diff_b(t_stack **st);
 int get_tot_diff(t_stack **st_a, t_stack **st_b);
 void	init_tree(t_tree **root, t_stack **st_a, t_stack **st_b);
 void	free_tree(t_tree **branch);
-void	branch_out(t_tree **prev, t_tree **branch, t_stack **st_a, t_stack **st_b, int lvl, int max);
+t_tree	**init_branch(t_tree **prev, t_stack **st_a, t_stack **st_b);
+void	branch_out(t_tree **branch, int max);
 t_tree **get_best_branch(t_tree **branch);
 
 

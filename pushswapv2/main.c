@@ -22,7 +22,7 @@ int	main(int ac, char **av)
 	t_stack *st_og;
 	t_stack *st_a;
 	t_stack *st_b;
-	t_tree *tree;
+	t_tree **tree;
 
 	st_og = NULL;
 	st_a = NULL;
@@ -39,13 +39,14 @@ int	main(int ac, char **av)
 	ft_printf("\ndiff: %d\n", get_diff_a(&st_a));
 
 	
-	init_tree(&tree, &st_a, &st_b);
-	branch_out(NULL, &tree, &st_a, &st_b, 0, 1);
-
-	print_lst((*(get_best_branch(&tree)))->st_a);
-	print_lst((*(get_best_branch(&tree)))->st_b);
+	tree = init_branch(NULL, &st_a, &st_b);
+	branch_out(tree, 1);
+	ft_printf("best branch:\nst_a:\n");
+	print_lst((*(get_best_branch(tree)))->st_a);
+	ft_printf("\nst_b:\n");
+	print_lst((*(get_best_branch(tree)))->st_b);
 	
-	free_tree(&tree);
+	free_tree(tree);
 	free_lst(&st_og);
 	free_lst(&st_a);
 	free_lst(&st_b);

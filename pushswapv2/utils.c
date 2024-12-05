@@ -54,7 +54,6 @@ int	lst_add_back(t_stack **st, t_stack *elem)
 	if (!elem)
 		return(0);
 	t_stack *tail;
-
 	tail = *st;
 
 	if (!tail)
@@ -166,6 +165,8 @@ int free_lst(t_stack **st)
 // return actual siye so if last id is 4 return 5 (id start at 0)
 int	size_list(t_stack **st)
 {
+	if (!st || !(*st))
+		return(-1);
 	t_stack *tail;
 
 	tail = *st;
@@ -280,8 +281,12 @@ t_stack **lst_copy_new(t_stack **st)
 {
 	t_stack **st_copy;
 	t_stack *tail;
-	st_copy = malloc(sizeof(t_stack));
-	(*st_copy) = NULL;
+
+	st_copy = malloc(sizeof(t_stack *));
+	if (!st_copy)
+		return (NULL);
+
+	*st_copy = NULL;
 
 	tail = *st;
 	while(tail)
