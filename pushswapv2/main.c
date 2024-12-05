@@ -40,13 +40,12 @@ int	main(int ac, char **av)
 
 	
 	tree = init_branch(NULL, &st_a, &st_b);
-	branch_out(tree, 1);
-	ft_printf("best branch:\nst_a:\n");
-	print_lst((*(get_best_branch(tree)))->st_a);
-	ft_printf("\nst_b:\n");
-	print_lst((*(get_best_branch(tree)))->st_b);
+	branch_out(tree, 3);
+	ft_printf("best branch:\n");
+	print_branch(get_best_branch(tree));
 	
 	free_tree(tree);
+	free(tree);
 	free_lst(&st_og);
 	free_lst(&st_a);
 	free_lst(&st_b);

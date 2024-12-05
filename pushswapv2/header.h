@@ -87,6 +87,7 @@ void	free_tree(t_tree **branch);
 t_tree	**init_branch(t_tree **prev, t_stack **st_a, t_stack **st_b);
 void	branch_out(t_tree **branch, int max);
 t_tree **get_best_branch(t_tree **branch);
+void	print_branch(t_tree **branch);
 
 
 

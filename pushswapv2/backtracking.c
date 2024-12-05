@@ -82,13 +82,19 @@ void	free_tree(t_tree **branch)
 {
 	t_tree *br;
 
-	if (!branch)
+	if (!branch || !(*branch))
 		return ;
 	br = *branch;
 	if (br->st_a)
+	{
 		free_lst(br->st_a);
+		//free(br->st_a);
+	}
 	if (br->st_b)
+	{
 		free_lst(br->st_b);
+		//free(br->st_b);
+	}
 	free_tree(br->sa);
 	free_tree(br->sb);
 	free_tree(br->ss);
@@ -327,17 +333,20 @@ t_tree **get_best_branch(t_tree **branch)
 }
 */
 
-static void	is_smallest(t_tree **branch, t_tree **smallest)
+static t_tree	**is_smallest(t_tree **branch, t_tree **smallest)
 {
 	t_tree **tmp;
 
 	if (!branch || !(*branch))
-		return ;
+		return (smallest) ;
 	tmp = (get_best_branch(branch));
+	if (!tmp || !(*tmp))
+		return (smallest);
 	if (tmp && !smallest)
 		smallest = tmp;
 	else if ((*tmp && !(*smallest)) || (*tmp && ((*tmp)->diff < (*smallest)->diff)))
 		(*smallest) = *tmp;
+	return (smallest);
 }
 
 t_tree **get_best_branch(t_tree **branch)
@@ -354,17 +363,35 @@ t_tree **get_best_branch(t_tree **branch)
 	if (br->diff == 0)
 		return(branch);
 
-	is_smallest(br->sa, smallest);
-	is_smallest(br->sb, smallest);
-	is_smallest(br->ss, smallest);
-	is_smallest(br->pa, smallest);
-	is_smallest(br->pb, smallest);
-	is_smallest(br->ra, smallest);
-	is_smallest(br->rb, smallest);
-	is_smallest(br->rr, smallest);
-	is_smallest(br->rra, smallest);
-	is_smallest(br->rrb, smallest);
-	is_smallest(br->rrr, smallest);
+	smallest = is_smallest(br->sa, smallest);
+	smallest = is_smallest(br->sb, smallest);
+	smallest = is_smallest(br->ss, smallest);
+	smallest = is_smallest(br->pa, smallest);
+	smallest = is_smallest(br->pb, smallest);
+	smallest = is_smallest(br->ra, smallest);
+	smallest = is_smallest(br->rb, smallest);
+	smallest = is_smallest(br->rr, smallest);
+	smallest = is_smallest(br->rra, smallest);
+	smallest = is_smallest(br->rrb, smallest);
+	smallest = is_smallest(br->rrr, smallest);
 	
 	return(smallest);
+}
+
+void	print_branch(t_tree **branch)
+{
+	t_tree *br;
+	if (!branch || !(*branch))
+		return ;
+	br = *branch;
+	if (!br || !(br->st_a) || !(br->st_b))
+		ft_printf("\nerror printing branch\n");
+	else
+	{
+		ft_printf("Branch level: %d\n", br->lvl);
+		ft_printf("st_a:\n");
+		print_lst(br->st_a);
+		ft_printf("st_b:\n");
+		print_lst(br->st_b);
+	}
 }
