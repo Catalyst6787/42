@@ -146,14 +146,14 @@ int printf_elem(t_stack *elem)
 
 int free_lst(t_stack **st)
 {
+	if (!st || !(*st))
+		return (0);
 	t_stack	*tail;
 	t_stack	*tmp;
 
 	tail = *st;
 	while(tail)
 	{
-		//ft_printf("attempt free on:\n");
-		//printf_elem(tail);
 		tmp = tail->next;
 		free(tail);
 		tail = tmp;
@@ -162,7 +162,7 @@ int free_lst(t_stack **st)
 	return (1);
 }
 
-// return actual siye so if last id is 4 return 5 (id start at 0)
+// return actual size so if last id is 4 return 5 (id start at 0)
 int	size_list(t_stack **st)
 {
 	if (!st || !(*st))
