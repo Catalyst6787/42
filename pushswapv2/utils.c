@@ -77,6 +77,8 @@ int	lst_add_back(t_stack **st, t_stack *elem)
 
 int	lst_add_front(t_stack **st, t_stack *elem)
 {
+	if (!st)
+		return (0);
 	if (!elem)
 		return(0);
 	t_stack *tail;
@@ -279,6 +281,8 @@ int	lst_copy(t_stack **st, t_stack **st_copy)
 
 t_stack **lst_copy_new(t_stack **st)
 {
+	if (!st || !(*st))
+		return (NULL);
 	t_stack **st_copy;
 	t_stack *tail;
 
