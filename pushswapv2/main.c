@@ -40,7 +40,7 @@ int	main(int ac, char **av)
 
 	
 	tree = init_branch(NULL, &st_a, &st_b);
-	branch_out(tree, 3);
+	branch_out(tree, 1);
 	ft_printf("best branch:\n");
 	print_branch(get_best_branch(tree));
 	

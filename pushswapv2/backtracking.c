@@ -161,12 +161,44 @@ static void	call_br_out(t_tree **branch, int max)
 	branch_out(br->rrb, max);
 	branch_out(br->rrr, max);
 }
+static int branch_exists_and_empty(t_tree **branch)
+{
+	t_tree *br;
+	if (!branch || !(*branch))
+		return(0);
+	br = *branch;
+	if (br->sa)
+		return(0);
+	if (br->sb)
+		return(0);
+	if (br->ss)
+		return(0);
+	if (br->pa)
+		return(0);
+	if (br->pb)
+		return(0);
+	if (br->ra)
+		return(0);
+	if (br->rb)
+		return(0);
+	if (br->rr)
+		return(0);
+	if (br->rra)
+		return(0);
+	if (br->rrb)
+		return(0);
+	if (br->rrb)
+		return(0);
+	return(1);
+}
 
 void	branch_out(t_tree **branch, int max)
 {
 	t_tree *br;
 
 	if (!branch || !(*branch))
+		return ;
+	if (!branch_exists_and_empty(branch))
 		return ;
 	br = *branch;
 	if (max <= br->lvl)
@@ -178,31 +210,37 @@ void	branch_out(t_tree **branch, int max)
 	t_stack **st_pa_a;
 	t_stack **st_pa_b;
 
-	st_pb_a = NULL;
-	st_pb_b = NULL;
-	st_pa_a = NULL;
-	st_pa_b = NULL;
+	st_pb_a = lst_copy_new(br->st_a);
+	st_pb_b = lst_copy_new(br->st_b);
+	st_pa_a = lst_copy_new(br->st_a);
+	st_pa_b = lst_copy_new(br->st_b);
 
 	if (br->st_a)
 	{
 		br->sa = init_branch(branch, swap(lst_copy_new(br->st_a)), lst_copy_new(br->st_b));
-		st_pb_a = lst_copy_new(br->st_a);
-		st_pb_b = lst_copy_new(br->st_b);
 		push(st_pb_a, st_pb_b);
 		br->pb = init_branch(branch, st_pb_a, st_pb_b);
 		br->ra = init_branch(branch, rotate(lst_copy_new(br->st_a)), lst_copy_new(br->st_b));
 		br->rra = init_branch(branch, rev_rotate(lst_copy_new(br->st_a)), lst_copy_new(br->st_b));
 
 	}
+	else
+	{
+		free_lst(st_pb_a);
+		free_lst(st_pb_b);
+	}
 	if (br->st_b)
 	{
 		br->sb = init_branch(branch, lst_copy_new(br->st_a), swap(lst_copy_new(br->st_b)));
-		st_pb_a = lst_copy_new(br->st_a);
-		st_pb_b = lst_copy_new(br->st_b);
 		push(st_pa_b, st_pa_a);
 		br->pb = init_branch(branch, st_pa_a, st_pa_b);
 		br->rb = init_branch(branch, lst_copy_new(br->st_a), rotate(lst_copy_new(br->st_b)));
 		br->rrb = init_branch(branch, lst_copy_new(br->st_a), rev_rotate(lst_copy_new(br->st_b)));
+	}
+	else
+	{
+		free_lst(st_pa_a);
+		free_lst(st_pa_b);
 	}
 	if (br->st_a && br->st_b)
 	{
@@ -213,43 +251,6 @@ void	branch_out(t_tree **branch, int max)
 	if (br->lvl < max)
 		call_br_out(branch, max);
 }
-/*
-t_tree **get_best_branch(t_tree **branch)
-{
-	t_tree *br;
-	t_tree *smallest;
-
-	smallest = NULL;
-	br = *branch;
-	if (!br)
-		return(NULL);
-	if (br->diff = 0)
-		return(branch);
-	if (br->sa && br->sa->diff && (!smallest || br->sa->diff < smallest->diff))
-		smallest = br->sa;
-	if (br->sb && br->sb->diff && (!smallest || br->sb->diff < smallest->diff))
-		smallest = br->sb;
-	if (br->ss && br->ss->diff && (!smallest || br->ss->diff < smallest->diff))
-		smallest = br->ss;
-	if (br->pa && br->pa->diff && (!smallest || br->pa->diff < smallest->diff))
-		smallest = br->pa;
-	if (br->pb && br->pb->diff && (!smallest || br->pb->diff < smallest->diff))
-		smallest = br->pb;
-	if (br->ra && br->ra->diff && (!smallest || br->ra->diff < smallest->diff))
-		smallest = br->ra;
-	if (br->rb && br->rb->diff && (!smallest || br->rb->diff < smallest->diff))
-		smallest = br->rb;
-	if (br->rr && br->rr->diff && (!smallest || br->rr->diff < smallest->diff))
-		smallest = br->rr;
-	if (br->rra && br->rra->diff && (!smallest || br->rra->diff < smallest->diff))
-		smallest = br->rra;
-	if (br->rrb && br->rrb->diff && (!smallest || br->rrb->diff < smallest->diff))
-		smallest = br->rrb;
-	if (br->rrr && br->rrr->diff && (!smallest || br->rrr->diff < smallest->diff))
-		smallest = br->rrr;
-	return(smallest);
-}
-*/
 
 static t_tree	**is_smallest(t_tree **branch, t_tree **smallest)
 {
@@ -302,14 +303,16 @@ void	print_branch(t_tree **branch)
 	if (!branch || !(*branch))
 		return ;
 	br = *branch;
-	if (!br || !(br->st_a) || !(br->st_b))
+	if (!br || !(br->st_a))
 		ft_printf("\nerror printing branch\n");
 	else
 	{
 		ft_printf("Branch level: %d\n", br->lvl);
 		ft_printf("st_a:\n");
-		print_lst(br->st_a);
+		if (br->st_a)
+			print_lst(br->st_a);
 		ft_printf("st_b:\n");
-		print_lst(br->st_b);
+		if (br->st_b)
+			print_lst(br->st_b);
 	}
 }

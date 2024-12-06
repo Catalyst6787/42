@@ -77,12 +77,12 @@ int	lst_add_back(t_stack **st, t_stack *elem)
 
 int	lst_add_front(t_stack **st, t_stack *elem)
 {
-	if (!st)
-		return (0);
-	if (!elem)
+	if (!elem || !st)
 		return(0);
 	t_stack *tail;
-
+	
+	//if (!st)
+	//	st = &tail;
 	tail = *st;
 
 	if (!tail)

@@ -31,10 +31,12 @@ t_stack	**rotate(t_stack **st)
 {
 	t_stack *tail;
 	t_stack *last;
-	
+
+	if(!st || !(*st))
+		return(0);
 	tail = *st;
 	last = *st;
-	if(!tail || !tail->next)
+	if (!tail || !tail->next)
 		return(0);
 	while(last->next)
 		last = last->next;
@@ -63,6 +65,8 @@ t_stack	**rev_rotate(t_stack **st)
 	t_stack *tail;
 	t_stack *last;
 	
+	if (!st || !(*st))
+		return(0);
 	tail = *st;
 	last = *st;
 	if(!tail || !tail->next)
