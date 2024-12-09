@@ -71,6 +71,7 @@ int	lst_add_back(t_stack **st, t_stack *elem)
 	elem->prev = tail;
 	tail->next = elem;
 	elem->id = (tail->id + 1);
+	elem->next = NULL;
 
 	return (1);
 }
@@ -148,8 +149,10 @@ int printf_elem(t_stack *elem)
 
 int free_lst(t_stack **st)
 {
-	if (!st || !(*st))
+	if (!st)
 		return (0);
+	if (!(*st))
+		return(0);
 	t_stack	*tail;
 	t_stack	*tmp;
 
