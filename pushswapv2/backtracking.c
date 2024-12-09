@@ -238,6 +238,8 @@ void	branch_out(t_tree **branch, int max)
 	{
 		free_lst(st_pb_a);
 		free_lst(st_pb_b);
+		free(st_pb_a);
+		free(st_pb_b);
 	}
 	if (br->st_b)
 	{
@@ -251,6 +253,8 @@ void	branch_out(t_tree **branch, int max)
 	{
 		free_lst(st_pa_a);
 		free_lst(st_pa_b);
+		free(st_pa_a);
+		free(st_pa_b);
 	}
 	if (br->st_a && br->st_b)
 	{

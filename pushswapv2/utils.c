@@ -288,14 +288,11 @@ t_stack **lst_copy_new(t_stack **st)
 		return (NULL);
 	t_stack **st_copy;
 	t_stack *tail;
-
-	st_copy = NULL;
-	if (!st_copy)
-		return (NULL);
-
-	*st_copy = NULL;
-
 	tail = *st;
+
+	st_copy =malloc(sizeof(t_stack *));
+	*st_copy = NULL;
+	
 	while(tail)
 	{
 		lst_add_back(st_copy, copy_elem(tail));

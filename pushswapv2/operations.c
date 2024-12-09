@@ -95,13 +95,7 @@ int push(t_stack **st_from, t_stack **st_to)
 {
 	if (!st_from || !(*st_from))
 		return(0);
-	t_stack *tail_from;
-
-	tail_from = *st_from;
-	if (!tail_from)
-		return(ft_printf("\nNothing to push, NULL node\n"), 0);
-
-	lst_add_front(st_to, copy_elem(tail_from));
+	lst_add_front(st_to, copy_elem(*st_from));
 	del_head(st_from);
 	return(1);
 }
