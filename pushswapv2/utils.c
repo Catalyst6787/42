@@ -20,6 +20,8 @@ int	del_head(t_stack **st)
 {
 	t_stack *tail;
 
+	if (!st)
+		return(0);
 	tail = *st;
 	if(!tail)
 		return(0);
@@ -48,6 +50,29 @@ int	del_head(t_stack **st)
 	}
 	return(1);
 }
+
+/*
+int del_head(t_stack **st)
+{
+	t_stack *tail;
+	t_stack *tmp;
+	if (!st || !(*st))
+		return(0);
+	tail = *st;
+	st = &tail->next;
+	if (tail->next)
+		tail->next->prev = NULL;
+	tmp = tail->next;
+	while(tail)
+	{
+		tail->id--;
+		tail = tail->next;
+	}
+	free(tmp);
+	tmp = NULL;
+	return(1);
+}
+*/
 
 int	lst_add_back(t_stack **st, t_stack *elem)
 {
@@ -80,6 +105,8 @@ int	lst_add_front(t_stack **st, t_stack *elem)
 {
 	if (!elem || !st)
 		return(0);
+	if (!(*st))
+		return(*st = elem, 1);
 	t_stack *tail;
 	
 	//if (!st)
@@ -284,15 +311,17 @@ int	lst_copy(t_stack **st, t_stack **st_copy)
 
 t_stack **lst_copy_new(t_stack **st)
 {
-	if (!st || !(*st))
+	if (!st)
 		return (NULL);
 	t_stack **st_copy;
 	t_stack *tail;
-	tail = *st;
 
 	st_copy =malloc(sizeof(t_stack *));
 	*st_copy = NULL;
 	
+	if (!(*st))
+		return(st_copy);
+	tail = *st;
 	while(tail)
 	{
 		lst_add_back(st_copy, copy_elem(tail));
