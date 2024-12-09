@@ -289,7 +289,7 @@ t_stack **lst_copy_new(t_stack **st)
 	t_stack **st_copy;
 	t_stack *tail;
 
-	st_copy = malloc(sizeof(t_stack *));
+	st_copy = NULL;
 	if (!st_copy)
 		return (NULL);
 
