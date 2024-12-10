@@ -45,7 +45,7 @@ int	main(int ac, char **av)
 	print_branch(get_best_branch(tree));
 	
 	free_tree(tree);
-	free(tree);
+	//free(tree);
 	free_lst(&st_og);
 	free_lst(&st_a);
 	free_lst(&st_b);

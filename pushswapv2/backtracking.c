@@ -105,6 +105,7 @@ void	free_tree(t_tree **branch)
 
 	free(*branch);
 	(*branch) = NULL;
+	free(branch);
 	branch = NULL;
 }
 
@@ -114,16 +115,24 @@ t_tree	**init_branch(t_tree **prev, t_stack **st_a, t_stack **st_b)
 	t_tree **branch;
 
 	branch = malloc(sizeof(t_tree *));
+	if (!branch)
+		return(NULL);
 	*branch = malloc(sizeof(t_tree));
-	if (!branch || !(*branch))
+	if (!(*branch))
 		return (NULL);
 	if (!(prev))
 		(*branch)->lvl = 0;
 	else
 		(*branch)->lvl = (*prev)->lvl + 1;
 	(*branch)->prev = prev;
-	(*branch)->st_a = st_a;
-	(*branch)->st_b = st_b;
+	if (st_a)
+		(*branch)->st_a = st_a;
+	else
+		(*branch)->st_a = NULL;
+	if (st_b)
+		(*branch)->st_b = st_b;
+	else
+		(*branch)->st_b = NULL;
 	(*branch)->diff = get_tot_diff(st_a, st_b);
 	(*branch)->sa = NULL;
 	(*branch)->sb = NULL;
@@ -161,6 +170,7 @@ static void	call_br_out(t_tree **branch, int max)
 	branch_out(br->rrb, max);
 	branch_out(br->rrr, max);
 }
+
 static int branch_exists_and_empty(t_tree **branch)
 {
 	t_tree *br;
@@ -228,6 +238,8 @@ void	branch_out(t_tree **branch, int max)
 	{
 		free_lst(st_pb_a);
 		free_lst(st_pb_b);
+		free(st_pb_a);
+		free(st_pb_b);
 	}
 	if (br->st_b)
 	{
@@ -241,6 +253,8 @@ void	branch_out(t_tree **branch, int max)
 	{
 		free_lst(st_pa_a);
 		free_lst(st_pa_b);
+		free(st_pa_a);
+		free(st_pa_b);
 	}
 	if (br->st_a && br->st_b)
 	{
