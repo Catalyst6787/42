@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/11 15:54:50 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/11 16:56:29 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,18 @@ typedef struct s_tree
 	struct	s_tree *rrr;
 } t_tree;
 
+# define SA 0
+# define SB 1
+# define SS 2
+# define PA 3
+# define PB 4
+# define RA 5
+# define RB 6
+# define RR 7
+# define RRA 8
+# define RRB 9
+# define RRR 10
+
 // UTILS
 int		get_stack_av(int ac, char **av, int **st);
 int		get_stack_split(char *s, int **st);
@@ -60,6 +72,9 @@ int	get_diff_a(int size, int **st_optid);
 int	get_diff_b(int size, int **st_optid);
 int get_tot_diff(int size_a, int size_b, int **st_a_optid, int **st_b_optid);
 
-
+// TREE
+void	init_tree(t_tree *branch, int ac, char **av);
+void	free_branch(t_tree *branch);
+void	print_branch(t_tree *branch);
 
 #endif
