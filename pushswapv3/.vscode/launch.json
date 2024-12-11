@@ -6,7 +6,7 @@
 			"type": "cppdbg",  // Corrected from "gdb" to "cppdbg" for C/C++ debugging in VSCode
 			"request": "launch",
 			"program": "${workspaceFolder}/push_swap",  // Path to the compiled executable
-			"args": ["1", "0", "2", "3"],  // Correctly using "args" for command-line arguments
+			"args": ["0", "1", "2", "3"],  // Correctly using "args" for command-line arguments
 			"stopAtEntry": false,  // Optional, set to true if you want to stop at the entry point
 			"cwd": "${workspaceFolder}",  // Working directory, typically the root of the workspace
 			"externalConsole": true,  // Set to true to use an external console for I/O

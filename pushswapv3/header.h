@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/11 11:35:57 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/11 14:55:44 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 typedef struct s_tree
 {
+	int lvl;
 	int *st_a;
 	int *st_a_optid;
 	int size_a;
@@ -49,5 +50,12 @@ int		get_stack_split(char *s, int **st);
 int		get_stack(int ac, char **av, int **st);
 void	print_st(int size, int **st);
 void	free_st(int **st);
+int		check_st_double(int size, int **st);
+int		check_args_numeric(int ac, char **av);
+
+// DIFF
+void	set_optid(int size, int **st, int **st_optid);
+
+
 
 #endif
