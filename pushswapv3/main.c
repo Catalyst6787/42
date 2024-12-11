@@ -18,8 +18,12 @@ int	main(int ac, char **av)
 	st_optid = malloc(sizeof(int) * size);
 	set_optid(size, &st, &st_optid);
 	
+
+
 	ft_printf("st_optid:\n");
 	print_st(size, &st_optid);
+	ft_printf("diff:\n");
+	ft_printf("%d\n", get_diff_b(size, &st_optid));
 	free_st(&st_optid);
 
 	ft_printf("st:\n");
