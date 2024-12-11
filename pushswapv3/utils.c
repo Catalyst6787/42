@@ -1,36 +1,37 @@
 #include "header.h"
 
-int	get_stack_av(int ac, char **av, int *st)
+int	get_stack_av(int ac, char **av, int **st)
 {
 	int i;
 
-	if (st)
+	if (*st)
 		return (0);
 	i = 0;
 	if (ac <= 1)
 		return(0);
-	st = malloc(sizeof(int) * ac - 1);
+	*st = malloc(sizeof(int) * ac - 1);
 	if (!st)
 		return(0);
 	while(i < ac - 1)
 	{
-		st[i] = ft_atoi(av[i + 1]);
+		(*st)[i] = ft_atoi(av[i + 1]);
 		i++;
 	}
 	return(ac - 1);
 }
-static int get_stack_split_atoi(char **tab, int *st)
+
+static int get_stack_split_atoi(char **tab, int **st)
 {
 	int i;
 
 	i = 0;
 	while(tab[i])
 		i++;
-	st = malloc(sizeof(int) * i);
+	*st = malloc(sizeof(int) * i);
 	i = 0;
 	while(tab[i])
 	{
-		st[i] = ft_atoi(tab[i]);
+		(*st)[i] = ft_atoi(tab[i]);
 		i++;
 	}
 	i = 0;
@@ -44,12 +45,12 @@ static int get_stack_split_atoi(char **tab, int *st)
 
 }
 
-int get_stack_split(char *s, int *st)
+int get_stack_split(char *s, int **st)
 {
 	return(get_stack_split_atoi(ft_split(s, ' '), st));
 }
 
-int get_stack(int ac, char **av, int *st)
+int get_stack(int ac, char **av, int **st)
 {
 	if (ac < 2)
 		return (0);
@@ -60,14 +61,23 @@ int get_stack(int ac, char **av, int *st)
 
 }
 
-void	print_st(int size, int *st)
+void	print_st(int size, int **st)
 {
 	int i;
 
 	i = 0;
 	while(i < size)
 	{
-		ft_printf("element n: %d, value: %d\n", i, st[i]);
+		ft_printf("element n: %d, value: %d\n", i, (*st)[i]);
 		i++;
 	}
+}
+
+void	free_st(int **st)
+{
+	if (!st || !(*st))
+		return ;
+	free(*st);
+	(*st) = NULL;
+	st = NULL;
 }

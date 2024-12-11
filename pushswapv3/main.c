@@ -10,6 +10,7 @@ int	main(int ac, char **av)
 
 	if (ac < 2)
 		return (0);
-	size = get_stack(ac, av, st);
-	print_st(size, st);
+	size = get_stack(ac, av, &st);
+	print_st(size, &st);
+	free_st(&st);
 }

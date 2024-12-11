@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/10 12:27:26 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/11 11:35:57 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,10 @@ typedef struct s_tree
 } t_tree;
 
 // UTILS
-int	get_stack_av(int ac, char **av, int *st);
-int get_stack_split(char *s, int *st);
-int get_stack(int ac, char **av, int *st);
-void	print_st(int size, int *st);
+int		get_stack_av(int ac, char **av, int **st);
+int		get_stack_split(char *s, int **st);
+int		get_stack(int ac, char **av, int **st);
+void	print_st(int size, int **st);
+void	free_st(int **st);
 
 #endif
