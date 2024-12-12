@@ -65,6 +65,9 @@ void	print_st(int size, int **st);
 void	free_st(int **st);
 int		check_st_double(int size, int **st);
 int		check_args_numeric(int ac, char **av);
+void	copy_st(int size, int **st, int **st_copy);
+void	copy_st_malloc(int size, int **st, int **st_copy);
+
 
 // DIFF
 void	set_optid(int size, int **st, int **st_optid);
@@ -76,5 +79,12 @@ int get_tot_diff(int size_a, int size_b, int **st_a_optid, int **st_b_optid);
 void	init_tree(t_tree *branch, int ac, char **av);
 void	free_branch(t_tree **branch);
 void	print_branch(t_tree *branch);
+void	init_branch(t_tree *prev, t_tree **br, int op);
+
+// OPERATIONS
+void	do_op(t_tree *prev, t_tree **br, int op);
+int		op_possible(t_tree *prev, int op);
+void	swap(int **st_prev, int **st, int size);
+
 
 #endif

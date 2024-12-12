@@ -2,6 +2,8 @@
 
 void	init_tree(t_tree *branch, int ac, char **av)
 {
+	if (!branch)
+		return((void)ft_printf("tried to init tree on NULL branch\n"));
 	branch->lvl = 0;
 	branch->st_a = NULL;
 	branch->size_a = get_stack(ac, av, &branch->st_a);
@@ -23,6 +25,39 @@ void	init_tree(t_tree *branch, int ac, char **av)
 	branch->rra = NULL;
 	branch->rrb = NULL;
 	branch->rrr = NULL;
+}
+
+void	init_branch(t_tree *prev, t_tree **br, int op)
+{
+	(void)op;
+	if (!prev)
+		return((void)ft_printf("tried to init branch with NULL prev\n"));
+	if (!op_possible(prev, op))
+		return(*br = NULL, (void)ft_printf("tried init branch on impossible op\n"));
+	*br =  (t_tree *)malloc(sizeof(t_tree));
+	(*br)->lvl = prev->lvl + 1;
+	(*br)->prev = prev;
+	(*br)->st_a = NULL;
+	(*br)->st_a_optid = NULL;
+	(*br)->size_a = 0;
+	(*br)->st_b = NULL;
+	(*br)->st_b_optid = NULL;
+	(*br)->size_b = 0;
+	do_op(prev, br, op);
+	(*br)->diff = get_tot_diff((*br)->size_a, (*br)->size_b, &(*br)->st_a_optid, &(*br)->st_b_optid);
+	/*
+	(*br)->sa = NULL;
+	(*br)->sb = NULL;
+	(*br)->ss = NULL;
+	(*br)->pa = NULL;
+	(*br)->pb = NULL;
+	(*br)->ra = NULL;
+	(*br)->rb = NULL;
+	(*br)->rr = NULL;
+	(*br)->rra = NULL;
+	(*br)->rrb = NULL;
+	(*br)->rrr = NULL;
+	*/
 }
 
 void free_branch(t_tree **branch)

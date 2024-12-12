@@ -7,7 +7,7 @@ int	main(int ac, char **av)
 	if (!check_args_numeric(ac, av))
 		return(ft_putstr_fd("Error, non numeric argument\n", 2), 0); // TMP change error msg
 	t_tree	*tree;
-	tree = (t_tree *)malloc(sizeof(t_tree));
+	tree =  (t_tree *)malloc(sizeof(t_tree));
 	if (!tree)
 		return(ft_putstr_fd("Error\n", 2), 0);
 
@@ -15,5 +15,10 @@ int	main(int ac, char **av)
 
 	print_branch(tree);
 
+	init_branch(tree, &tree->sa, 0);
+	print_branch(tree->sa);
+
+	free_branch(&tree->sa);
 	free_branch(&tree);
+	
 }
