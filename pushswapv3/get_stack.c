@@ -25,6 +25,8 @@ static int get_stack_split_atoi(char **tab, int **st)
 	int i;
 
 	i = 0;
+	if (*st)
+		return (0);
 	while(tab[i])
 		i++;
 	*st = malloc(sizeof(int) * i);

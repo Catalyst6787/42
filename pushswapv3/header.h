@@ -74,7 +74,7 @@ int get_tot_diff(int size_a, int size_b, int **st_a_optid, int **st_b_optid);
 
 // TREE
 void	init_tree(t_tree *branch, int ac, char **av);
-void	free_branch(t_tree *branch);
+void	free_branch(t_tree **branch);
 void	print_branch(t_tree *branch);
 
 #endif

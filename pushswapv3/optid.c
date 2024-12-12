@@ -46,7 +46,7 @@ void	set_optid(int size, int **st, int **st_optid)
 	int last_smallest;
 	
 	current_optid = 0;
-
+	*st_optid = malloc(sizeof(int) * (size));
 	last_smallest = get_smallest(size, st);
 	while(current_optid < size)
 	{

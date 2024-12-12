@@ -1,6 +1,6 @@
 NAME = push_swap
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror # -fsanitize=address
 
 PRINTF_DIR = ./printf
 PRINTF_LIB = $(PRINTF_DIR)/libftprintf.a

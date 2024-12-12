@@ -31,7 +31,10 @@ int	main(int ac, char **av)
 
 	print_branch(tree);
 
-	//free_branch(tree);
+	free_branch(&tree);
+
+	ft_printf("freed_branch:\n");
+	print_branch(tree);
 
 	/*
 	ft_printf("st_optid:\n");
