@@ -29,11 +29,13 @@ void	do_op2(t_tree *prev, t_tree **br, int op)
 {
 	if (op == PA)
 	{
-		return ;
+		push_a(prev->size_a, &(*br)->size_a, prev->st_b, (*br)->st_a);
+		push_a(prev->size_a, &(*br)->size_a, prev->st_b_optid, (*br)->st_a_optid);
 	}
 	else if (op == PB)
 	{
-		return ;
+		push_a(prev->size_b, &(*br)->size_b, prev->st_a, (*br)->st_b);
+		push_a(prev->size_b, &(*br)->size_b, prev->st_b_optid, (*br)->st_a_optid);
 	}
 	else if (op == RA)
 	{
@@ -136,4 +138,18 @@ void	rev_rotate(int **st_prev, int **st, int size)
 		i--;
 	}
 	(*st)[i] = tmp;
+}
+void	push_a(int size_prev, int *size, int **st, int **st_prev)
+{
+	int i;
+
+	i = 1;
+	*size = size_prev + 1;
+	*st = malloc(sizeof(int) * (*size));
+	(*st)[0] = (*st_prev)[0];
+	while(i < *size)
+	{
+		(*st)[i] = (*st_prev)[i - 1];
+		i++;
+	}
 }
