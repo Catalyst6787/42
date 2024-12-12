@@ -12,11 +12,12 @@ int	main(int ac, char **av)
 		return(ft_putstr_fd("Error\n", 2), 0);
 
 	init_tree(tree, ac, av);
-
+	if (tree->size_a < 2)
+		return(free_tree(&tree), ft_printf("only one element in list\n"), 0);
 	ft_printf("\nROOT:\n\n");
 	print_branch(tree);
 
-	init_branch(tree, &tree->sa, 5);
+	init_branch(tree, &tree->sa, 0);
 	ft_printf("\nTEST SA:\n\n");
 	print_branch(tree->sa);
 

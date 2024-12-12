@@ -1,5 +1,30 @@
 #include "header.h"
 
+void	do_op(t_tree *prev, t_tree **br, int op)
+{
+	if (!prev || !br)
+		return((void)ft_printf("Tried do_op on non existant branch / previous branch"));
+	if (op == SA)
+	{
+		swap(&(prev->st_a), &(*br)->st_a, prev->size_a);
+		swap(&(prev->st_a_optid), &(*br)->st_a_optid, prev->size_a);
+		(*br)->size_a = prev->size_a;
+	}
+	else if (op == SB)
+	{
+		swap(&(prev->st_b), &(*br)->st_b, prev->size_b);
+		swap(&(prev->st_b_optid), &(*br)->st_b_optid, prev->size_b);
+		(*br)->size_b = prev->size_b;
+	}
+	else if (op == SS)
+	{
+		do_op(prev, br, SA);
+		do_op(prev, br, SB);
+	}
+	else
+		do_op2(prev, br, op);
+}
+
 void	do_op2(t_tree *prev, t_tree **br, int op)
 {
 	if (op == PA)
@@ -27,31 +52,6 @@ void	do_op2(t_tree *prev, t_tree **br, int op)
 		do_op2(prev, br, RA);
 		do_op2(prev, br, RB);
 	}
-}
-
-void	do_op(t_tree *prev, t_tree **br, int op)
-{
-	if (!prev || !br)
-		return((void)ft_printf("Tried do_op on non existant branch / previous branch"));
-	if (op == SA)
-	{
-		swap(&(prev->st_a), &(*br)->st_a, prev->size_a);
-		swap(&(prev->st_a_optid), &(*br)->st_a_optid, prev->size_a);
-		(*br)->size_a = prev->size_a;
-	}
-	else if (op == SB)
-	{
-		swap(&(prev->st_b), &(*br)->st_b, prev->size_b);
-		swap(&(prev->st_b_optid), &(*br)->st_b_optid, prev->size_b);
-		(*br)->size_b = prev->size_b;
-	}
-	else if (op == SS)
-	{
-		do_op(prev, br, SA);
-		do_op(prev, br, SB);
-	}
-	else
-		do_op2(prev, br, op);
 }
 
 int	op_possible(t_tree *prev, int op)
