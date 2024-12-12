@@ -13,12 +13,13 @@ int	main(int ac, char **av)
 
 	init_tree(tree, ac, av);
 
+	ft_printf("\nROOT:\n\n");
 	print_branch(tree);
 
 	init_branch(tree, &tree->sa, 0);
+	ft_printf("\nTEST SA:\n\n");
 	print_branch(tree->sa);
 
-	free_branch(&tree->sa);
-	free_branch(&tree);
+	free_tree(&tree);
 	
 }
