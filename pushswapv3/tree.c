@@ -42,35 +42,6 @@ void free_branch(t_tree **branch)
     }
 }
 
-/*
-void	print_branch(t_tree *branch)
-{
-	if (!branch)
-		return (ft_printf("NULL branch!\n"), (void)NULL);
-	ft_printf("Branch level: %d\n", branch->lvl);
-	if (branch->st_a)
-	{
-		ft_printf("st_a of size: %d\n", branch->size_a);
-		ft_printf("st_a (value): \n");
-		print_st(branch->size_a, &branch->st_a);
-		ft_printf("st_a (optid): \n");
-		print_st(branch->size_a, &branch->st_a_optid);
-	}
-	else
-		ft_printf("st_a: NULL\n st_a_optid: NULL\n");
-	if (branch->st_b)
-	{
-		ft_printf("st_a of size: %d\n", branch->size_a);
-		ft_printf("st_a (value): \n");
-		print_st(branch->size_a, &branch->st_a);
-		ft_printf("st_a (optid): \n");
-		print_st(branch->size_a, &branch->st_a_optid);
-	}
-	else
-		ft_printf("st_b: NULL\n st_b_optid: NULL\n");
-}
-*/
-
 void	print_branch(t_tree *branch)
 {
 	if (!branch)
