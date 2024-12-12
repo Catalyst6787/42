@@ -16,7 +16,7 @@ int	main(int ac, char **av)
 	ft_printf("\nROOT:\n\n");
 	print_branch(tree);
 
-	init_branch(tree, &tree->sa, 0);
+	init_branch(tree, &tree->sa, 5);
 	ft_printf("\nTEST SA:\n\n");
 	print_branch(tree->sa);
 

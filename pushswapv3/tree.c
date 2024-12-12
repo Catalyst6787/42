@@ -45,7 +45,7 @@ void	init_branch(t_tree *prev, t_tree **br, int op)
 	(*br)->size_b = 0;
 	do_op(prev, br, op);
 	(*br)->diff = get_tot_diff((*br)->size_a, (*br)->size_b, &(*br)->st_a_optid, &(*br)->st_b_optid);
-	/*
+	/* NOT SURE THAT THIS IS NECESSARY, KEEPING IT AROUND FOR NOW
 	(*br)->sa = NULL;
 	(*br)->sb = NULL;
 	(*br)->ss = NULL;

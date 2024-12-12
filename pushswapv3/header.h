@@ -84,8 +84,10 @@ void	init_branch(t_tree *prev, t_tree **br, int op);
 
 // OPERATIONS
 void	do_op(t_tree *prev, t_tree **br, int op);
+void	do_op2(t_tree *prev, t_tree **br, int op);
 int		op_possible(t_tree *prev, int op);
 void	swap(int **st_prev, int **st, int size);
+void	rotate(int **st_prev, int **st, int size);
 
 
 #endif
