@@ -3,6 +3,7 @@
 void	init_tree(t_tree *branch, int ac, char **av)
 {
 	branch->lvl = 0;
+	branch->st_a = NULL;
 	branch->size_a = get_stack(ac, av, &branch->st_a);
 	set_optid(branch->size_a, &branch->st_a, &branch->st_a_optid);
 	branch->st_b = NULL;
@@ -33,10 +34,10 @@ void	free_branch(t_tree *branch)
 
 void	print_branch(t_tree *branch)
 {
-	ft_printf("Branch level: %d\n, branch->lvl");
+	ft_printf("Branch level: %d\n", branch->lvl);
 	if (branch->st_a)
 	{
-		ft_printf("st_a of size: %d\n, branch->size_a");
+		ft_printf("st_a of size: %d\n", branch->size_a);
 		ft_printf("st_a (value): \n");
 		print_st(branch->size_a, &branch->st_a);
 		ft_printf("st_a (optid): \n");
@@ -46,7 +47,7 @@ void	print_branch(t_tree *branch)
 		ft_printf("st_a: NULL\n st_a_optid: NULL\n");
 	if (branch->st_b)
 	{
-		ft_printf("st_a of size: %d\n, branch->size_a");
+		ft_printf("st_a of size: %d\n", branch->size_a);
 		ft_printf("st_a (value): \n");
 		print_st(branch->size_a, &branch->st_a);
 		ft_printf("st_a (optid): \n");

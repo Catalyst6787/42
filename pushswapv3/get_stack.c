@@ -9,8 +9,8 @@ int	get_stack_av(int ac, char **av, int **st)
 	i = 0;
 	if (ac <= 1)
 		return(0);
-	*st = malloc(sizeof(int) * ac - 1);
-	if (!st)
+	*st = malloc(sizeof(int) * (ac - 1));
+	if (!(*st))
 		return(0);
 	while(i < ac - 1)
 	{
