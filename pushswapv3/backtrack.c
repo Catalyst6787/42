@@ -53,4 +53,3 @@ void	branch_out(t_tree **br, int max)
 	if ((*br)->lvl < max - 1)
 		call_branch_out(br, max);
 }
-

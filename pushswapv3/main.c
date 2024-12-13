@@ -25,9 +25,9 @@ int	main(int ac, char **av)
 	if (tree->size_a < 2)
 		return(free_tree(&tree), ft_printf("only one element in list\n"), 0);
 
-	branch_out(&tree, 5);
+	//branch_out(&tree, 4);
 
-	//print_tree(&tree);
+
 	free_tree(&tree);
 
 	time (&end); // TESTING
