@@ -5,17 +5,17 @@ void	print_tree(t_tree **br)
 	if (!br || !(*br))
 		return ;
 	print_branch(*br);
-	print_branch((*br)->sa);
-	print_branch((*br)->sb);
-	print_branch((*br)->ss);
-	print_branch((*br)->pa);
-	print_branch((*br)->pb);
-	print_branch((*br)->ra);
-	print_branch((*br)->rb);
-	print_branch((*br)->rr);
-	print_branch((*br)->rra);
-	print_branch((*br)->rrb);
-	print_branch((*br)->rrr);
+	print_tree(&(*br)->sa);
+	print_tree(&(*br)->sb);
+	print_tree(&(*br)->ss);
+	print_tree(&(*br)->pa);
+	print_tree(&(*br)->pb);
+	print_tree(&(*br)->ra);
+	print_tree(&(*br)->rb);
+	print_tree(&(*br)->rr);
+	print_tree(&(*br)->rra);
+	print_tree(&(*br)->rrb);
+	print_tree(&(*br)->rrr);
 }
 
 static void	call_branch_out(t_tree **br, int max)

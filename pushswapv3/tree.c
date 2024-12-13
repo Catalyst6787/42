@@ -62,17 +62,17 @@ void	free_tree(t_tree **root)
 {
 	if (!root || !(*root))
 		return ((void)ft_printf("tried to free NULL tree\n"));
-	free_branch(&(*root)->sa);
-	free_branch(&(*root)->sb);
-	free_branch(&(*root)->ss);
-	free_branch(&(*root)->pa);
-	free_branch(&(*root)->pb);
-	free_branch(&(*root)->ra);
-	free_branch(&(*root)->rb);
-	free_branch(&(*root)->rr);
-	free_branch(&(*root)->rra);
-	free_branch(&(*root)->rrb);
-	free_branch(&(*root)->rrr);
+	free_tree(&(*root)->sa);
+	free_tree(&(*root)->sb);
+	free_tree(&(*root)->ss);
+	free_tree(&(*root)->pa);
+	free_tree(&(*root)->pb);
+	free_tree(&(*root)->ra);
+	free_tree(&(*root)->rb);
+	free_tree(&(*root)->rr);
+	free_tree(&(*root)->rra);
+	free_tree(&(*root)->rrb);
+	free_tree(&(*root)->rrr);
 
 	free_branch(root);
 }

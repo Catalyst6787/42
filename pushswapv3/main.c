@@ -19,14 +19,8 @@ int	main(int ac, char **av)
 		return(free(tree), 0);
 	if (tree->size_a < 2)
 		return(free_tree(&tree), ft_printf("only one element in list\n"), 0);
-	
-	//ft_printf("\nROOT:\n\n");
-	//print_branch(tree);
-	//init_branch(tree, &tree->sa, PB);
-	//ft_printf("\nTEST SA:\n\n");
-	//print_branch(tree->sa);
-	
-	branch_out(&tree, 1);
+
+	branch_out(&tree, 2);
 
 	print_tree(&tree);
 	free_tree(&tree);
