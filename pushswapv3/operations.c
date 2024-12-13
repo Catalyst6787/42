@@ -10,6 +10,22 @@ int	op_possible(t_tree *prev, int op)
 		return(0);
 	if ((op == SS || op == RR || op == RRR) && (!prev->st_a || !prev->st_b))
 		return(0);
+	if (op == SA && prev->lastop == SA)
+		return(0);
+	if (op == SB && prev->lastop == SB)
+		return(0);
+	if (op == SS && prev->lastop == SS)
+		return(0);
+	if (op == PA && prev->lastop == PB)
+		return(0);
+	if (op == PB && prev->lastop == PA)
+		return(0);
+	if ((op == RA && prev->lastop == RRA) || (op == RRA && prev->lastop == RA))
+		return(0);
+	if ((op == RB && prev->lastop == RRB) || (op == RRB && prev->lastop == RB))
+		return(0);
+	if ((op == RR && prev->lastop == RRR) || (op == RRR && prev->lastop == RR))
+		return(0);
 	return(1);
 }
 

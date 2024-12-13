@@ -42,7 +42,7 @@ void	copy_st(int size, int **st, int **st_copy)
 void	copy_st_malloc(int size, int **st, int **st_copy)
 {
 	if (!st || !(*st))
-		return((void)ft_printf("tried copy_st_malloc on NULL st"));
+		return ;
 	if (!st || !(*st))
 		return((void)ft_printf("tried copy_st_malloc on NULL st_copy"));
 	*st_copy = malloc(sizeof(int) * size);

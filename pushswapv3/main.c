@@ -20,7 +20,7 @@ int	main(int ac, char **av)
 	if (tree->size_a < 2)
 		return(free_tree(&tree), ft_printf("only one element in list\n"), 0);
 
-	branch_out(&tree, 2);
+	branch_out(&tree, 3);
 
 	print_tree(&tree);
 	free_tree(&tree);
