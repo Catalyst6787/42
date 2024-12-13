@@ -16,17 +16,7 @@ int	init_tree(t_tree *branch, int ac, char **av)
 	branch->size_b = 0;
 	branch->diff = get_tot_diff(branch->size_a, branch->size_b, &branch->st_a_optid, &branch->st_b_optid);
 	branch->prev = NULL;
-	branch->sa = NULL;
-	branch->sb = NULL;
-	branch->ss = NULL;
-	branch->pa = NULL;
-	branch->pb = NULL;
-	branch->ra = NULL;
-	branch->rb = NULL;
-	branch->rr = NULL;
-	branch->rra = NULL;
-	branch->rrb = NULL;
-	branch->rrr = NULL;
+	set_subbranches_to_NULL(&branch);
 	return(1);
 }
 
@@ -48,20 +38,7 @@ void	init_branch(t_tree *prev, t_tree **br, int op)
 	(*br)->size_b = 0;
 	do_op(prev, br, op);
 	(*br)->diff = get_tot_diff((*br)->size_a, (*br)->size_b, &(*br)->st_a_optid, &(*br)->st_b_optid);
-	
-	/* NOT SURE THAT THIS IS NECESSARY, KEEPING IT AROUND FOR NOW
-	(*br)->sa = NULL;
-	(*br)->sb = NULL;
-	(*br)->ss = NULL;
-	(*br)->pa = NULL;
-	(*br)->pb = NULL;
-	(*br)->ra = NULL;
-	(*br)->rb = NULL;
-	(*br)->rr = NULL;
-	(*br)->rra = NULL;
-	(*br)->rrb = NULL;
-	(*br)->rrr = NULL;
-	*/
+	set_subbranches_to_NULL(br);
 }
 
 void free_branch(t_tree **branch)

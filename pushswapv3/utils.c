@@ -50,3 +50,18 @@ void	copy_st_malloc(int size, int **st, int **st_copy)
 		return (*st_copy = NULL, (void)ft_printf("malloc error in copy_st_malloc"));
 	copy_st(size, st, st_copy);
 }
+
+void	set_subbranches_to_NULL(t_tree **br)
+{
+	(*br)->sa = NULL;
+	(*br)->sb = NULL;
+	(*br)->ss = NULL;
+	(*br)->pa = NULL;
+	(*br)->pb = NULL;
+	(*br)->ra = NULL;
+	(*br)->rb = NULL;
+	(*br)->rr = NULL;
+	(*br)->rra = NULL;
+	(*br)->rrb = NULL;
+	(*br)->rrr = NULL;
+}
