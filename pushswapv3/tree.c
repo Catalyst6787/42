@@ -1,12 +1,14 @@
 #include "header.h"
 
-void	init_tree(t_tree *branch, int ac, char **av)
+int	init_tree(t_tree *branch, int ac, char **av)
 {
 	if (!branch)
-		return((void)ft_printf("tried to init tree on NULL branch\n"));
+		return((void)ft_printf("tried to init tree on NULL branch\n"), 0);
 	branch->lvl = 0;
 	branch->st_a = NULL;
 	branch->size_a = get_stack(ac, av, &branch->st_a);
+	if (!check_st_double(branch->size_a, &branch->st_a))
+		return(ft_putstr_fd("Error, double in stack\n", 2), -1);
 	branch->st_a_optid = NULL;
 	set_optid(branch->size_a, &branch->st_a, &branch->st_a_optid);
 	branch->st_b = NULL;
@@ -25,6 +27,7 @@ void	init_tree(t_tree *branch, int ac, char **av)
 	branch->rra = NULL;
 	branch->rrb = NULL;
 	branch->rrr = NULL;
+	return(1);
 }
 
 void	init_branch(t_tree *prev, t_tree **br, int op)
@@ -45,6 +48,7 @@ void	init_branch(t_tree *prev, t_tree **br, int op)
 	(*br)->size_b = 0;
 	do_op(prev, br, op);
 	(*br)->diff = get_tot_diff((*br)->size_a, (*br)->size_b, &(*br)->st_a_optid, &(*br)->st_b_optid);
+	
 	/* NOT SURE THAT THIS IS NECESSARY, KEEPING IT AROUND FOR NOW
 	(*br)->sa = NULL;
 	(*br)->sb = NULL;
