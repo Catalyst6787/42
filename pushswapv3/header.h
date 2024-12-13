@@ -102,4 +102,9 @@ void	push_b_optid(t_tree *prev, t_tree **br);
 void	print_tree(t_tree **br);
 void	branch_out(t_tree **br, int max);
 
+// SOLVE
+t_tree **get_best_branch(t_tree **branch);
+void	solve(t_tree **br);
+void	print_steps(t_tree **br);
+
 #endif
