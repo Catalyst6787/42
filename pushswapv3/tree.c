@@ -80,8 +80,8 @@ void	free_tree(t_tree **root)
 void	print_branch(t_tree *branch)
 {
 	if (!branch)
-		return (ft_printf("NULL branch!\n"), (void)NULL);
-	ft_printf("Branch level: %d\n", branch->lvl);
+		return (ft_printf("\nNULL branch!\n"), (void)NULL);
+	ft_printf("\nBranch level: %d\n", branch->lvl);
 
 	ft_printf("st_a of size: %d\n", branch->size_a);
 	ft_printf("st_a (value): \n");
@@ -95,5 +95,5 @@ void	print_branch(t_tree *branch)
 	ft_printf("st_b (optid): \n");
 	print_st(branch->size_b, &branch->st_b_optid);
 
-	ft_printf("diff of stacks: %d\n", branch->diff);
+	ft_printf("diff of stacks: %d\n\n", branch->diff);
 }

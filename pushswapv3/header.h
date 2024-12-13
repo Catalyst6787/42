@@ -96,4 +96,7 @@ void	push_a_optid(t_tree *prev, t_tree **br);
 void	push_b(t_tree *prev, t_tree **br);
 void	push_b_optid(t_tree *prev, t_tree **br);
 
+//BACKTRACKING
+void	print_tree(t_tree **br);
+
 #endif
