@@ -60,7 +60,7 @@ void	push_b(t_tree *prev, t_tree **br)
 	(*br)->size_b = prev->size_b + 1;
 	(*br)->st_b = malloc(sizeof(int) * ((*br)->size_b));
 	(*br)->st_b[0] = prev->st_a[0];
-	while(i < (*br)->size_a)
+	while(i < (*br)->size_b)
 	{
 		(*br)->st_b[i] = prev->st_b[i - 1];
 		i++;

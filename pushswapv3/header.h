@@ -23,6 +23,7 @@
 
 typedef struct s_tree
 {
+	int		lastop;
 	int		lvl;
 	int		*st_a;
 	int		*st_a_optid;
@@ -68,6 +69,7 @@ int		check_args_numeric(int ac, char **av);
 void	copy_st(int size, int **st, int **st_copy);
 void	copy_st_malloc(int size, int **st, int **st_copy);
 void	set_subbranches_to_NULL(t_tree **br);
+void	print_op(int op);
 
 
 // DIFF

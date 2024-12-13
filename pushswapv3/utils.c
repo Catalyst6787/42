@@ -65,3 +65,31 @@ void	set_subbranches_to_NULL(t_tree **br)
 	(*br)->rrb = NULL;
 	(*br)->rrr = NULL;
 }
+
+void	print_op(int op)
+{
+	if (op == -1)
+		ft_printf("NULL\n");
+	else if (op == 0)
+		ft_printf("SA\n");
+	else if (op == 1)
+		ft_printf("SB\n");
+	else if (op == 2)
+		ft_printf("SS\n");
+	else if (op == 3)
+		ft_printf("PA\n");
+	else if (op == 4)
+		ft_printf("PB\n");
+	else if (op == 5)
+		ft_printf("RA\n");
+	else if (op == 6)
+		ft_printf("RB\n");
+	else if (op == 7)
+		ft_printf("RR\n");
+	else if (op == 8)
+		ft_printf("RRA\n");
+	else if (op == 9)
+		ft_printf("RRB\n");
+	else if (op == 10)
+		ft_printf("RRR\n");
+}

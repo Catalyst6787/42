@@ -4,6 +4,7 @@ int	init_tree(t_tree *branch, int ac, char **av)
 {
 	if (!branch)
 		return((void)ft_printf("tried to init tree on NULL branch\n"), 0);
+	branch->lastop = -1;
 	branch->lvl = 0;
 	branch->st_a = NULL;
 	branch->size_a = get_stack(ac, av, &branch->st_a);
@@ -26,8 +27,9 @@ void	init_branch(t_tree *prev, t_tree **br, int op)
 	if (!prev)
 		return((void)ft_printf("tried to init branch with NULL prev\n"));
 	if (!op_possible(prev, op))
-		return(*br = NULL, (void)ft_printf("tried init branch on impossible op\n"));
+		return(*br = NULL, (void)NULL);
 	*br =  (t_tree *)malloc(sizeof(t_tree));
+	(*br)->lastop = op;
 	(*br)->lvl = prev->lvl + 1;
 	(*br)->prev = prev;
 	(*br)->st_a = NULL;
@@ -61,7 +63,7 @@ void free_branch(t_tree **branch)
 void	free_tree(t_tree **root)
 {
 	if (!root || !(*root))
-		return ((void)ft_printf("tried to free NULL tree\n"));
+		return ;
 	free_tree(&(*root)->sa);
 	free_tree(&(*root)->sb);
 	free_tree(&(*root)->ss);
@@ -82,6 +84,8 @@ void	print_branch(t_tree *branch)
 	if (!branch)
 		return (ft_printf("\nNULL branch!\n"), (void)NULL);
 	ft_printf("\nBranch level: %d\n", branch->lvl);
+	ft_printf("\nBranch last op: ");
+	print_op(branch->lastop);
 
 	ft_printf("st_a of size: %d\n", branch->size_a);
 	ft_printf("st_a (value): \n");
