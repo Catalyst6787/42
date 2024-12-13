@@ -98,5 +98,6 @@ void	push_b_optid(t_tree *prev, t_tree **br);
 
 //BACKTRACKING
 void	print_tree(t_tree **br);
+void	branch_out(t_tree **br, int max);
 
 #endif
