@@ -90,6 +90,9 @@ int		op_possible(t_tree *prev, int op);
 void	swap(int **st_prev, int **st, int size);
 void	rotate(int **st_prev, int **st, int size);
 void	rev_rotate(int **st_prev, int **st, int size);
-
+void	push_a(t_tree *prev, t_tree **br);
+void	push_a_optid(t_tree *prev, t_tree **br);
+void	push_b(t_tree *prev, t_tree **br);
+void	push_b_optid(t_tree *prev, t_tree **br);
 
 #endif

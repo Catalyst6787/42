@@ -4,7 +4,7 @@ void	do_op(t_tree *prev, t_tree **br, int op)
 {
 	if (!prev || !br)
 		return((void)ft_printf("Tried do_op on non existant branch / previous branch"));
-	if (op == SA)
+	else if (op == SA)
 	{
 		swap(&(prev->st_a), &(*br)->st_a, prev->size_a);
 		swap(&(prev->st_a_optid), &(*br)->st_a_optid, prev->size_a);
@@ -29,13 +29,13 @@ void	do_op2(t_tree *prev, t_tree **br, int op)
 {
 	if (op == PA)
 	{
-		push_a(prev->size_a, &(*br)->size_a, prev->st_b, (*br)->st_a);
-		push_a(prev->size_a, &(*br)->size_a, prev->st_b_optid, (*br)->st_a_optid);
+		push_a(prev, br);
+		push_a_optid(prev, br);
 	}
 	else if (op == PB)
 	{
-		push_a(prev->size_b, &(*br)->size_b, prev->st_a, (*br)->st_b);
-		push_a(prev->size_b, &(*br)->size_b, prev->st_b_optid, (*br)->st_a_optid);
+		push_b(prev, br);
+		push_b_optid(prev, br);
 	}
 	else if (op == RA)
 	{
@@ -139,17 +139,107 @@ void	rev_rotate(int **st_prev, int **st, int size)
 	}
 	(*st)[i] = tmp;
 }
-void	push_a(int size_prev, int *size, int **st, int **st_prev)
+void	push_a(t_tree *prev, t_tree **br)
 {
 	int i;
 
 	i = 1;
-	*size = size_prev + 1;
-	*st = malloc(sizeof(int) * (*size));
-	(*st)[0] = (*st_prev)[0];
-	while(i < *size)
+	(*br)->size_a = prev->size_a + 1;
+	(*br)->st_a = malloc(sizeof(int) * ((*br)->size_a));
+	(*br)->st_a[0] = prev->st_b[0];
+	while(i < (*br)->size_a)
 	{
-		(*st)[i] = (*st_prev)[i - 1];
+		(*br)->st_a[i] = prev->st_a[i - 1];
+		i++;
+	}
+
+	i = 0;
+	(*br)->size_b = prev->size_b - 1;
+	if ((*br)->size_b == 0)
+		return ((void)((*br)->st_b == NULL));
+	(*br)->st_b = malloc(sizeof(int) * ((*br)->size_b));
+	while(i < (*br)->size_b)
+	{
+		(*br)->st_b[i] = prev->st_b[i + 1];
 		i++;
 	}
 }
+
+void	push_a_optid(t_tree *prev, t_tree **br)
+{
+	int i;
+
+	i = 1;
+	(*br)->size_a = prev->size_a + 1;
+	(*br)->st_a_optid = malloc(sizeof(int) * ((*br)->size_a));
+	(*br)->st_a_optid[0] = prev->st_b_optid[0];
+	while(i < (*br)->size_a)
+	{
+		(*br)->st_a_optid[i] = prev->st_a_optid[i - 1];
+		i++;
+	}
+
+	i = 0;
+	(*br)->size_b = prev->size_b - 1;
+	if ((*br)->size_b == 0)
+		return ((void)((*br)->st_b_optid == NULL));
+	(*br)->st_b_optid = malloc(sizeof(int) * ((*br)->size_b));
+	while(i < (*br)->size_b)
+	{
+		(*br)->st_b_optid[i] = prev->st_b_optid[i + 1];
+		i++;
+	}
+}
+
+void	push_b(t_tree *prev, t_tree **br)
+{
+	int i;
+
+	i = 1;
+	(*br)->size_b = prev->size_b + 1;
+	(*br)->st_b = malloc(sizeof(int) * ((*br)->size_b));
+	(*br)->st_b[0] = prev->st_a[0];
+	while(i < (*br)->size_a)
+	{
+		(*br)->st_b[i] = prev->st_b[i - 1];
+		i++;
+	}
+
+	i = 0;
+	(*br)->size_a = prev->size_a - 1;
+	if ((*br)->size_a == 0)
+		return ((void)((*br)->st_a == NULL));
+	(*br)->st_a = malloc(sizeof(int) * ((*br)->size_a));
+	while(i < (*br)->size_a)
+	{
+		(*br)->st_a[i] = prev->st_a[i + 1];
+		i++;
+	}
+}
+
+void	push_b_optid(t_tree *prev, t_tree **br)
+{
+	int i;
+
+	i = 1;
+	(*br)->size_b = prev->size_b + 1;
+	(*br)->st_b_optid = malloc(sizeof(int) * ((*br)->size_b));
+	(*br)->st_b_optid[0] = prev->st_a_optid[0];
+	while(i < (*br)->size_b)
+	{
+		(*br)->st_b_optid[i] = prev->st_b_optid[i - 1];
+		i++;
+	}
+
+	i = 0;
+	(*br)->size_a = prev->size_a - 1;
+	if ((*br)->size_a == 0)
+		return ((void)((*br)->st_a_optid == NULL));
+	(*br)->st_a_optid = malloc(sizeof(int) * ((*br)->size_a));
+	while(i < (*br)->size_a)
+	{
+		(*br)->st_a_optid[i] = prev->st_a_optid[i + 1];
+		i++;
+	}
+}
+
