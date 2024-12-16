@@ -71,25 +71,25 @@ void	print_op(int op)
 	if (op == -1)
 		ft_printf("NULL\n");
 	else if (op == 0)
-		ft_printf("SA\n");
+		ft_printf("sa\n");
 	else if (op == 1)
-		ft_printf("SB\n");
+		ft_printf("sb\n");
 	else if (op == 2)
-		ft_printf("SS\n");
+		ft_printf("ss\n");
 	else if (op == 3)
-		ft_printf("PA\n");
+		ft_printf("pa\n");
 	else if (op == 4)
-		ft_printf("PB\n");
+		ft_printf("pb\n");
 	else if (op == 5)
-		ft_printf("RA\n");
+		ft_printf("ra\n");
 	else if (op == 6)
-		ft_printf("RB\n");
+		ft_printf("rb\n");
 	else if (op == 7)
-		ft_printf("RR\n");
+		ft_printf("rr\n");
 	else if (op == 8)
-		ft_printf("RRA\n");
+		ft_printf("rra\n");
 	else if (op == 9)
-		ft_printf("RRB\n");
+		ft_printf("rrb\n");
 	else if (op == 10)
-		ft_printf("RRR\n");
+		ft_printf("rrr\n");
 }

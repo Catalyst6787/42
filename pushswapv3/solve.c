@@ -120,7 +120,7 @@ void	branch_out_next(t_tree **br, int max_depth)
 void	solve(t_tree **br, int max_depth)
 {
 	if ((*br)->diff == 0)
-		return(print_branch(*br), print_steps(br));
+		return(print_steps(br));
 	branch_out_next(br, max_depth);
 	solve(get_best_branch(br), max_depth);
 }

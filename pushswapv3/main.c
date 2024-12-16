@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 		return(free_tree(&tree), ft_printf("only one element in list\n"), 0);
 
 
-	solve(&tree, 1);
+	solve(&tree, 4);
 	//branch_out(&tree, 4);
 	//print_branch(*get_best_branch(&tree));
 	
@@ -36,8 +36,8 @@ int	main(int ac, char **av)
 
 	time (&end); // TESTING
 	dif = difftime (end,start); // TESTING
-	printf ("\n\nYour calculations took %.2lf seconds to run.\n", dif ); // TESTING
-	
+	//printf ("\n\nYour calculations took %.2lf seconds to run.\n", dif ); // TESTING
+	(void)dif;
 	return (0);
 }
 /*
