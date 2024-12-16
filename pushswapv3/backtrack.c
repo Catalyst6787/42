@@ -39,17 +39,20 @@ void	branch_out(t_tree **br, int max)
 {
 	if (!br || !(*br))
 		return ;
-	init_branch(*br, &(*br)->sa, SA);
-	init_branch(*br, &(*br)->sb, SB);
-	init_branch(*br, &(*br)->ss, SS);
-	init_branch(*br, &(*br)->pa, PA);
-	init_branch(*br, &(*br)->pb, PB);
-	init_branch(*br, &(*br)->ra, RA);
-	init_branch(*br, &(*br)->rb, RB);
-	init_branch(*br, &(*br)->rr, RR);
-	init_branch(*br, &(*br)->rra, RRA);
-	init_branch(*br, &(*br)->rrb, RRB);
-	init_branch(*br, &(*br)->rrr, RRR);
-	if ((*br)->lvl < max - 1)
-		call_branch_out(br, max);
+	if (max)
+	{
+		init_branch(*br, &(*br)->sa, SA);
+		init_branch(*br, &(*br)->sb, SB);
+		init_branch(*br, &(*br)->ss, SS);
+		init_branch(*br, &(*br)->pa, PA);
+		init_branch(*br, &(*br)->pb, PB);
+		init_branch(*br, &(*br)->ra, RA);
+		init_branch(*br, &(*br)->rb, RB);
+		init_branch(*br, &(*br)->rr, RR);
+		init_branch(*br, &(*br)->rra, RRA);
+		init_branch(*br, &(*br)->rrb, RRB);
+		init_branch(*br, &(*br)->rrr, RRR);
+	}
+	if (max - 1)
+		call_branch_out(br, max--);
 }

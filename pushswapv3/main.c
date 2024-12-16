@@ -25,8 +25,12 @@ int	main(int ac, char **av)
 	if (tree->size_a < 2)
 		return(free_tree(&tree), ft_printf("only one element in list\n"), 0);
 
-	solve(&tree);
+
+	solve(&tree, 1);
+	//branch_out(&tree, 4);
 	//print_branch(*get_best_branch(&tree));
+	
+	//print_tree(&tree);
 
 	free_tree(&tree);
 

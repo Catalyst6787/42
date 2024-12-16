@@ -103,8 +103,9 @@ void	print_tree(t_tree **br);
 void	branch_out(t_tree **br, int max);
 
 // SOLVE
-t_tree **get_best_branch(t_tree **branch);
-void	solve(t_tree **br);
+t_tree **find_best_branch(t_tree **br, t_tree **current_best);
+t_tree **get_best_branch(t_tree **tree);
 void	print_steps(t_tree **br);
+void	solve(t_tree **br, int max_depth);
 
 #endif
