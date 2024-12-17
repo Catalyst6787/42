@@ -82,6 +82,7 @@ int get_tot_diff(int size_a, int size_b, int **st_a_optid, int **st_b_optid);
 int	init_tree(t_tree *branch, int ac, char **av);
 void	free_branch(t_tree **branch);
 void	free_tree(t_tree **root);
+void	free_tree_excl(t_tree **root, t_tree **br);
 void	print_branch(t_tree *branch);
 void	init_branch(t_tree *prev, t_tree **br, int op);
 
@@ -106,6 +107,6 @@ void	branch_out(t_tree **br, int max);
 t_tree **find_best_branch(t_tree **br, t_tree **current_best);
 t_tree **get_best_branch(t_tree **tree);
 void	print_steps(t_tree **br);
-void	solve(t_tree **br, int max_depth);
+void	solve(t_tree **br, int max_depth, t_tree **tree);
 
 #endif

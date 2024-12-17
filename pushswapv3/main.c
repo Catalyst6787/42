@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 		return(free_tree(&tree), ft_printf("only one element in list\n"), 0);
 
 
-	solve(&tree, 4);
+	solve(&tree, 1, NULL);
 	//branch_out(&tree, 4);
 	//print_branch(*get_best_branch(&tree));
 	

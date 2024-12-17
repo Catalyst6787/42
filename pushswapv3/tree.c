@@ -79,6 +79,27 @@ void	free_tree(t_tree **root)
 	free_branch(root);
 }
 
+void	free_tree_excl(t_tree **root, t_tree **br)
+{
+	if (!root || !(*root))
+		return ;
+	if (*root == *br || root == br)
+		return ;
+	free_tree_excl(&(*root)->sa, br);
+	free_tree_excl(&(*root)->sb, br);
+	free_tree_excl(&(*root)->ss, br);
+	free_tree_excl(&(*root)->pa, br);
+	free_tree_excl(&(*root)->pb, br);
+	free_tree_excl(&(*root)->ra, br);
+	free_tree_excl(&(*root)->rb, br);
+	free_tree_excl(&(*root)->rr, br);
+	free_tree_excl(&(*root)->rra, br);
+	free_tree_excl(&(*root)->rrb, br);
+	free_tree_excl(&(*root)->rrr, br);
+
+	free_branch(root);
+}
+
 void	print_branch(t_tree *branch)
 {
 	if (!branch)

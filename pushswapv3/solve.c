@@ -116,11 +116,45 @@ void	branch_out_next(t_tree **br, int max_depth)
 	if (!is_branch)
 		branch_out(br, max_depth);
 }
-
-void	solve(t_tree **br, int max_depth)
+/*
+static void remove_ref(t_tree **br)
 {
+	if (!br || !*br)
+		return;
+
+	if ((*br)->lastop == SA)
+		(*br)->prev->sa = NULL;
+	else if ((*br)->lastop == SB)
+		(*br)->prev->sb = NULL;
+	else if ((*br)->lastop == SS)
+		(*br)->prev->ss = NULL;
+	else if ((*br)->lastop == PA)
+		(*br)->prev->pa = NULL;
+	else if ((*br)->lastop == PB)
+		(*br)->prev->pb = NULL;
+	else if ((*br)->lastop == RA)
+		(*br)->prev->ra = NULL;
+	else if ((*br)->lastop == RB)
+		(*br)->prev->rb = NULL;
+	else if ((*br)->lastop == RR)
+		(*br)->prev->rr = NULL;
+	else if ((*br)->lastop == RRA)
+		(*br)->prev->rra = NULL;
+	else if ((*br)->lastop == RRB)
+		(*br)->prev->rrb = NULL;
+	else if ((*br)->lastop == RRR)
+		(*br)->prev->rrr = NULL;
+}
+*/
+
+void	solve(t_tree **br, int max_depth, t_tree **tree)
+{
+	print_steps(br);
+	free_tree_excl(tree, br);
+	(*br)->prev = NULL;
+	
 	if ((*br)->diff == 0)
-		return(print_steps(br));
+		return (free_tree(br));
 	branch_out_next(br, max_depth);
-	solve(get_best_branch(br), max_depth);
+	solve(get_best_branch(br), max_depth, br);
 }
