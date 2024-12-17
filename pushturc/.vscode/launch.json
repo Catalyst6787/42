@@ -1,0 +1,32 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "Debug C program",
+			"type": "cppdbg",  // Corrected from "gdb" to "cppdbg" for C/C++ debugging in VSCode
+			"request": "launch",
+			"program": "${workspaceFolder}/push_swap",  // Path to the compiled executable
+			"args": ["1", "0", "2", "3"],  // Correctly using "args" for command-line arguments
+			"stopAtEntry": false,  // Optional, set to true if you want to stop at the entry point
+			"cwd": "${workspaceFolder}",  // Working directory, typically the root of the workspace
+			"externalConsole": true,  // Set to true to use an external console for I/O
+			"MIMode": "gdb",  // Mode to use for GDB
+			"miDebuggerPath": "/usr/bin/gdb",  // Adjust this to your actual GDB path
+			"preLaunchTask": "build C program",  // This assumes you have a build task named "build C program"
+			"setupCommands": [
+				{
+					"description": "Enable pretty-printing for gdb",
+					"text": "-enable-pretty-printing",
+					"ignoreFailures": true
+				}
+			],
+			"logging": {
+				"trace": true,
+				"traceResponse": true,
+				"engineLogging": true
+			},
+			//"symbolSearchPath": "",
+			"serverLaunchTimeout": 10000
+		}
+	]
+}
