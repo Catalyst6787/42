@@ -15,7 +15,7 @@ t_tree **find_best_branch(t_tree **br, t_tree **current_best)
 {
 	if (!br || !(*br))
 		return(current_best);
-	if ((*br)->diff < (*current_best)->diff /* || ((*br)->diff == (*current_best)->diff && (*br)->lvl < (*current_best)->lvl)*/)
+	if ((*br)->diff < (*current_best)->diff || ((*br)->diff == (*current_best)->diff && (*br)->lvl < (*current_best)->lvl))
 		current_best = br;
 	if ((*br)->sa)
 		current_best = find_best_branch(&(*br)->sa, current_best);
