@@ -25,6 +25,7 @@ int	main(int ac, char **av)
 	free_st(&st_a_value);
 	size_b = 0;
 
+	
 
 	free_st(&st_a);
 	free_st(&st_b);
