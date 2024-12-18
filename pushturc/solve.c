@@ -179,9 +179,9 @@ int find_spot_b(int val, int **st_b, int size)
 
 	i = 0;
 	if (is_lower(val, st_b, size))
-		return(get_min(st_b, size) + 1);
+		return(0/*get_min(st_b, size)*/);
 	else if (is_bigger(val, st_b, size))
-		return(get_max(st_b, size) - 1);
+		return(get_max(st_b, size));
 	while((i < size - 1) && !((*st_b)[i] > val && (*st_b)[i + 1] < val))
 		i++;
 	return (i);
@@ -191,6 +191,10 @@ void	push_cheapest_to_b(int cheapest, int **st_a, int *size_a, int **st_b, int *
 {
 	int op_to_top_a;
 	int op_to_top_b;
+
+	int op_on_b;
+
+	op_on_b = 0;
 
 	op_to_top_a = op_to_top(st_a, *size_a, cheapest);
 	op_to_top_b = op_to_top(st_b, *size_b, find_spot_b((*st_a)[cheapest], st_b, *size_b));
@@ -206,6 +210,7 @@ void	push_cheapest_to_b(int cheapest, int **st_a, int *size_a, int **st_b, int *
 			rotate(st_b, *size_b);
 			op_to_top_a--;
 			op_to_top_b--;
+			op_on_b--;
 		}
 	}
 	else if (op_to_top_a < 0 && op_to_top_b < 0)
@@ -217,6 +222,7 @@ void	push_cheapest_to_b(int cheapest, int **st_a, int *size_a, int **st_b, int *
 			rev_rotate(st_b, *size_b);
 			op_to_top_a++;
 			op_to_top_b++;
+			op_on_b++;
 		}
 	}
 	while(op_to_top_a != 0)
@@ -241,14 +247,31 @@ void	push_cheapest_to_b(int cheapest, int **st_a, int *size_a, int **st_b, int *
 			printop(RB);
 			rotate(st_b, *size_b);
 			op_to_top_b--;
+			op_on_b--;
 		}
 		else if (op_to_top_b < 0)
 		{
 			printop(RRB);
 			rev_rotate(st_b, *size_b);
 			op_to_top_b++;
+			op_on_b++;
 		}
 	}
 	printop(PB);
 	push(st_a, size_a, st_b, size_b);
+	while(op_on_b != 0)
+	{
+		if (op_on_b > 0)
+		{
+			printop(RB);
+			rotate(st_b, *size_b);
+			op_on_b--;
+		}
+		else if (op_on_b < 0)
+		{
+			printop(RRB);
+			rev_rotate(st_b, *size_b);
+			op_on_b++;
+		}
+	}
 }
