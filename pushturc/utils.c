@@ -51,3 +51,28 @@ void	copy_st_malloc(int size, int **st, int **st_copy)
 	copy_st(size, st, st_copy);
 }
 
+void	printop(int op)
+{
+	if (op == SA)
+		ft_printf("sa\n");
+	if (op == SB)
+		ft_printf("sb\n");
+	if (op == SS)
+		ft_printf("ss\n");
+	if (op == PA)
+		ft_printf("pa\n");
+	if (op == PB)
+		ft_printf("pb\n");
+	if (op == RA)
+		ft_printf("ra\n");
+	if (op == RB)
+		ft_printf("rb\n");
+	if (op == RR)
+		ft_printf("rr\n");
+	if (op == RRA)
+		ft_printf("rra\n");
+	if (op == RRB)
+		ft_printf("rrb\n");
+	if (op == RRR)
+		ft_printf("rrr\n");
+}

@@ -25,7 +25,27 @@ int	main(int ac, char **av)
 	free_st(&st_a_value);
 	size_b = 0;
 
-	
+	ft_printf("\n");
+
+	ft_printf("st_a:\n");
+	print_st(size_a, &st_a);
+	ft_printf("size st_a: %d\n", size_a);
+	ft_printf("st_b:\n");
+	print_st(size_b, &st_b);
+	ft_printf("size st_a: %d\n", size_b);
+
+	ft_printf("\n");
+	push_to_b(&st_a, &size_a, &st_b, &size_b);
+	ft_printf("\n");
+
+	ft_printf("st_a:\n");
+	print_st(size_a, &st_a);
+	ft_printf("size st_a: %d\n", size_a);
+	ft_printf("st_b:\n");
+	print_st(size_b, &st_b);
+	ft_printf("size st_a: %d\n", size_b);
+
+	ft_printf("\n");
 
 	free_st(&st_a);
 	free_st(&st_b);
