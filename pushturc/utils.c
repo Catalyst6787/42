@@ -51,9 +51,8 @@ void	copy_st_malloc(int size, int **st, int **st_copy)
 	copy_st(size, st, st_copy);
 }
 
-void	printop(int op, t_data *d)
+void	lst_printop(int op)
 {
-	(void)d;
 	if (op == SA)
 		ft_printf("sa\n");
 	if (op == SB)
@@ -77,3 +76,63 @@ void	printop(int op, t_data *d)
 	if (op == RRR)
 		ft_printf("rrr\n");
 }
+
+void	lstadd_back_ops(t_ops **lst, t_ops *new)
+{
+	t_ops	*last;
+
+	last = *lst;
+
+	if (!new)
+		return ;
+	while(last && last->next)
+		last = last->next;
+	if (!last)
+		*lst = new;
+	else
+		last->next = new;
+}
+
+t_ops	*lstnew_ops(int op)
+{
+	t_ops	*elem;
+
+	elem = malloc(sizeof(t_ops));
+	if (!elem)
+		return (NULL);
+	elem->op = op;
+	elem->next = NULL;
+	return (elem);
+}
+
+void	print_all_ops(t_data *d)
+{
+	t_ops *tail;
+
+	tail = d->ops;
+	while(tail)
+	{
+		lst_printop(tail->op);
+		tail = tail->next;
+	}
+}
+
+void	printop(int op, t_data *d)
+{
+	lstadd_back_ops(&d->ops, lstnew_ops(op));
+}
+
+void	free_ops(t_data *d)
+{
+	t_ops *tail;
+	t_ops *tmp;
+
+	tail = d->ops;
+	while(tail)
+	{
+		tmp = tail->next;
+		free(tail);
+		tail = tmp;
+	}
+}
+

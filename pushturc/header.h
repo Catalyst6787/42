@@ -59,6 +59,11 @@ int		check_args_numeric(int ac, char **av);
 void	copy_st(int size, int **st, int **st_copy);
 void	copy_st_malloc(int size, int **st, int **st_copy);
 void	printop(int op, t_data *d);
+void	print_all_ops(t_data *d);
+t_ops	*lstnew_ops(int op);
+void	lstadd_back_ops(t_ops **lst, t_ops *new);
+void	lst_printop(int op);
+void	free_ops(t_data *d);
 
 // OPTID
 void	set_optid(int size, int **st, int **st_optid);

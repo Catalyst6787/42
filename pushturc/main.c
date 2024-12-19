@@ -13,6 +13,7 @@ int	main(int ac, char **av)
 	st_a_value = NULL;
 	d->st_a = NULL;
 	d->st_b = NULL;
+	d->ops = NULL;
 
 	if (ac < 2)
 		return(ft_putstr_fd("Error, no arguments\n", 2), 0); // TMP change error msg
@@ -26,6 +27,7 @@ int	main(int ac, char **av)
 	free_st(&st_a_value);
 	d->size_b = 0;
 
+	/*
 	ft_printf("\n");
 
 	ft_printf("st_a:\n");
@@ -36,8 +38,10 @@ int	main(int ac, char **av)
 	ft_printf("size st_a: %d\n", d->size_b);
 
 	ft_printf("\n");
-	push_to_b(&d->st_a, &d->size_a, &d->st_b, &d->size_b);
-	push_to_a(&d->st_a, &d->size_a, &d->st_b, &d->size_b);
+	*/
+	push_to_b(d);
+	push_to_a(d);
+	/*
 	ft_printf("\n");
 
 	ft_printf("st_a:\n");
@@ -49,6 +53,9 @@ int	main(int ac, char **av)
 
 	ft_printf("\n");
 
+	*/
+	print_all_ops(d);
+	free_ops(d);
 	free_st(&d->st_a);
 	free_st(&d->st_b);
 	free(d);
