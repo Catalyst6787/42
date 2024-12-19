@@ -5,8 +5,8 @@ void	push_to_b(int **st_a, int *size_a, int **st_b, int *size_b)
 	//int max;
 	//int min;
 	int cheapest;
-	if ((*size_a) <= 3)
-		return(solve_for_3(st_a, size_a));
+	if ((*size_a) == 0)
+		return ;
 	if ((*size_b) == 0)
 	{
 		printop(PB);
@@ -22,6 +22,15 @@ void	push_to_b(int **st_a, int *size_a, int **st_b, int *size_b)
 	cheapest = find_cheapest(st_a, *size_a, st_b, *size_b);
 	push_cheapest_to_b(cheapest, st_a, size_a, st_b, size_b);
 	push_to_b(st_a, size_a, st_b, size_b);
+}
+
+void	push_to_a(int **st_a, int *size_a, int **st_b, int *size_b)
+{
+	while((*size_b) > 0)
+	{
+		printop(PA);
+		push(st_b, size_b, st_a, size_a);
+	}
 }
 
 void	solve_for_3(int	**st_a, int *size_a)

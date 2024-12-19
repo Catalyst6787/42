@@ -58,6 +58,7 @@ void	push(int **st_from, int *size_from, int **st_to, int *size_to);
 
 // SOLVE
 void	push_to_b(int **st_a, int *size_a, int **st_b, int *size_b);
+void	push_to_a(int **st_a, int *size_a, int **st_b, int *size_b);
 void	solve_for_3(int	**st_a, int *size_a);
 int	get_min(int **st, int size);
 int	get_max(int **st, int size);

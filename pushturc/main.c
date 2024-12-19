@@ -36,6 +36,7 @@ int	main(int ac, char **av)
 
 	ft_printf("\n");
 	push_to_b(&st_a, &size_a, &st_b, &size_b);
+	push_to_a(&st_a, &size_a, &st_b, &size_b);
 	ft_printf("\n");
 
 	ft_printf("st_a:\n");
