@@ -64,8 +64,11 @@ int	get_max(int **st, int size);
 int	find_cheapest(int **st_a, int size_a, int **st_b, int size_b);
 int	cost_to_top(int **st, int size, int id);
 int	op_to_top(int **st, int size, int id);
+int	put_to_top_a(int **st, int size, int id);
+int	put_to_top_b(int **st, int size, int id);
+int	is_lower(int val, int **st, int size);
+int	is_bigger(int val, int **st, int size);
 int	find_spot_b(int val, int **st_b, int size);
-int	find_spot_a(int val, int **st_b, int size);
 void	push_cheapest_to_b(int cheapest, int **st_a, int *size_a, int **st_b, int *size_b);
 
 #endif

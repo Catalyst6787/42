@@ -76,3 +76,4 @@ void	push(int **st_from, int *size_from, int **st_to, int *size_to)
 	}
 	return(free_st(st_from), (void)(*st_from = new_st_from));
 }
+
