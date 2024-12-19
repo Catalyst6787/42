@@ -55,6 +55,10 @@ int	main(int ac, char **av)
 
 	*/
 	print_all_ops(d);
+	ft_printf("\n\n");
+	clean_moves(d);
+	print_all_ops(d);
+	ft_printf("\n\n");
 	free_ops(d);
 	free_st(&d->st_a);
 	free_st(&d->st_b);

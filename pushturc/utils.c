@@ -135,4 +135,33 @@ void	free_ops(t_data *d)
 		tail = tmp;
 	}
 }
+void	del_node(t_ops *node, t_ops *prev, t_data *d)
+{
+	if (!prev)
+		d->ops = node->next;
+	else
+		prev->next = node->next;
+	free(node);
+}
 
+void	clean_moves(t_data *d)
+{
+	t_ops *tail;
+	t_ops *prev;
+
+	tail = d->ops;
+	prev = NULL;
+	while(tail && tail->next)
+	{
+		if (tail->op == PB && tail->next->op == PA)
+		{
+			del_node(tail, prev, d);
+			del_node(prev->next, prev, d);
+			prev = NULL;
+			tail = d->ops;
+			continue;
+		}
+		prev = tail;
+		tail = tail->next;
+	}
+}
