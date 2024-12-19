@@ -9,10 +9,6 @@ int	main(int ac, char **av)
 			return(ft_putstr_fd("Error\n", 2), 0);
 
 	int *st_a_value;
-	//int *st_a;
-	//int size_a;
-	//int *st_b;
-	//int size_b;
 
 	st_a_value = NULL;
 	d->st_a = NULL;

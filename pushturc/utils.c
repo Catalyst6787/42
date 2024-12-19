@@ -51,8 +51,9 @@ void	copy_st_malloc(int size, int **st, int **st_copy)
 	copy_st(size, st, st_copy);
 }
 
-void	printop(int op)
+void	printop(int op, t_data *d)
 {
+	(void)d;
 	if (op == SA)
 		ft_printf("sa\n");
 	if (op == SB)

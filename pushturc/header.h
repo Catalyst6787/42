@@ -58,7 +58,7 @@ int		check_st_double(int size, int **st);
 int		check_args_numeric(int ac, char **av);
 void	copy_st(int size, int **st, int **st_copy);
 void	copy_st_malloc(int size, int **st, int **st_copy);
-void	printop(int op);
+void	printop(int op, t_data *d);
 
 // OPTID
 void	set_optid(int size, int **st, int **st_optid);
@@ -72,19 +72,19 @@ void	rev_rotate(int **st, int size);
 void	push(int **st_from, int *size_from, int **st_to, int *size_to);
 
 // SOLVE
-void	push_to_b(int **st_a, int *size_a, int **st_b, int *size_b);
-void	push_to_a(int **st_a, int *size_a, int **st_b, int *size_b);
-void	solve_for_3(int	**st_a, int *size_a);
+void	push_to_b(t_data *d);
+void	push_to_a(t_data *d);
+//void	solve_for_3(int	**st_a, int *size_a);
 int	get_min(int **st, int size);
 int	get_max(int **st, int size);
 int	find_cheapest(int **st_a, int size_a, int **st_b, int size_b);
 int	cost_to_top(int **st, int size, int id);
 int	op_to_top(int **st, int size, int id);
-int	put_to_top_a(int **st, int size, int id);
-int	put_to_top_b(int **st, int size, int id);
+int	put_to_top_a(int **st, int size, int id, t_data *d);
+int	put_to_top_b(int **st, int size, int id, t_data *d);
 int	is_lower(int val, int **st, int size);
 int	is_bigger(int val, int **st, int size);
 int	find_spot_b(int val, int **st_b, int size);
-void	push_cheapest_to_b(int cheapest, int **st_a, int *size_a, int **st_b, int *size_b);
+void	push_cheapest_to_b(int cheapest, t_data *d);
 
 #endif
