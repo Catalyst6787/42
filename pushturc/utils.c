@@ -153,7 +153,14 @@ void	clean_moves(t_data *d)
 	prev = NULL;
 	while(tail && tail->next)
 	{
-		if (tail->op == PB && tail->next->op == PA)
+		if ((tail->op == PB && tail->next->op == PA)
+		|| (tail->op == PA && tail->next->op == PB)
+		|| (tail->op == SA && tail->next->op == SA)
+		|| (tail->op == SB && tail->next->op == SB)
+		|| (tail->op == RB && tail->next->op == RRB)
+		|| (tail->op == RRB && tail->next->op == RB)
+		|| (tail->op == RA && tail->next->op == RRA)
+		|| (tail->op == RRA && tail->next->op == RA))
 		{
 			del_node(tail, prev, d);
 			del_node(prev->next, prev, d);
