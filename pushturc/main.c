@@ -3,54 +3,58 @@
 
 int	main(int ac, char **av)
 {
-	int *st_a_value;
-	int *st_a;
-	int size_a;
-	int *st_b;
-	int size_b;
+	t_data *d;
+	d =  (t_data *)malloc(sizeof(t_data));
+	if (!d)
+			return(ft_putstr_fd("Error\n", 2), 0);
 
-	st_a = NULL;
+	int *st_a_value;
+	//int *st_a;
+	//int size_a;
+	//int *st_b;
+	//int size_b;
+
 	st_a_value = NULL;
-	st_b = NULL;
+	d->st_a = NULL;
+	d->st_b = NULL;
 
 	if (ac < 2)
 		return(ft_putstr_fd("Error, no arguments\n", 2), 0); // TMP change error msg
 	if (!check_args_numeric(ac, av))
 		return(ft_putstr_fd("Error, non numeric argument\n", 2), 0); // TMP change error msg
 	
-	size_a = get_stack(ac, av, &st_a_value);
-	if (!check_st_double(size_a, &st_a_value))
+	d->size_a = get_stack(ac, av, &st_a_value);
+	if (!check_st_double(d->size_a, &st_a_value))
 		return(free_st(&st_a_value), ft_putstr_fd("Error, doubles in list\n", 2), 0);
-	set_optid(size_a, &st_a_value, &st_a);
+	set_optid(d->size_a, &st_a_value, &d->st_a);
 	free_st(&st_a_value);
-	size_b = 0;
+	d->size_b = 0;
 
 	ft_printf("\n");
 
 	ft_printf("st_a:\n");
-	print_st(size_a, &st_a);
-	ft_printf("size st_a: %d\n", size_a);
+	print_st(d->size_a, &d->st_a);
+	ft_printf("size st_a: %d\n", d->size_a);
 	ft_printf("st_b:\n");
-	print_st(size_b, &st_b);
-	ft_printf("size st_a: %d\n", size_b);
+	print_st(d->size_b, &d->st_b);
+	ft_printf("size st_a: %d\n", d->size_b);
 
 	ft_printf("\n");
-	push_to_b(&st_a, &size_a, &st_b, &size_b);
-	push_to_a(&st_a, &size_a, &st_b, &size_b);
+	push_to_b(&d->st_a, &d->size_a, &d->st_b, &d->size_b);
+	push_to_a(&d->st_a, &d->size_a, &d->st_b, &d->size_b);
 	ft_printf("\n");
 
 	ft_printf("st_a:\n");
-	print_st(size_a, &st_a);
-	ft_printf("size st_a: %d\n", size_a);
+	print_st(d->size_a, &d->st_a);
+	ft_printf("size st_a: %d\n", d->size_a);
 	ft_printf("st_b:\n");
-	print_st(size_b, &st_b);
-	ft_printf("size st_a: %d\n", size_b);
+	print_st(d->size_b, &d->st_b);
+	ft_printf("size st_a: %d\n", d->size_b);
 
 	ft_printf("\n");
 
-	free_st(&st_a);
-	free_st(&st_b);
-	(void)size_b;
-	(void)st_b;
+	free_st(&d->st_a);
+	free_st(&d->st_b);
+	free(d);
 	return (0);
 }

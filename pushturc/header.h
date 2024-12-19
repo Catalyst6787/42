@@ -33,6 +33,21 @@
 # define RRB 9
 # define RRR 10
 
+typedef struct s_ops
+{
+	int	op;
+	struct s_ops *next;
+} t_ops;
+
+typedef struct	s_data
+{
+	int *st_a;
+	int size_a;
+	int *st_b;
+	int size_b;
+	struct s_ops *ops;
+} t_data;
+
 // UTILS
 int		get_stack_av(int ac, char **av, int **st);
 int		get_stack_split(char *s, int **st);
