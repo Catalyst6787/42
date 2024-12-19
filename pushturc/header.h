@@ -65,6 +65,7 @@ void	lstadd_back_ops(t_ops **lst, t_ops *new);
 void	lst_printop(int op);
 void	free_ops(t_data *d);
 void	clean_moves(t_data *d);
+void	combine_moves(t_data *d);
 void	del_node(t_ops *node, t_ops *prev, t_data *d);
 
 // OPTID

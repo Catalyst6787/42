@@ -57,6 +57,7 @@ int	main(int ac, char **av)
 	//print_all_ops(d);
 	//ft_printf("\n\n");
 	clean_moves(d);
+	combine_moves(d);
 	print_all_ops(d);
 	//ft_printf("\n\n");
 	free_ops(d);

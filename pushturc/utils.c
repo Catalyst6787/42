@@ -172,3 +172,44 @@ void	clean_moves(t_data *d)
 		tail = tail->next;
 	}
 }
+
+void	combine_moves(t_data *d)
+{
+	t_ops *tail;
+	t_ops *prev;
+
+	tail = d->ops;
+	prev = NULL;
+	while(tail && tail->next)
+	{
+		if ((tail->op == SA && tail->next->op == SB)
+		|| (tail->op == SB && tail->next->op == SA))
+		{
+			del_node(tail, prev, d);
+			prev->next->op = SS;
+			prev = NULL;
+			tail = d->ops;
+			continue;
+		}
+		else if ((tail->op == RA && tail->next->op == RB)
+		|| (tail->op == RB && tail->next->op == RA))
+		{
+			del_node(tail, prev, d);
+			prev->next->op = RR;
+			prev = NULL;
+			tail = d->ops;
+			continue;
+		}
+		else if ((tail->op == RRA && tail->next->op == RRB)
+		|| (tail->op == RRB && tail->next->op == RRA))
+		{
+			del_node(tail, prev, d);
+			prev->next->op = RRR;
+			prev = NULL;
+			tail = d->ops;
+			continue;
+		}
+		prev = tail;
+		tail = tail->next;
+	}
+}
