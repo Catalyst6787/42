@@ -169,6 +169,8 @@ int	put_to_top_b(int **st, int size, int id)
 		rev_rotate(st, size);
 		op++;
 	}
+	if (res < 0)
+		return(res - 1);
 	return(res);
 }
 
