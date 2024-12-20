@@ -59,6 +59,28 @@ void	solve_for_3(int	**st_a, int *size_a, t_data *d)
 		return(printop(SA, d), swap(st_a, *size_a));
 }
 
+void	solve_for_less_than_6(t_data *d)
+{
+	if (d->size_a == 3)
+		return(solve_for_3(&d->st_a, &d->size_a, d));
+	else if (d->size_a == 2)
+		return(printop(SA, d), swap(&d->st_a, d->size_a));
+	else if (d->size_a >= 4)
+	{
+		put_to_top_a(&d->st_a, d->size_a, get_min(&d->st_a, d->size_a), d);
+		printop(PB, d);
+		push(&d->st_a, &d->size_a, &d->st_b, &d->size_b);
+	}
+	if (d->size_a == 4)
+	{
+		put_to_top_a(&d->st_a, d->size_a, get_min(&d->st_a, d->size_a), d);
+		printop(PB, d);
+		push(&d->st_a, &d->size_a, &d->st_b, &d->size_b);
+	}
+	solve_for_3(&d->st_a, &d->size_a, d);
+	push_to_a(d);
+}
+
 int	get_min(int **st, int size)
 {
 	int i;

@@ -48,10 +48,14 @@ typedef struct	s_data
 	struct s_ops *ops;
 } t_data;
 
+// GET STACK
+int	get_stack_av(int ac, char **av, int **st, int *err);
+int get_stack_split_atoi(char **tab, int **st, int *err);
+int get_stack_split(char *s, int **st, int *err);
+int get_stack(int ac, char **av, int **st, int *err);
+int	ft_long_atoi(const char *str, int *error);
+
 // UTILS
-int		get_stack_av(int ac, char **av, int **st);
-int		get_stack_split(char *s, int **st);
-int		get_stack(int ac, char **av, int **st);
 void	print_st(int size, int **st);
 void	free_st(int **st);
 int		check_st_double(int size, int **st);
@@ -70,6 +74,7 @@ void	del_node(t_ops *node, t_ops *prev, t_data *d);
 int	get_smallest_bigger(int val, int **st, int size);
 int	get_bigest_smaller(int val, int **st, int size);
 void	align_stack(t_data *d);
+int	is_sorted_a(int **st_a, int size_a);
 
 // OPTID
 void	set_optid(int size, int **st, int **st_optid);
@@ -85,7 +90,7 @@ void	push(int **st_from, int *size_from, int **st_to, int *size_to);
 // SOLVE
 void	push_to_b(t_data *d);
 void	push_to_a(t_data *d);
-//void	solve_for_3(int	**st_a, int *size_a);
+void	solve_for_3(int	**st_a, int *size_a, t_data *d);
 int	get_min(int **st, int size);
 int	get_max(int **st, int size);
 int	find_cheapest(t_data *d);
@@ -99,5 +104,6 @@ int	is_bigger(int val, int **st, int size);
 int	find_spot_b(int val, int **st_b, int size);
 void	push_cheapest_to_b(int cheapest, t_data *d);
 void	good_put_to_top(t_data *d, int id_a, int id_b);
+void	solve_for_less_than_6(t_data *d);
 
 #endif

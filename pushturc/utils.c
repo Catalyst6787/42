@@ -213,3 +213,18 @@ void	combine_moves(t_data *d)
 		tail = tail->next;
 	}
 }
+
+int	is_sorted_a(int **st_a, int size_a)
+{
+	int i;
+
+	i = 0;
+	while(i < size_a - 1)
+	{
+		if ((*st_a)[i] > (*st_a)[i + 1])
+			return(0);
+		i++;
+	}
+	return(1);
+}
+
