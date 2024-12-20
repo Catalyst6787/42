@@ -133,6 +133,30 @@ int	find_cheapest(t_data *d)
 	}
 	return(cheapest);
 }
+static int gfc_2(int op_to_top_a, int op_to_top_b, int fullres)
+{
+		while(op_to_top_a > 0)
+	{
+		op_to_top_a--;
+		fullres++;
+	}
+	while(op_to_top_b > 0)
+	{
+		op_to_top_b--;
+		fullres++;
+	}
+	while(op_to_top_a < 0)
+	{
+		op_to_top_a++;
+		fullres++;
+	}
+	while(op_to_top_b < 0)
+	{
+		op_to_top_b++;
+		fullres++;
+	}
+	return(fullres);
+}
 
 int get_full_cost(t_data *d, int id)
 {
@@ -155,27 +179,7 @@ int get_full_cost(t_data *d, int id)
 		op_to_top_b++;
 		fullres++;
 	}
-	while(op_to_top_a > 0)
-	{
-		op_to_top_a--;
-		fullres++;
-	}
-	while(op_to_top_b > 0)
-	{
-		op_to_top_b--;
-		fullres++;
-	}
-	while(op_to_top_a < 0)
-	{
-		op_to_top_a++;
-		fullres++;
-	}
-	while(op_to_top_b < 0)
-	{
-		op_to_top_b++;
-		fullres++;
-	}
-	return(fullres);
+	return (gfc_2(op_to_top_a, op_to_top_b, fullres));
 }
 
 int	cost_to_top(int **st, int size, int id)
