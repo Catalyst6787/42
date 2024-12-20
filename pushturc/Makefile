@@ -1,6 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/20 16:27:11 by lfaure            #+#    #+#              #
+#    Updated: 2024/12/20 16:29:35 by lfaure           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = push_swap
 CC = gcc
-CFLAGS = -g -Wall -Wextra -Werror # -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror -Wunused-function # -fsanitize=address
 
 PRINTF_DIR = ./printf
 PRINTF_LIB = $(PRINTF_DIR)/libftprintf.a

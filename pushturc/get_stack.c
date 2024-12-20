@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   get_stack.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/20 16:26:58 by lfaure            #+#    #+#             */
+/*   Updated: 2024/12/20 16:29:38 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "header.h"
 
 int	get_stack_av(int ac, char **av, int **st, int *err)
@@ -87,7 +99,6 @@ int	ft_long_atoi(const char *str, int *error)
 		i++;
 	}
 	r *= n;
-
 	if (r > INT_MAX || r < INT_MIN)
 		return(*error = 1, 0);
 	return ((int)r);
