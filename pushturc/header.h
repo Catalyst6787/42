@@ -67,6 +67,9 @@ void	free_ops(t_data *d);
 void	clean_moves(t_data *d);
 void	combine_moves(t_data *d);
 void	del_node(t_ops *node, t_ops *prev, t_data *d);
+int	get_smallest_bigger(int val, int **st, int size);
+int	get_bigest_smaller(int val, int **st, int size);
+void	align_stack(t_data *d);
 
 // OPTID
 void	set_optid(int size, int **st, int **st_optid);
@@ -85,7 +88,8 @@ void	push_to_a(t_data *d);
 //void	solve_for_3(int	**st_a, int *size_a);
 int	get_min(int **st, int size);
 int	get_max(int **st, int size);
-int	find_cheapest(int **st_a, int size_a, int **st_b, int size_b);
+int	find_cheapest(t_data *d);
+int get_full_cost(t_data *d, int id);
 int	cost_to_top(int **st, int size, int id);
 int	op_to_top(int **st, int size, int id);
 int	put_to_top_a(int **st, int size, int id, t_data *d);
@@ -94,5 +98,6 @@ int	is_lower(int val, int **st, int size);
 int	is_bigger(int val, int **st, int size);
 int	find_spot_b(int val, int **st_b, int size);
 void	push_cheapest_to_b(int cheapest, t_data *d);
+void	good_put_to_top(t_data *d, int id_a, int id_b);
 
 #endif

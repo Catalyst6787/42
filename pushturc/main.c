@@ -40,6 +40,7 @@ int	main(int ac, char **av)
 	ft_printf("\n");
 	*/
 	push_to_b(d);
+	align_stack(d);
 	push_to_a(d);
 	/*
 	ft_printf("\n");
@@ -52,8 +53,8 @@ int	main(int ac, char **av)
 	ft_printf("size st_a: %d\n", d->size_b);
 
 	ft_printf("\n");
-
 	*/
+	
 	//print_all_ops(d);
 	//ft_printf("\n\n");
 	clean_moves(d);

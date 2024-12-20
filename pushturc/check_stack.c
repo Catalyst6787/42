@@ -30,7 +30,7 @@ static int check_for_string(char **av)
 	has_digit = 0;
 	while(av[1][i])
 		{
-			if (!ft_isdigit(av[1][i]) && av[1][i] != ' ')
+			if (!ft_isdigit(av[1][i]) && (av[1][i] != ' ' && av[1][i] != '-'))
 				return (0);
 			else if (ft_isdigit(av[1][i]))
 				has_digit = 1;
@@ -55,7 +55,7 @@ static int check_for_array(char **av)
 	{
 		while(av[j][i])
 		{
-			if (!ft_isdigit(av[j][i]) && av[j][i] != ' ')
+			if (!ft_isdigit(av[j][i]) && (av[j][i] != ' ' && av[j][i] != '-'))
 				return (0);
 			else if (ft_isdigit(av[j][i]))
 				has_digit = 1;
