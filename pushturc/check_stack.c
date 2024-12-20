@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:26:47 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/20 16:29:37 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:49:16 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	check_st_double(int size, int **st)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	j = 1;
@@ -30,42 +30,42 @@ int	check_st_double(int size, int **st)
 		i++;
 		j = i + 1;
 	}
-	return(1);
+	return (1);
 }
 
-static int check_for_string(char **av)
+static int	check_for_string(char **av)
 {
-	int i;
-	int has_digit;
+	int	i;
+	int	has_digit;
 
 	i = 0;
 	has_digit = 0;
-	while(av[1][i])
-		{
-			if (!ft_isdigit(av[1][i]) && (av[1][i] != ' ' && av[1][i] != '-'))
-				return (0);
-			else if (ft_isdigit(av[1][i]))
-				has_digit = 1;
-			i++;
-		}
-		if (!has_digit)
+	while (av[1][i])
+	{
+		if (!ft_isdigit(av[1][i]) && (av[1][i] != ' ' && av[1][i] != '-'))
 			return (0);
-		else
-			return (1);
+		else if (ft_isdigit(av[1][i]))
+			has_digit = 1;
+		i++;
+	}
+	if (!has_digit)
+		return (0);
+	else
+		return (1);
 }
 
-static int check_for_array(char **av)
+static int	check_for_array(char **av)
 {
-	int i;
-	int j;
-	int has_digit;
+	int	i;
+	int	j;
+	int	has_digit;
 
 	i = 0;
 	j = 1;
 	has_digit = 0;
-	while(av[j])
+	while (av[j])
 	{
-		while(av[j][i])
+		while (av[j][i])
 		{
 			if (!ft_isdigit(av[j][i]) && (av[j][i] != ' ' && av[j][i] != '-'))
 				return (0);
@@ -74,7 +74,7 @@ static int check_for_array(char **av)
 			i++;
 		}
 		if (!has_digit)
-			return(0);
+			return (0);
 		i = 0;
 		has_digit = 0;
 		j++;
@@ -82,10 +82,10 @@ static int check_for_array(char **av)
 	return (1);
 }
 
-int check_args_numeric(int ac, char **av)
+int	check_args_numeric(int ac, char **av)
 {
 	if (ac == 2)
 		return (check_for_string(av));
 	else
-		return(check_for_array(av));
+		return (check_for_array(av));
 }

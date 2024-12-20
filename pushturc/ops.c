@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:36:11 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/20 16:36:13 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/20 17:02:16 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,9 @@ void	lstadd_back_ops(t_ops **lst, t_ops *new)
 	t_ops	*last;
 
 	last = *lst;
-
 	if (!new)
 		return ;
-	while(last && last->next)
+	while (last && last->next)
 		last = last->next;
 	if (!last)
 		*lst = new;
@@ -68,10 +67,10 @@ t_ops	*lstnew_ops(int op)
 
 void	print_all_ops(t_data *d)
 {
-	t_ops *tail;
+	t_ops	*tail;
 
 	tail = d->ops;
-	while(tail)
+	while (tail)
 	{
 		lst_printop(tail->op);
 		tail = tail->next;

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 17:40:05 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/11 16:56:29 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:56:10 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,25 +35,25 @@
 
 typedef struct s_ops
 {
-	int	op;
-	struct s_ops *next;
-} t_ops;
+	int				op;
+	struct s_ops	*next;
+}	t_ops;
 
-typedef struct	s_data
+typedef struct s_data
 {
-	int *st_a;
-	int size_a;
-	int *st_b;
-	int size_b;
-	struct s_ops *ops;
-} t_data;
+	int				*st_a;
+	int				size_a;
+	int				*st_b;
+	int				size_b;
+	struct s_ops	*ops;
+}	t_data;
 
 // GET STACK
-int	get_stack_av(int ac, char **av, int **st, int *err);
-int get_stack_split_atoi(char **tab, int **st, int *err);
-int get_stack_split(char *s, int **st, int *err);
-int get_stack(int ac, char **av, int **st, int *err);
-int	ft_long_atoi(const char *str, int *error);
+int		get_stack_av(int ac, char **av, int **st, int *err);
+int		get_stack_split_atoi(char **tab, int **st, int *err);
+int		get_stack_split(char *s, int **st, int *err);
+int		get_stack(int ac, char **av, int **st, int *err);
+int		ft_long_atoi(const char *str, int *error);
 
 // UTILS
 void	print_st(int size, int **st);
@@ -71,17 +71,15 @@ void	free_ops(t_data *d);
 void	clean_moves(t_data *d);
 void	combine_moves(t_data *d);
 void	del_node(t_ops *node, t_ops *prev, t_data *d);
-int	get_smallest_bigger(int val, int **st, int size);
-int	get_bigest_smaller(int val, int **st, int size);
+int		get_smallest_bigger(int val, int **st, int size);
+int		get_bigest_smaller(int val, int **st, int size);
 void	align_stack(t_data *d);
-int	is_sorted_a(int **st_a, int size_a);
+int		is_sorted_a(int **st_a, int size_a);
 
 // OPTID
 void	set_optid(int size, int **st, int **st_optid);
 
-
 // OPERATIONS
-
 void	swap(int **st, int size);
 void	rotate(int **st, int size);
 void	rev_rotate(int **st, int size);
@@ -91,17 +89,17 @@ void	push(int **st_from, int *size_from, int **st_to, int *size_to);
 void	push_to_b(t_data *d);
 void	push_to_a(t_data *d);
 void	solve_for_3(int	**st_a, int *size_a, t_data *d);
-int	get_min(int **st, int size);
-int	get_max(int **st, int size);
-int	find_cheapest(t_data *d);
-int get_full_cost(t_data *d, int id);
-int	cost_to_top(int **st, int size, int id);
-int	op_to_top(int **st, int size, int id);
-int	put_to_top_a(int **st, int size, int id, t_data *d);
-int	put_to_top_b(int **st, int size, int id, t_data *d);
-int	is_lower(int val, int **st, int size);
-int	is_bigger(int val, int **st, int size);
-int	find_spot_b(int val, int **st_b, int size);
+int		get_min(int **st, int size);
+int		get_max(int **st, int size);
+int		find_cheapest(t_data *d);
+int		get_full_cost(t_data *d, int id);
+int		cost_to_top(int **st, int size, int id);
+int		op_to_top(int **st, int size, int id);
+int		put_to_top_a(int **st, int size, int id, t_data *d);
+int		put_to_top_b(int **st, int size, int id, t_data *d);
+int		is_lower(int val, int **st, int size);
+int		is_bigger(int val, int **st, int size);
+int		find_spot_b(int val, int **st_b, int size);
 void	push_cheapest_to_b(int cheapest, t_data *d);
 void	good_put_to_top(t_data *d, int id_a, int id_b);
 void	solve_for_less_than_6(t_data *d);

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 16:26:58 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/20 16:29:38 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/20 16:53:27 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,57 +14,56 @@
 
 int	get_stack_av(int ac, char **av, int **st, int *err)
 {
-	int i;
+	int	i;
 
 	if (*st)
 		return (0);
 	i = 0;
 	if (ac <= 1)
-		return(0);
+		return (0);
 	*st = malloc(sizeof(int) * (ac - 1));
 	if (!(*st))
-		return(0);
-	while(i < ac - 1)
+		return (0);
+	while (i < ac - 1)
 	{
 		(*st)[i] = ft_long_atoi(av[i + 1], err);
 		i++;
 	}
-	return(ac - 1);
+	return (ac - 1);
 }
 
-int get_stack_split_atoi(char **tab, int **st, int *err)
+int	get_stack_split_atoi(char **tab, int **st, int *err)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (*st)
 		return (0);
-	while(tab[i])
+	while (tab[i])
 		i++;
 	*st = malloc(sizeof(int) * i);
 	i = 0;
-	while(tab[i])
+	while (tab[i])
 	{
 		(*st)[i] = ft_long_atoi(tab[i], err);
 		i++;
 	}
 	i = 0;
-	while(tab[i])
+	while (tab[i])
 	{
-		free(tab[i]);
+		free (tab[i]);
 		i++;
 	}
-	free(tab);
+	free (tab);
 	return (i);
-
 }
 
-int get_stack_split(char *s, int **st, int *err)
+int	get_stack_split(char *s, int **st, int *err)
 {
-	return(get_stack_split_atoi(ft_split(s, ' '), st, err));
+	return (get_stack_split_atoi(ft_split(s, ' '), st, err));
 }
 
-int get_stack(int ac, char **av, int **st, int *err)
+int	get_stack(int ac, char **av, int **st, int *err)
 {
 	if (ac < 2)
 		return (0);
@@ -72,14 +71,13 @@ int get_stack(int ac, char **av, int **st, int *err)
 		return (get_stack_split(av[1], st, err));
 	else
 		return (get_stack_av(ac, av, st, err));
-
 }
 
 int	ft_long_atoi(const char *str, int *error)
 {
 	long	r;
-	int	i;
-	int	n;
+	int		i;
+	int		n;
 
 	i = 0;
 	r = 0;
@@ -100,6 +98,6 @@ int	ft_long_atoi(const char *str, int *error)
 	}
 	r *= n;
 	if (r > INT_MAX || r < INT_MIN)
-		return(*error = 1, 0);
+		return (*error = 1, 0);
 	return ((int)r);
 }
