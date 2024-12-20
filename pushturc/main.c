@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/20 15:03:37 by lfaure            #+#    #+#             */
-/*   Updated: 2024/12/20 16:59:07 by lfaure           ###   ########.fr       */
+/*   Updated: 2024/12/20 17:34:59 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ static int	main2(t_data *d)
 		push_to_a(d);
 	}
 	clean_moves(d);
-	combine_moves(d);
 	print_all_ops(d);
 	free_ops(d);
 	free_st(&d->st_a);
@@ -50,7 +49,7 @@ int	main(int ac, char **av)
 	d->st_b = NULL;
 	d->ops = NULL;
 	if (ac < 2)
-		return (0);
+		return (free(d), 0);
 	if (!check_args_numeric(ac, av))
 		return (free(d), ft_putstr_fd("Error\n", 2), 0);
 	d->size_a = get_stack(ac, av, &st_a_value, &error);
