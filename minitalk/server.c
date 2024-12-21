@@ -1,9 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   server.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/21 18:49:49 by lfaure            #+#    #+#             */
+/*   Updated: 2024/12/21 18:57:03 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "server.h"
 
-void signal_handler(int signum)
+void	signal_handler(int signum)
 {
 	static char	res;
 	static int	bit_pos;
+
 	if (signum == SIGUSR1)
 		res |= (1 << (7 - bit_pos));
 	bit_pos++;
@@ -15,18 +28,17 @@ void signal_handler(int signum)
 	}
 }
 
-int main(void)
+int	main(void)
 {
-    struct sigaction action;
-    action.sa_handler = signal_handler;
-    sigemptyset(&action.sa_mask);
-    action.sa_flags = 0;
+	struct sigaction	action;
 
-    sigaction(SIGUSR1, &action, NULL);
-    sigaction(SIGUSR2, &action, NULL);
-
-    ft_printf("%d\n\n", getpid());
-    while (1)
-        usleep(1000);
-    return 0;
+	action.sa_handler = signal_handler;
+	sigemptyset(&action.sa_mask);
+	action.sa_flags = 0;
+	sigaction(SIGUSR1, &action, NULL);
+	sigaction(SIGUSR2, &action, NULL);
+	ft_printf("%d\n\n", getpid());
+	while (1)
+		usleep(1000);
+	return (0);
 }

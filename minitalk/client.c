@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/12/21 18:49:53 by lfaure            #+#    #+#             */
+/*   Updated: 2024/12/21 18:55:25 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "client.h"
 
 void	send_char(char c, int pid)
 {
-	int i;
-	int bit;
+	int	i;
+	int	bit;
 
 	i = 7;
 	bit = 0;
-	while(i >= 0)
+	while (i >= 0)
 	{
 		bit = (c >> i) & 1;
 		if (bit)
@@ -19,14 +31,13 @@ void	send_char(char c, int pid)
 	}
 }
 
-int main(int ac, char **av)
+int	main(int ac, char **av)
 {
-	int i;
-	int server_pid;
+	int	i;
+	int	server_pid;
 
 	if (ac != 3)
-		return 0;
-
+		return (0);
 	server_pid = ft_atoi(av[1]);
 	ft_printf("\nclient received pid: %d\n", server_pid);
 	i = 0;
@@ -37,5 +48,5 @@ int main(int ac, char **av)
 		i++;
 	}
 	ft_printf("\ndone! sent all chars.\n");
-	return(0);
+	return (0);
 }
