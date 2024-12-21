@@ -6,7 +6,7 @@
 #    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/29 16:03:02 by lfaure            #+#    #+#              #
-#    Updated: 2024/10/07 18:28:39 by lfaure           ###   ########.fr        #
+#    Updated: 2024/12/21 15:26:19 by lfaure           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,21 +39,23 @@ OBJS = $(SRCS:.c=.o)
 
 OBJSB = $(SRCSB:.c=.o)
 
+.SILENT:
+
 all: $(NAME)
 
 $(NAME):
-	gcc $(FLAG) $(OPTION) $(SRCS)
-	ar rc $(NAME) $(OBJS)
+	@gcc $(FLAG) $(OPTION) $(SRCS)
+	@ar rc $(NAME) $(OBJS)
 
 clean:
-	rm -f $(OBJS)
-	rm -f $(OBJSB)
+	@rm -f $(OBJS)
+	@rm -f $(OBJSB)
 
 fclean: clean
-	rm -f $(NAME)
+	@rm -f $(NAME)
 
 re: fclean all
 
 bonus: 
-	gcc $(FLAG) $(OPTION) $(SRCS) $(SRCSB)
-	ar rc $(NAME) $(OBJS) $(OBJSB)
+	@gcc $(FLAG) $(OPTION) $(SRCS) $(SRCSB)
+	@ar rc $(NAME) $(OBJS) $(OBJSB)

@@ -6,7 +6,7 @@
 #    By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/10/15 17:56:15 by lfaure            #+#    #+#              #
-#    Updated: 2024/11/22 16:08:29 by lfaure           ###   ########.fr        #
+#    Updated: 2024/12/21 15:26:42 by lfaure           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,23 +26,25 @@ CC = gcc
 
 CFLAGS = -Wall -Werror -Wextra -I ./include
 
+.SILENT:
+
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	make -C libft
-	cp libft/libft.a ./
-	ar rcs $@ $(OBJS) libft.a
-	rm -f libft.a
+	@make -C libft
+	@cp libft/libft.a ./
+	@ar rcs $@ $(OBJS) libft.a
+	@rm -f libft.a
 
 %.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	make clean -C ./libft
-	rm -rf $(OBJS)
+	@make clean -C ./libft
+	@rm -rf $(OBJS)
 
 fclean: clean
-	make clean -C ./libft
-	rm -rf $(NAME)
+	@make clean -C ./libft
+	@rm -rf $(NAME)
 
 re: fclean all
