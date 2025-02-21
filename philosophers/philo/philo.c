@@ -1,59 +1,56 @@
 # include "philo.h"
 
-void	*print_odd_to_goal(void *ptr)
+void	start_philo(t_state *state)
 {
-	printf("entered print odd\n\n");
-	t_philo	*node = ptr;
-	int goal = node->nbr;
-	int c = 0;
-	while(c < goal)
-	{
-		usleep(25);
-		if (c % 2)
-			printf("%d\n", c);
-		c++;
-	}
-	printf("\n");
-	free(ptr);
-	pthread_exit(0);
-	return((void *)42);
+	
 }
 
-void	*print_even_to_goal(void *ptr)
+static void	loop_init(t_philo *first, unsigned int nbr_of_processes, t_state *state)
 {
-	printf("entered print even\n\n");
-	t_philo	*node = ptr;
-	int goal = node->nbr;
-	int c = 0;
-	while(c < goal)
+	t_philo			*next;
+	t_philo			*prev;
+	unsigned int	nbr_philo;
+
+	nbr_philo = 2;
+	next = NULL;
+	prev = first;
+	while (nbr_philo < nbr_of_processes)
 	{
-		usleep(25);
-		if (!(c % 2))
-			printf("%d\n", c);
-		c++;
+		next = malloc(sizeof(t_philo));
+		next->id = nbr_philo;
+		next->fork = 1;
+		nbr_philo++;
+		prev->left = next;
+		next->left = NULL;
+		next->state = state;
+		nbr_philo++;
 	}
-	printf("\n");
-	free(ptr);
-	pthread_exit(0);
-	return((void *)42);
+	if (next)
+		next->left = first;
+}
+
+void	init_philo(unsigned int nbr_of_processes, t_state *state)
+{
+	if (!nbr_of_processes)
+		return ;
+	t_philo			*first;
+
+	first = malloc(sizeof(t_philo));
+	first->id = 1;
+	first->fork = 1;
+	first->left = NULL;
+	first->state = state;
+	state->first = first;
+	loop_init(first, nbr_of_processes, state);
 }
 
 int	main(void)
 {
-	pthread_t	id_odd;
-	pthread_t	id_even;
+	t_state	*state;
 
-	t_philo *node_odd = malloc(sizeof(t_philo));
-	node_odd->nbr = 50;
-	t_philo *node_even = malloc(sizeof(t_philo));
-	node_even->nbr = 50;
-
-	pthread_create(&id_even, NULL, *print_even_to_goal, node_even);
-	usleep(25);
-	pthread_create(&id_odd, NULL, *print_odd_to_goal, node_odd);
-	
-	pthread_join(id_even, NULL);
-	pthread_join(id_odd, NULL);
-
+	state = malloc(sizeof(t_state));
+	state->is_over = 0;
+	state->first = NULL;
+	init_philo(20, state);
 	return(0);
 }
