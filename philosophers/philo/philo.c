@@ -17,6 +17,10 @@ int	main(int ac, char **av)
 	init_philo(state);
 
 	start_philo(state);
+	while(!state->is_over)
+	{
+		usleep(100);
+	}
 	wait_philo(state);
 
 	free_philo(state);

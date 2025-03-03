@@ -4,13 +4,15 @@
 # include <pthread.h>
 # include <stdlib.h>
 # include <stdio.h>
-#include <unistd.h>
+# include <unistd.h>
+# include <sys/time.h>
 
 typedef	struct s_philo
 {
 	unsigned int	id;
-	unsigned int	fork;
+	pthread_mutex_t	fork;
 	unsigned int	nbr_of_meal;
+	unsigned int	last_meal;
 	pthread_t		thread_id;
 	struct s_state	*state;
 	struct s_philo	*left;

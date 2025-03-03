@@ -1,8 +1,39 @@
 #include "philo.h"
 
+int	eat(t_philo *philo)
+{
+	pthread_mutex_lock(&philo->left->fork);
+	printf("timestamp_in_ms %u has taken a fork\n", philo->id);
+	pthread_mutex_lock(&philo->fork);
+	printf("timestamp_in_ms %u has taken a fork\n", philo->id);
+	printf("timestamp_in_ms %u is eating\n", philo->id);
+	usleep(philo->state->tt_eat);
+	pthread_mutex_unlock(&philo->left->fork);
+	pthread_mutex_unlock(&philo->fork);
+	return (0);
+}
+
+int	philo_logic(t_philo *philo)
+{
+	//philo -> last_meal = gettimeofday();
+	if (!(philo->state->nbr_eat < 0) && (unsigned int)philo->state->nbr_eat == philo->nbr_of_meal)
+		return(0);
+	while(!(philo->state->is_over))
+	{
+		eat(philo);
+		printf("timestamp_in_ms %u is sleeping\n", philo->id);
+		usleep(philo->state->tt_sleep);
+		printf("timestamp_in_ms %u is thinking\n", philo->id);
+	}
+	return(0);
+}
+
 void	*start_routine(t_philo *philo)
 {
-	printf("philo nbr: %u, thread id: %lu.\n", philo->id, philo->thread_id);
+	//printf("philo nbr: %u, thread id: %lu.\n", philo->id, philo->thread_id);
+	//pthread_mutex_init(&philo->fork, NULL);
+	philo_logic(philo);
+	pthread_mutex_destroy(&philo->fork);
 	return(NULL);
 }
 
@@ -16,7 +47,7 @@ void	start_philo(t_state *state)
 		printf("starting philo nbr: %u\n", current->id);
 
 		pthread_create(&(current->thread_id), NULL, (void *)start_routine, current);
-		usleep(10);
+		usleep(1000);
 		if (current->id < current->left->id)
 			current = current->left;
 		else

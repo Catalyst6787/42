@@ -30,7 +30,7 @@ void	init_philo(t_state *state)
 
 	current = malloc(sizeof(t_philo));
 	current->id = 1;
-	current->fork = 1;
+	pthread_mutex_init(&current->fork, NULL);
 	current->nbr_of_meal = 0;
 	current->thread_id = 0;
 	current->state = state;
@@ -40,7 +40,7 @@ void	init_philo(t_state *state)
 	{
 		next = malloc(sizeof(t_philo));
 		next->id = current->id + 1;
-		next->fork = 1;
+		pthread_mutex_init(&next->fork, NULL);
 		next->nbr_of_meal = 0;
 		next->thread_id = 0;
 		next->state = state;
