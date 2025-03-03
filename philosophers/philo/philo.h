@@ -11,6 +11,7 @@ typedef	struct s_philo
 	unsigned int	id;
 	unsigned int	fork;
 	unsigned int	nbr_of_meal;
+	pthread_t		thread_id;
 	struct s_state	*state;
 	struct s_philo	*left;
 }	t_philo;

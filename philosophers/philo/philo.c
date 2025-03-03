@@ -1,9 +1,48 @@
 # include "philo.h"
 
-// void	start_philo(t_state *state)
-// {
+void	*start_routine(t_philo *philo)
+{
+	printf("philo nbr: %u, thread id: %lu.\n", philo->id, philo->thread_id);
+	return(NULL);
+}
 
-// }
+void	start_philo(t_state *state)
+{
+	t_philo	*current;
+
+	current = state->first;
+	while(current)
+	{
+		printf("starting philo nbr: %u\n", current->id);
+
+		pthread_create(&(current->thread_id), NULL, (void *)start_routine, current);
+		usleep(10);
+		if (current->id < current->left->id)
+			current = current->left;
+		else
+			current = NULL;
+	}
+}
+
+
+
+void	wait_philo(t_state *state)
+{
+	t_philo	*current;
+
+	current = state->first;
+	while(current)
+	{
+		printf("waiting for philo nbr: %u\n", current->id);
+
+		pthread_join(current->thread_id, NULL);
+
+		if (current->id < current->left->id)
+			current = current->left;
+		else
+			current = NULL;
+	}
+}
 
 
 void	init_philo(t_state *state)
@@ -15,6 +54,7 @@ void	init_philo(t_state *state)
 	current->id = 1;
 	current->fork = 1;
 	current->nbr_of_meal = 0;
+	current->thread_id = 0;
 	current->state = state;
 	current->left = NULL;
 	state->first = current;
@@ -24,6 +64,7 @@ void	init_philo(t_state *state)
 		next->id = current->id + 1;
 		next->fork = 1;
 		next->nbr_of_meal = 0;
+		next->thread_id = 0;
 		next->state = state;
 		next->left = NULL;
 		current->left = next;
@@ -116,7 +157,10 @@ int	main(int ac, char **av)
 	debug_print_args(state);
 
 	init_philo(state);
-	debug_print_all_philo(state);
+	//debug_print_all_philo(state);
+
+	start_philo(state);
+	wait_philo(state);
 
 	free_philo(state);
 	free(state);
