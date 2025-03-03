@@ -1,0 +1,54 @@
+#include "philo.h"
+
+void	init_args(int ac, char **av, t_state *state)
+{
+	state->is_over = 0;
+	state->nbr_philo = (unsigned int)atoi(av[1]);
+	state->tt_die = (unsigned int)atoi(av[2]);
+	state->tt_eat = (unsigned int)atoi(av[3]);
+	state->tt_sleep = (unsigned int)atoi(av[4]);
+	if (ac == 6)
+		state->nbr_eat = (unsigned int)atoi(av[5]);
+	else
+		state->nbr_eat = -1;
+	state->first = NULL;
+}
+
+int	check_args(int ac, char **av)
+{
+	if ((atoi(av[1]) < 0) || (atoi(av[2]) < 0) || (atoi(av[3]) < 0) || (atoi(av[4]) < 0))
+		return(1);
+	if (ac == 6 && atoi(av[5]) < 0)
+		return(1);
+	return(0);
+}
+
+void	init_philo(t_state *state)
+{
+	t_philo	*current;
+	t_philo	*next;
+
+	current = malloc(sizeof(t_philo));
+	current->id = 1;
+	current->fork = 1;
+	current->nbr_of_meal = 0;
+	current->thread_id = 0;
+	current->state = state;
+	current->left = NULL;
+	state->first = current;
+	while(current->id < state->nbr_philo)
+	{
+		next = malloc(sizeof(t_philo));
+		next->id = current->id + 1;
+		next->fork = 1;
+		next->nbr_of_meal = 0;
+		next->thread_id = 0;
+		next->state = state;
+		next->left = NULL;
+		current->left = next;
+
+		current = next;
+	}
+	current->left = state->first;
+}
+

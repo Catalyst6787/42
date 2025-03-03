@@ -27,5 +27,23 @@ typedef	struct s_state
 	struct s_philo	*first;
 }	t_state;
 
+// DEBUG
+void	debug_print_args(t_state *state);
+void	debug_print_all_philo(t_state *state);
+
+// INIT
+void	init_args(int ac, char **av, t_state *state);
+int	check_args(int ac, char **av);
+void	init_philo(t_state *state);
+
+// QUIT
+void	wait_philo(t_state *state);
+void	free_philo(t_state *state);
+
+// START
+void	*start_routine(t_philo *philo);
+void	start_philo(t_state *state);
+
+
 
 #endif
