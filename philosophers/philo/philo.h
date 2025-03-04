@@ -41,6 +41,10 @@ int		check_args(int ac, char **av);
 void	init_start_time(t_state *state);
 void	init_philo(t_state *state);
 
+// LOGIC
+int	eat(t_philo *philo);
+int	philo_logic(t_philo *philo);
+
 // QUIT
 void	wait_philo(t_state *state);
 void	free_philo(t_state *state);
@@ -48,6 +52,7 @@ void	free_philo(t_state *state);
 // START
 void	*start_routine(t_philo *philo);
 void	start_philo(t_state *state);
+void	*manager(t_state *state);
 
 // UTILS
 unsigned long	spent_time_ms(t_state *state);

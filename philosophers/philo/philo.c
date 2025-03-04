@@ -2,7 +2,9 @@
 
 int	main(int ac, char **av)
 {
-	t_state	*state;
+	t_state		*state;
+	pthread_t	manager_id;
+
 	if (ac < 5 || ac > 6)
 		return(printf("\nusage: number_of_philosophers time_to_die time_to_eat time_to_sleep%s",
 			" [number_of_times_each_philosopher_must_eat]\n"), 1);
@@ -18,10 +20,13 @@ int	main(int ac, char **av)
 	init_start_time(state);
 
 	start_philo(state);
+	pthread_create(&manager_id, NULL, (void *)manager, state);
 
-
-
+	while(!state->is_over)
+		usleep(1);
 	wait_philo(state);
+	printf("waiting for manager\n");
+	pthread_join(manager_id, NULL);
 
 	free_philo(state);
 

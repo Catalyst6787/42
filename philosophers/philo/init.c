@@ -4,7 +4,7 @@ void	init_args(int ac, char **av, t_state *state)
 {
 	state->is_over = 0;
 	state->nbr_philo = (unsigned int)atoi(av[1]);
-	state->tt_die = (unsigned int)atoi(av[2]) * 1000;
+	state->tt_die = (unsigned int)atoi(av[2]);
 	state->tt_eat = (unsigned int)atoi(av[3]) * 1000;
 	state->tt_sleep = (unsigned int)atoi(av[4]) * 1000;
 	if (ac == 6)

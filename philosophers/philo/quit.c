@@ -7,10 +7,10 @@ void	wait_philo(t_state *state)
 	current = state->first;
 	while(current)
 	{
-		// printf("waiting for philo nbr: %u\n", current->id);
+		printf("waiting for philo nbr: %u\n", current->id);
 		pthread_join(current->thread_id, NULL);
 
-		if (current->id < current->left->id)
+		if (current->left && current->id < current->left->id)
 			current = current->left;
 		else
 			current = NULL;
