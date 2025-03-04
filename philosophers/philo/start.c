@@ -5,18 +5,18 @@ int	eat(t_philo *philo)
 	if (philo->id % 2)
 	{
 		pthread_mutex_lock(&philo->left->fork);
-		printf("timestamp_in_ms %u has taken left fork\n", philo->id);
+		printf("%lums %u has taken left fork\n", spent_time_ms(philo->state), philo->id);
 		pthread_mutex_lock(&philo->fork);
-		printf("timestamp_in_ms %u has taken right fork\n", philo->id);
+		printf("%lums %u has taken right fork\n", spent_time_ms(philo->state), philo->id);
 	}
 	else
 	{
 		pthread_mutex_lock(&philo->fork);
-		printf("timestamp_in_ms %u has taken right fork\n", philo->id);
+		printf("%lums %u has taken right fork\n", spent_time_ms(philo->state), philo->id);
 		pthread_mutex_lock(&philo->left->fork);
-		printf("timestamp_in_ms %u has taken left fork\n", philo->id);
+		printf("%lums %u has taken left fork\n", spent_time_ms(philo->state), philo->id);
 	}
-	printf("timestamp_in_ms %u is eating\n", philo->id);
+	printf("%lums %u is eating\n", spent_time_ms(philo->state), philo->id);
 	usleep(philo->state->tt_eat);
 	pthread_mutex_unlock(&philo->left->fork);
 	pthread_mutex_unlock(&philo->fork);
@@ -30,9 +30,9 @@ int	philo_logic(t_philo *philo)
 	while(!(philo->state->is_over))
 	{
 		eat(philo);
-		printf("timestamp_in_ms %u is sleeping\n", philo->id);
+		printf("%lums %u is sleeping\n", spent_time_ms(philo->state), philo->id);
 		usleep(philo->state->tt_sleep);
-		printf("timestamp_in_ms %u is thinking\n", philo->id);
+		printf("%lums %u is thinking\n", spent_time_ms(philo->state), philo->id);
 	}
 	return(0);
 }
