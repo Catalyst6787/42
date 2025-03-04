@@ -16,7 +16,10 @@ int	main(int ac, char **av)
 
 	init_philo(state);
 	init_start_time(state);
+
 	start_philo(state);
+
+
 
 	wait_philo(state);
 

@@ -27,13 +27,16 @@ int	philo_logic(t_philo *philo)
 {
 	if (!(philo->state->nbr_eat < 0) && (unsigned int)philo->state->nbr_eat == philo->nbr_of_meal)
 		return(0);
-	while(!(philo->state->is_over))
+	while(!(philo->state->is_over) && (philo->state->nbr_eat == -1 || (philo->nbr_of_meal != (unsigned int)philo->state->nbr_eat)))
 	{
 		eat(philo);
+		philo->nbr_of_meal++;
+		philo->last_meal = spent_time_ms(philo->state);
 		printf("%lums %u is sleeping\n", spent_time_ms(philo->state), philo->id);
 		usleep(philo->state->tt_sleep);
 		printf("%lums %u is thinking\n", spent_time_ms(philo->state), philo->id);
 	}
+	// printf("%u ate %u times, leaving\n", philo->id, philo->nbr_of_meal);
 	return(0);
 }
 
