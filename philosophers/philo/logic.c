@@ -30,7 +30,7 @@ int	eat(t_philo *philo)
 		if (take_left_fork(philo))
 			return(1);
 		if (philo->left == philo)
-			return(pthread_mutex_unlock(&philo->left->fork) ,usleep(philo->state->tt_die), 1); // try without sleep
+			return(pthread_mutex_unlock(&philo->left->fork), 1);
 		if (take_right_fork(philo))
 			return(1);
 	}
@@ -97,7 +97,6 @@ void	*manager(t_state *state)
 	current = state->first;
 	while(current && !state->is_over)
 	{
-		//printf("manager examining philo %u. last meal: %u, current ts: %lu, time since last meal: %u, ate %u time(s)\n", current->id, current->last_meal, spent_time_ms(state), ((unsigned int)spent_time_ms(state) - current->last_meal), current->nbr_of_meal);
 		if ((unsigned long)state->tt_die <= (spent_time_ms(state) - (unsigned long)current->last_meal) && (state->nbr_eat == -1 || current->nbr_of_meal < (unsigned int)state->nbr_eat))
 			return (state->is_over = 1, printf("\033[1;31m%lums %u died. last meal was %u\n\033[0m", spent_time_ms(state), current->id, current->last_meal), NULL);
 		current = current->left;
@@ -111,4 +110,3 @@ void	*manager(t_state *state)
 	return (NULL);
 }
 
-// philosphers should not quit after eating enough times

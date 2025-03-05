@@ -14,7 +14,6 @@ int	main(int ac, char **av)
 	init_args(ac, av, state);
 	if (state->nbr_philo == 0)
 		return 0;
-	// debug_print_args(state);
 
 	init_philo(state);
 	init_start_time(state);
@@ -25,7 +24,6 @@ int	main(int ac, char **av)
 	while(!state->is_over)
 		usleep(1);
 	wait_philo(state);
-	// printf("waiting for manager\n");
 	pthread_join(manager_id, NULL);
 
 	free_philo(state);

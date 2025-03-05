@@ -1,7 +1,5 @@
 #include "philo.h"
 
-
-
 void	*start_routine(t_philo *philo)
 {
 	philo_logic(philo);
