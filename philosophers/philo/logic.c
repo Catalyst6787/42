@@ -5,9 +5,11 @@ static int	take_left_fork(t_philo *philo)
 	if (is_over(philo->state))
 		return(1);
 	pthread_mutex_lock(&philo->left->fork);
-	if (is_over(philo->state))
-		return(pthread_mutex_unlock(&philo->left->fork), 1);
+	pthread_mutex_lock(&philo->state->is_over_mutex);
+	if (philo->state->is_over)
+		return(pthread_mutex_unlock(&philo->left->fork), pthread_mutex_unlock(&philo->state->is_over_mutex), 1);
 	printf("%lums %u has taken left fork\n", spent_time_ms(philo->state), philo->id);
+	pthread_mutex_unlock(&philo->state->is_over_mutex);
 	return(0);
 }
 
@@ -16,9 +18,11 @@ static int	take_right_fork(t_philo *philo)
 	if (is_over(philo->state))
 		return(1);
 	pthread_mutex_lock(&philo->fork);
-	if (is_over(philo->state))
-		return(pthread_mutex_unlock(&philo->fork), 1);
+	pthread_mutex_lock(&philo->state->is_over_mutex);
+	if (philo->state->is_over)
+		return(pthread_mutex_unlock(&philo->fork), pthread_mutex_unlock(&philo->state->is_over_mutex), 1);
 	printf("%lums %u has taken right fork\n", spent_time_ms(philo->state), philo->id);
+	pthread_mutex_unlock(&philo->state->is_over_mutex);
 	return(0);
 }
 
