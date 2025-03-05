@@ -46,8 +46,6 @@ int	eat(t_philo *philo)
 	printf("%lums %u is eating\n", spent_time_ms(philo->state), philo->id);
 	philo->nbr_of_meal++;
 	philo->last_meal = spent_time_ms(philo->state);
-	if (philo->state->nbr_eat != -1 && philo->nbr_of_meal == (unsigned int)philo->state->nbr_eat)
-		philo->state->is_over = 1;
 	usleep(philo->state->tt_eat);
 	pthread_mutex_unlock(&philo->left->fork);
 	pthread_mutex_unlock(&philo->fork);
@@ -58,19 +56,37 @@ int	philo_logic(t_philo *philo)
 {
 	if (!(philo->state->nbr_eat < 0) && (unsigned int)philo->state->nbr_eat == philo->nbr_of_meal)
 		return(0);
-	while(!(philo->state->is_over) && (philo->state->nbr_eat == -1 || (philo->nbr_of_meal != (unsigned int)philo->state->nbr_eat)))
+	while(!(philo->state->is_over))
 	{
 		if (eat(philo))
 			return(0);
-		if (!(philo->state->is_over) && (philo->state->nbr_eat == -1 || (philo->nbr_of_meal != (unsigned int)philo->state->nbr_eat)))
+		if (!(philo->state->is_over))
 		{
 			printf("%lums %u is sleeping\n", spent_time_ms(philo->state), philo->id);
 			usleep(philo->state->tt_sleep);
 		}
-		if (!(philo->state->is_over) && (philo->state->nbr_eat == -1 || (philo->nbr_of_meal != (unsigned int)philo->state->nbr_eat)))
+		if (!(philo->state->is_over))
 			printf("%lums %u is thinking\n", spent_time_ms(philo->state), philo->id);
 	}
-	// printf("%u ate %u times, leaving\n", philo->id, philo->nbr_of_meal);
+	return(0);
+}
+
+static int	all_ate_enough(t_philo *first)
+{
+	t_philo *current;
+
+	current = first;
+	if ((int)first->nbr_of_meal >= first->state->nbr_eat)
+	{
+		current = current->left;
+		while(current != first)
+		{
+			if ((int)current->nbr_of_meal < current->state->nbr_eat)
+				return(0);
+			current = current->left;
+		}
+		return(1);
+	}
 	return(0);
 }
 
@@ -83,12 +99,14 @@ void	*manager(t_state *state)
 	{
 		//printf("manager examining philo %u. last meal: %u, current ts: %lu, time since last meal: %u, ate %u time(s)\n", current->id, current->last_meal, spent_time_ms(state), ((unsigned int)spent_time_ms(state) - current->last_meal), current->nbr_of_meal);
 		if ((unsigned long)state->tt_die <= (spent_time_ms(state) - (unsigned long)current->last_meal) && (state->nbr_eat == -1 || current->nbr_of_meal < (unsigned int)state->nbr_eat))
-		{
-			state->is_over = 1;
-			printf("\033[1;31m%lums %u died. last meal was %u\n\033[0m", spent_time_ms(state), current->id, current->last_meal);
-		}
+			return (state->is_over = 1, printf("\033[1;31m%lums %u died. last meal was %u\n\033[0m", spent_time_ms(state), current->id, current->last_meal), NULL);
 		current = current->left;
-		//usleep(1);
+		if (current == state->first)
+		{
+			if (state->nbr_eat != -1 && all_ate_enough(state->first))
+				return (state->is_over = 1, NULL);
+			usleep(1000);
+		}
 	}
 	return (NULL);
 }

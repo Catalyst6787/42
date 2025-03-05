@@ -9,7 +9,7 @@
 			"type": "cppdbg",
 			"request": "launch",
 			"program": "${workspaceFolder}/philosophers",
-			"args": ["1", "100", "100", "100"],
+			"args": ["2", "410", "200", "200", "1"],
 			"stopAtEntry": false,
 			"cwd": "${fileDirname}",
 			"environment": [],
