@@ -25,7 +25,7 @@ int	main(int ac, char **av)
 	while(!state->is_over)
 		usleep(1);
 	wait_philo(state);
-	printf("waiting for manager\n");
+	// printf("waiting for manager\n");
 	pthread_join(manager_id, NULL);
 
 	free_philo(state);
