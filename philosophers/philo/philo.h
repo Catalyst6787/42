@@ -11,7 +11,9 @@ typedef	struct s_philo
 {
 	unsigned int	id;
 	pthread_mutex_t	fork;
+	pthread_mutex_t	nbr_of_meal_mutex;
 	unsigned int	nbr_of_meal;
+	pthread_mutex_t	last_meal_mutex;
 	unsigned int	last_meal;
 	pthread_t		thread_id;
 	struct s_state	*state;
@@ -20,6 +22,8 @@ typedef	struct s_philo
 
 typedef	struct s_state
 {
+	pthread_mutex_t	log;
+	pthread_mutex_t	is_over_mutex;
 	unsigned int	is_over;
 	unsigned int	nbr_philo;
 	unsigned int	tt_die;
@@ -56,7 +60,11 @@ void	*manager(t_state *state);
 
 // UTILS
 unsigned long	spent_time_ms(t_state *state);
-
-
+void	set_mutex_isover(t_state *state, unsigned int isover);
+unsigned int	is_over(t_state *state);
+unsigned int	get_mutex_last_meal(t_philo *philo);
+void	set_mutex_last_meal(t_philo *philo, unsigned int last_meal);
+unsigned int	get_mutex_nbr_meal(t_philo *philo);
+void	set_mutex_nbr_meal(t_philo *philo, unsigned int nbr_meal);
 
 #endif

@@ -21,8 +21,8 @@ int	main(int ac, char **av)
 	start_philo(state);
 	pthread_create(&manager_id, NULL, (void *)manager, state);
 
-	while(!state->is_over)
-		usleep(1);
+	// while(!is_over(state))
+	// 	usleep(1);
 	wait_philo(state);
 	pthread_join(manager_id, NULL);
 

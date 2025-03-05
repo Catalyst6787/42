@@ -2,6 +2,8 @@
 
 void	init_args(int ac, char **av, t_state *state)
 {
+	pthread_mutex_init(&state->is_over_mutex, NULL);
+	pthread_mutex_init(&state->log, NULL);
 	state->is_over = 0;
 	state->nbr_philo = (unsigned int)atoi(av[1]);
 	state->tt_die = (unsigned int)atoi(av[2]);
@@ -42,6 +44,8 @@ void	init_philo(t_state *state)
 	current = malloc(sizeof(t_philo));
 	current->id = 1;
 	pthread_mutex_init(&current->fork, NULL);
+	pthread_mutex_init(&current->nbr_of_meal_mutex, NULL);
+	pthread_mutex_init(&current->last_meal_mutex, NULL);
 	current->nbr_of_meal = 0;
 	current->last_meal = 0;
 	current->thread_id = 0;
@@ -53,6 +57,8 @@ void	init_philo(t_state *state)
 		next = malloc(sizeof(t_philo));
 		next->id = current->id + 1;
 		pthread_mutex_init(&next->fork, NULL);
+		pthread_mutex_init(&current->nbr_of_meal_mutex, NULL);
+		pthread_mutex_init(&current->last_meal_mutex, NULL);
 		next->nbr_of_meal = 0;
 		next->last_meal = 0;
 		next->thread_id = 0;
