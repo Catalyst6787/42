@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:11:23 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/06 16:41:10 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/06 16:55:37 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char **av)
 	if (state->nbr_philo == 0)
 		return (free(state), 0);
 	sem_unlink("forks_sem");
-	state->forks_sem = sem_open("forks_sem", O_CREAT, O_EXCL, state->nbr_philo);
+	state->forks_sem = sem_open("forks_sem", O_CREAT, state->forks_sem);
 	if (state->forks_sem == SEM_FAILED)
 		return (printf("sem_open failed\n"), free(state), 1);
 	init_philo(state);
