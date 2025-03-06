@@ -3,9 +3,6 @@
 void	*start_routine(t_philo *philo)
 {
 	philo_logic(philo);
-	pthread_mutex_destroy(&philo->fork);
-	pthread_mutex_destroy(&philo->last_meal_mutex);
-	pthread_mutex_destroy(&philo->nbr_of_meal_mutex);
 	return(NULL);
 }
 

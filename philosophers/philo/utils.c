@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:44:10 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/06 10:45:43 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/06 12:01:20 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,6 @@ void	log_action_mutex(t_philo *philo, t_log_action log)
 	else if (log == think_log)
 		printf("%lums %u is thinking\n", spent_time_ms(philo->state), philo->id);
 	else if (log == die_log)
-		printf("\033[1;31m%lums %u died. last meal was %u\n\033[0m", spent_time_ms(philo->state), philo->id, philo->last_meal);
+		printf("\033[1;31m%lums %u died. last meal was %u\033[0m\n", spent_time_ms(philo->state), philo->id, philo->last_meal);
 	pthread_mutex_unlock(&philo->state->log);
 }

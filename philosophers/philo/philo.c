@@ -13,7 +13,7 @@ int	main(int ac, char **av)
 	state = malloc(sizeof(t_state));
 	init_args(ac, av, state);
 	if (state->nbr_philo == 0)
-		return 0;
+		return (free(state), 0);
 
 	init_philo(state);
 	init_start_time(state);
@@ -27,7 +27,8 @@ int	main(int ac, char **av)
 	pthread_join(manager_id, NULL);
 
 	free_philo(state);
-
+	pthread_mutex_destroy(&state->log);
+	pthread_mutex_destroy(&state->is_over_mutex);
 	free(state);
 	return(0);
 }

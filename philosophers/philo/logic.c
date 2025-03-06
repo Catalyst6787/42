@@ -7,7 +7,7 @@ static int	take_left_fork(t_philo *philo)
 	pthread_mutex_lock(&philo->left->fork);
 	pthread_mutex_lock(&philo->state->is_over_mutex);
 	if (philo->state->is_over)
-		return(pthread_mutex_unlock(&philo->left->fork), pthread_mutex_unlock(&philo->state->is_over_mutex), 1);
+		return (pthread_mutex_unlock(&philo->left->fork), pthread_mutex_unlock(&philo->state->is_over_mutex), 1);
 	log_action_mutex(philo, take_left_log);
 	pthread_mutex_unlock(&philo->state->is_over_mutex);
 	return(0);
@@ -108,7 +108,7 @@ void	*manager(t_state *state)
 		{
 			if (state->nbr_eat != -1 && all_ate_enough(state->first))
 				return (set_mutex_isover(state, 1), NULL);
-			//usleep(1000);
+			usleep(1000);
 		}
 	}
 	return (NULL);

@@ -57,15 +57,14 @@ void	init_philo(t_state *state)
 		next = malloc(sizeof(t_philo));
 		next->id = current->id + 1;
 		pthread_mutex_init(&next->fork, NULL);
-		pthread_mutex_init(&current->nbr_of_meal_mutex, NULL);
-		pthread_mutex_init(&current->last_meal_mutex, NULL);
+		pthread_mutex_init(&next->nbr_of_meal_mutex, NULL);
+		pthread_mutex_init(&next->last_meal_mutex, NULL);
 		next->nbr_of_meal = 0;
 		next->last_meal = 0;
 		next->thread_id = 0;
 		next->state = state;
 		next->left = NULL;
 		current->left = next;
-
 		current = next;
 	}
 	current->left = state->first;
