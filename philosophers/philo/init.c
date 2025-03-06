@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 14:44:52 by lfaure            #+#    #+#             */
+/*   Updated: 2025/03/06 14:56:21 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 void	init_args(int ac, char **av, t_state *state)
@@ -18,16 +30,17 @@ void	init_args(int ac, char **av, t_state *state)
 
 int	check_args(int ac, char **av)
 {
-	if ((ft_atou(av[1]) < 0) || (ft_atou(av[2]) < 0) || (ft_atou(av[3]) < 0) || (ft_atou(av[4]) < 0))
-		return(1);
+	if ((ft_atou(av[1]) < 0) || (ft_atou(av[2]) < 0)
+		|| (ft_atou(av[3]) < 0) || (ft_atou(av[4]) < 0))
+		return (1);
 	if (ac == 6 && ft_atou(av[5]) < 0)
-		return(1);
-	return(0);
+		return (1);
+	return (0);
 }
 
 void	init_start_time(t_state *state)
 {
-	struct	timeval tv;
+	struct timeval	tv;
 
 	tv.tv_sec = 0;
 	tv.tv_usec = 0;
@@ -36,34 +49,33 @@ void	init_start_time(t_state *state)
 	state->start_time_us = tv.tv_usec;
 }
 
+static	t_philo	*create_philo(t_state *state, unsigned int id)
+{
+	t_philo	*philo;
+
+	philo = malloc(sizeof(t_philo));
+	philo->id = id;
+	pthread_mutex_init(&philo->fork, NULL);
+	pthread_mutex_init(&philo->nbr_of_meal_mutex, NULL);
+	pthread_mutex_init(&philo->last_meal_mutex, NULL);
+	philo->nbr_of_meal = 0;
+	philo->last_meal = 0;
+	philo->thread_id = 0;
+	philo->state = state;
+	philo->left = NULL;
+	return (philo);
+}
+
 void	init_philo(t_state *state)
 {
 	t_philo	*current;
 	t_philo	*next;
 
-	current = malloc(sizeof(t_philo));
-	current->id = 1;
-	pthread_mutex_init(&current->fork, NULL);
-	pthread_mutex_init(&current->nbr_of_meal_mutex, NULL);
-	pthread_mutex_init(&current->last_meal_mutex, NULL);
-	current->nbr_of_meal = 0;
-	current->last_meal = 0;
-	current->thread_id = 0;
-	current->state = state;
-	current->left = NULL;
+	current = create_philo(state, 1);
 	state->first = current;
-	while(current->id < state->nbr_philo)
+	while (current->id < state->nbr_philo)
 	{
-		next = malloc(sizeof(t_philo));
-		next->id = current->id + 1;
-		pthread_mutex_init(&next->fork, NULL);
-		pthread_mutex_init(&next->nbr_of_meal_mutex, NULL);
-		pthread_mutex_init(&next->last_meal_mutex, NULL);
-		next->nbr_of_meal = 0;
-		next->last_meal = 0;
-		next->thread_id = 0;
-		next->state = state;
-		next->left = NULL;
+		next = create_philo(state, current->id + 1);
 		current->left = next;
 		current = next;
 	}

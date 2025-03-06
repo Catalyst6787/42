@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   logic.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 14:57:18 by lfaure            #+#    #+#             */
+/*   Updated: 2025/03/06 14:57:52 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 static int	take_left_fork(t_philo *philo)
 {
 	if (is_over(philo->state))
-		return(1);
+		return (1);
 	pthread_mutex_lock(&philo->left->fork);
 	pthread_mutex_lock(&philo->state->is_over_mutex);
 	if (philo->state->is_over)
@@ -16,14 +28,14 @@ static int	take_left_fork(t_philo *philo)
 static int	take_right_fork(t_philo *philo)
 {
 	if (is_over(philo->state))
-		return(1);
+		return (1);
 	pthread_mutex_lock(&philo->fork);
 	pthread_mutex_lock(&philo->state->is_over_mutex);
 	if (philo->state->is_over)
-		return(pthread_mutex_unlock(&philo->fork), pthread_mutex_unlock(&philo->state->is_over_mutex), 1);
+		return (pthread_mutex_unlock(&philo->fork), pthread_mutex_unlock(&philo->state->is_over_mutex), 1);
 	log_action_mutex(philo, take_right_log);
 	pthread_mutex_unlock(&philo->state->is_over_mutex);
-	return(0);
+	return (0);
 }
 
 int	eat(t_philo *philo)
@@ -32,21 +44,21 @@ int	eat(t_philo *philo)
 	{
 		usleep(200);
 		if (take_left_fork(philo))
-			return(1);
+			return (1);
 		if (philo->left == philo)
-			return(pthread_mutex_unlock(&philo->left->fork), 1);
+			return (pthread_mutex_unlock(&philo->left->fork), 1);
 		if (take_right_fork(philo))
-			return(pthread_mutex_unlock(&philo->left->fork), 1);
+			return (pthread_mutex_unlock(&philo->left->fork), 1);
 	}
 	else
 	{
 		if (take_right_fork(philo))
-			return(1);
+			return (1);
 		if (take_left_fork(philo))
-			return(pthread_mutex_unlock(&philo->fork), 1);
+			return (pthread_mutex_unlock(&philo->fork), 1);
 	}
 	if (is_over(philo->state))
-		return(1);
+		return (1);
 	log_action_mutex(philo, eat_log);
 	set_mutex_nbr_meal(philo, get_mutex_nbr_meal(philo) + 1);
 	set_mutex_last_meal(philo, spent_time_ms(philo->state));
@@ -59,11 +71,11 @@ int	eat(t_philo *philo)
 int	philo_logic(t_philo *philo)
 {
 	if (!(philo->state->nbr_eat < 0) && (unsigned int)philo->state->nbr_eat == get_mutex_nbr_meal(philo))
-		return(0);
+		return (0);
 	while(!(is_over(philo->state)))
 	{
 		if (eat(philo))
-			return(0);
+			return (0);
 		if (!(is_over(philo->state)))
 		{
 			log_action_mutex(philo, sleep_log);
@@ -86,12 +98,12 @@ static int	all_ate_enough(t_philo *first)
 		while(current != first)
 		{
 			if ((int)get_mutex_nbr_meal(current) < current->state->nbr_eat)
-				return(0);
+				return (0);
 			current = current->left;
 		}
-		return(1);
+		return (1);
 	}
-	return(0);
+	return (0);
 }
 
 void	*manager(t_state *state)
