@@ -74,4 +74,6 @@ unsigned int	get_mutex_nbr_meal(t_philo *philo);
 void	set_mutex_nbr_meal(t_philo *philo, unsigned int nbr_meal);
 void	log_action_mutex(t_philo *philo, t_log_action log);
 
+int	ft_atou(const char *str);
+
 #endif

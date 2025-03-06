@@ -28,7 +28,7 @@ static int	take_right_fork(t_philo *philo)
 
 int	eat(t_philo *philo)
 {
-	if (philo->id % 2)
+	if ((philo->id) % 2)
 	{
 		usleep(200);
 		if (take_left_fork(philo))

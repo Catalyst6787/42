@@ -5,12 +5,12 @@ void	init_args(int ac, char **av, t_state *state)
 	pthread_mutex_init(&state->is_over_mutex, NULL);
 	pthread_mutex_init(&state->log, NULL);
 	state->is_over = 0;
-	state->nbr_philo = (unsigned int)atoi(av[1]);
-	state->tt_die = (unsigned int)atoi(av[2]);
-	state->tt_eat = (unsigned int)atoi(av[3]) * 1000;
-	state->tt_sleep = (unsigned int)atoi(av[4]) * 1000;
+	state->nbr_philo = (unsigned int)ft_atou(av[1]);
+	state->tt_die = (unsigned int)ft_atou(av[2]);
+	state->tt_eat = (unsigned int)ft_atou(av[3]) * 1000;
+	state->tt_sleep = (unsigned int)ft_atou(av[4]) * 1000;
 	if (ac == 6)
-		state->nbr_eat = (unsigned int)atoi(av[5]);
+		state->nbr_eat = (unsigned int)ft_atou(av[5]);
 	else
 		state->nbr_eat = -1;
 	state->first = NULL;
@@ -18,9 +18,9 @@ void	init_args(int ac, char **av, t_state *state)
 
 int	check_args(int ac, char **av)
 {
-	if ((atoi(av[1]) < 0) || (atoi(av[2]) < 0) || (atoi(av[3]) < 0) || (atoi(av[4]) < 0))
+	if ((ft_atou(av[1]) < 0) || (ft_atou(av[2]) < 0) || (ft_atou(av[3]) < 0) || (ft_atou(av[4]) < 0))
 		return(1);
-	if (ac == 6 && atoi(av[5]) < 0)
+	if (ac == 6 && ft_atou(av[5]) < 0)
 		return(1);
 	return(0);
 }
