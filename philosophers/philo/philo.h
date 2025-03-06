@@ -35,9 +35,15 @@ typedef	struct s_state
 	struct s_philo	*first;
 }	t_state;
 
-// DEBUG
-void	debug_print_args(t_state *state);
-void	debug_print_all_philo(t_state *state);
+typedef enum s_log_action
+{
+	take_left_log,
+	take_right_log,
+	eat_log,
+	sleep_log,
+	think_log,
+	die_log
+}	t_log_action;
 
 // INIT
 void	init_args(int ac, char **av, t_state *state);
@@ -66,5 +72,6 @@ unsigned int	get_mutex_last_meal(t_philo *philo);
 void	set_mutex_last_meal(t_philo *philo, unsigned int last_meal);
 unsigned int	get_mutex_nbr_meal(t_philo *philo);
 void	set_mutex_nbr_meal(t_philo *philo, unsigned int nbr_meal);
+void	log_action_mutex(t_philo *philo, t_log_action log);
 
 #endif

@@ -8,7 +8,7 @@ static int	take_left_fork(t_philo *philo)
 	pthread_mutex_lock(&philo->state->is_over_mutex);
 	if (philo->state->is_over)
 		return(pthread_mutex_unlock(&philo->left->fork), pthread_mutex_unlock(&philo->state->is_over_mutex), 1);
-	printf("%lums %u has taken left fork\n", spent_time_ms(philo->state), philo->id);
+	log_action_mutex(philo, take_left_log);
 	pthread_mutex_unlock(&philo->state->is_over_mutex);
 	return(0);
 }
@@ -21,7 +21,7 @@ static int	take_right_fork(t_philo *philo)
 	pthread_mutex_lock(&philo->state->is_over_mutex);
 	if (philo->state->is_over)
 		return(pthread_mutex_unlock(&philo->fork), pthread_mutex_unlock(&philo->state->is_over_mutex), 1);
-	printf("%lums %u has taken right fork\n", spent_time_ms(philo->state), philo->id);
+	log_action_mutex(philo, take_right_log);
 	pthread_mutex_unlock(&philo->state->is_over_mutex);
 	return(0);
 }
@@ -30,7 +30,7 @@ int	eat(t_philo *philo)
 {
 	if (philo->id % 2)
 	{
-		usleep(1000);
+		usleep(200);
 		if (take_left_fork(philo))
 			return(1);
 		if (philo->left == philo)
@@ -47,7 +47,7 @@ int	eat(t_philo *philo)
 	}
 	if (is_over(philo->state))
 		return(1);
-	printf("%lums %u is eating\n", spent_time_ms(philo->state), philo->id);
+	log_action_mutex(philo, eat_log);
 	set_mutex_nbr_meal(philo, get_mutex_nbr_meal(philo) + 1);
 	set_mutex_last_meal(philo, spent_time_ms(philo->state));
 	usleep(philo->state->tt_eat);
@@ -66,11 +66,11 @@ int	philo_logic(t_philo *philo)
 			return(0);
 		if (!(is_over(philo->state)))
 		{
-			printf("%lums %u is sleeping\n", spent_time_ms(philo->state), philo->id);
+			log_action_mutex(philo, sleep_log);
 			usleep(philo->state->tt_sleep);
 		}
 		if (!(is_over(philo->state)))
-			printf("%lums %u is thinking\n", spent_time_ms(philo->state), philo->id);
+			log_action_mutex(philo, think_log);
 	}
 	return(0);
 }
@@ -102,7 +102,7 @@ void	*manager(t_state *state)
 	while(current && !state->is_over)
 	{
 		if ((unsigned long)state->tt_die <= (spent_time_ms(state) - (unsigned long)get_mutex_last_meal(current)) && (state->nbr_eat == -1 || get_mutex_nbr_meal(current) < (unsigned int)state->nbr_eat))
-			return (set_mutex_isover(state, 1), printf("\033[1;31m%lums %u died. last meal was %u\n\033[0m", spent_time_ms(state), current->id, current->last_meal), NULL);
+			return (set_mutex_isover(state, 1), log_action_mutex(current, die_log), NULL);
 		current = current->left;
 		if (current == state->first)
 		{

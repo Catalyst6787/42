@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/03/06 10:44:10 by lfaure            #+#    #+#             */
+/*   Updated: 2025/03/06 10:45:43 by lfaure           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "philo.h"
 
 unsigned long	spent_time_ms(t_state *state)
@@ -63,4 +75,22 @@ void	set_mutex_nbr_meal(t_philo *philo, unsigned int nbr_meal)
 	pthread_mutex_lock(&philo->nbr_of_meal_mutex);
 	philo->nbr_of_meal = nbr_meal;
 	pthread_mutex_unlock(&philo->nbr_of_meal_mutex);
+}
+
+void	log_action_mutex(t_philo *philo, t_log_action log)
+{
+	pthread_mutex_lock(&philo->state->log);
+	if (log == take_left_log)
+		printf("%lums %u has taken left fork\n", spent_time_ms(philo->state), philo->id);
+	else if (log == take_right_log)
+		printf("%lums %u has taken right fork\n", spent_time_ms(philo->state), philo->id);
+	else if (log == eat_log)
+		printf("%lums %u is eating\n", spent_time_ms(philo->state), philo->id);
+	else if (log == sleep_log)
+		printf("%lums %u is sleeping\n", spent_time_ms(philo->state), philo->id);
+	else if (log == think_log)
+		printf("%lums %u is thinking\n", spent_time_ms(philo->state), philo->id);
+	else if (log == die_log)
+		printf("\033[1;31m%lums %u died. last meal was %u\n\033[0m", spent_time_ms(philo->state), philo->id, philo->last_meal);
+	pthread_mutex_unlock(&philo->state->log);
 }
