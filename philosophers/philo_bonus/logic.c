@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:57:18 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/07 16:02:51 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/07 16:43:12 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@ int	eat(t_philo *philo)
 {
 	if (philo->left == philo)
 		return(log_action_mutex(philo, take_fork1_log), 1);
-	if (philo->id % 2)
-		usleep(200);
-	sem_wait(philo->state->forks_sem);
-	log_action_mutex(philo, take_fork1_log);
+	sem_wait(philo->local_forks_sem);
+	if (philo->id % 2 && philo->nbr_of_meal == 0)
+		sem_post(philo->local_forks_sem);
+	if (!is_over(philo->state))
+		log_action_mutex(philo, take_fork1_log);
 	if (is_over(philo->state))
-		return (sem_post(philo->state->forks_sem), 1);
-	sem_wait(philo->state->forks_sem);
-	log_action_mutex(philo, take_fork2_log);
+		return (sem_post(philo->local_forks_sem), 1);
+	sem_wait(philo->local_forks_sem);
+	if (!is_over(philo->state))
+		log_action_mutex(philo, take_fork2_log);
 	if (is_over(philo->state))
-		return (sem_post(philo->state->forks_sem), sem_post(philo->state->forks_sem), 1);
+		return (sem_post(philo->local_forks_sem), sem_post(philo->local_forks_sem), 1);
 	log_action_mutex(philo, eat_log);
 	set_mutex_nbr_meal(philo, get_mutex_nbr_meal(philo) + 1);
 	set_mutex_last_meal(philo, spent_time_ms(philo->state));
 	usleep(philo->state->tt_eat);
-	sem_post(philo->state->forks_sem);
-	sem_post(philo->state->forks_sem);
+	sem_post(philo->local_forks_sem);
+	sem_post(philo->local_forks_sem);
 	return (0);
 }
 

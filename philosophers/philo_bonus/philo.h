@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:17:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/07 16:01:21 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/07 16:09:34 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 typedef struct s_philo
 {
+	sem_t			*local_forks_sem;
 	unsigned int	id;
 	pthread_mutex_t	nbr_of_meal_mutex;
 	unsigned int	nbr_of_meal;
