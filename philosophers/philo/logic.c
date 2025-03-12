@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:57:18 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/06 15:10:01 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:25:20 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ int	eat(t_philo *philo)
 	log_action_mutex(philo, eat_log);
 	set_mutex_nbr_meal(philo, get_mutex_nbr_meal(philo) + 1);
 	set_mutex_last_meal(philo, spent_time_ms(philo->state));
-	usleep(philo->state->tt_eat);
+	mysleep(philo->state->tt_eat);
 	return (pthread_mutex_unlock(&philo->left->fork),
 		pthread_mutex_unlock(&philo->fork), 0);
 }
@@ -81,7 +81,7 @@ int	philo_logic(t_philo *philo)
 		if (!(is_over(philo->state)))
 		{
 			log_action_mutex(philo, sleep_log);
-			usleep(philo->state->tt_sleep);
+			mysleep(philo->state->tt_sleep);
 		}
 		if (!(is_over(philo->state)))
 			log_action_mutex(philo, think_log);

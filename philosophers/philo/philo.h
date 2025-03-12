@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:17:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/06 15:19:03 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:27:33 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void			start_philo(t_state *state);
 void			*manager(t_state *state);
 
 // UTILS
+void			mysleep(unsigned int ms);
 unsigned long	spent_time_ms(t_state *state);
 void			set_mutex_isover(t_state *state, unsigned int isover);
 unsigned int	is_over(t_state *state);

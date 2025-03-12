@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:44:52 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/06 14:56:21 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:24:42 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	init_args(int ac, char **av, t_state *state)
 	state->is_over = 0;
 	state->nbr_philo = (unsigned int)ft_atou(av[1]);
 	state->tt_die = (unsigned int)ft_atou(av[2]);
-	state->tt_eat = (unsigned int)ft_atou(av[3]) * 1000;
-	state->tt_sleep = (unsigned int)ft_atou(av[4]) * 1000;
+	state->tt_eat = (unsigned int)ft_atou(av[3]); //* 1000;
+	state->tt_sleep = (unsigned int)ft_atou(av[4]); // * 1000;
 	if (ac == 6)
 		state->nbr_eat = (unsigned int)ft_atou(av[5]);
 	else
