@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:11:23 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/14 14:47:22 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/14 15:21:10 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,30 @@
 
 void	start_philo(t_philo *philo, unsigned int id)
 {
-	int	i;
-
-	i = 0;
 	philo->id = id;
-	while(i < 10)
+	philo->forks = sem_open("sem_forks", O_CREAT, 0777, philo->nbr_philo);
+	if (philo->forks == SEM_FAILED)
+		return((void)printf("sem failed\n"));
+	while(philo->nbr_of_meal < (unsigned int)philo->nbr_eat)
 	{
-		usleep(20000);
-		printf("philo nbr: %u, ate %i times\n", philo->id, i);
-		i++;
+		if (philo->id % 2 && philo->nbr_of_meal == 0)
+		{
+			sem_wait(philo->forks);
+			sem_post(philo->forks);
+		}
+		printf("%u tries to take fork1\n", philo->id);
+		sem_wait(philo->forks);
+		printf("%u has taken fork1\n", philo->id);
+		printf("%u tries to take fork2\n", philo->id);
+		sem_wait(philo->forks);
+		printf("%u has taken fork2\n", philo->id);
+		mysleep(philo->tt_eat);
+		printf("%u, ate %i times\n", philo->id, philo->nbr_of_meal + 1);
+		printf("%u, sleeps\n", philo->id);
+		mysleep(philo->tt_sleep);
+		sem_post(philo->forks);
+		sem_post(philo->forks);
+		philo->nbr_of_meal++;
 	}
 }
 
@@ -60,6 +75,7 @@ int	main(int ac, char **av)
 		return (free(philo), 0);
 	init_start_time(philo);
 	philo->pids = malloc(sizeof(unsigned int) * philo->nbr_philo);
+	sem_unlink("sem_forks");
 	start_processes(philo);
 	free(philo);
 	return (0);
