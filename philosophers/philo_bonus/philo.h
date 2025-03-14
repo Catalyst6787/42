@@ -6,25 +6,23 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:17:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/07 16:09:34 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/12 18:27:33 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
-# include <semaphore.h>
 # include <pthread.h>
 # include <stdlib.h>
 # include <stdio.h>
 # include <unistd.h>
 # include <sys/time.h>
-# include <fcntl.h>
 
 typedef struct s_philo
 {
-	sem_t			*local_forks_sem;
 	unsigned int	id;
+	pthread_mutex_t	fork;
 	pthread_mutex_t	nbr_of_meal_mutex;
 	unsigned int	nbr_of_meal;
 	pthread_mutex_t	last_meal_mutex;
@@ -36,7 +34,6 @@ typedef struct s_philo
 
 typedef struct s_state
 {
-	sem_t			*forks_sem;
 	pthread_mutex_t	log;
 	pthread_mutex_t	is_over_mutex;
 	unsigned int	is_over;
@@ -52,8 +49,8 @@ typedef struct s_state
 
 typedef enum s_log_action
 {
-	take_fork1_log,
-	take_fork2_log,
+	take_left_log,
+	take_right_log,
 	eat_log,
 	sleep_log,
 	think_log,
@@ -84,6 +81,7 @@ void			start_philo(t_state *state);
 void			*manager(t_state *state);
 
 // UTILS
+void			mysleep(unsigned int ms);
 unsigned long	spent_time_ms(t_state *state);
 void			set_mutex_isover(t_state *state, unsigned int isover);
 unsigned int	is_over(t_state *state);

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:19:56 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/06 15:56:02 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/06 15:19:57 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ void	free_philo(t_state *state)
 		id = tail->id;
 		if (tail->id < state->nbr_philo)
 			next = tail->left;
+		pthread_mutex_destroy(&tail->fork);
 		pthread_mutex_destroy(&tail->last_meal_mutex);
 		pthread_mutex_destroy(&tail->nbr_of_meal_mutex);
 		free(tail);
