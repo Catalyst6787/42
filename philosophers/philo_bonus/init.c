@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:44:52 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/14 15:12:57 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/14 16:07:32 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	init_args(int ac, char **av, t_philo *philo)
 	philo->tt_die = (unsigned int)ft_atou(av[2]);
 	philo->tt_eat = (unsigned int)ft_atou(av[3]);
 	philo->tt_sleep = (unsigned int)ft_atou(av[4]);
+	philo->nbr_of_meal = 0;
 	if (ac == 6)
 		philo->nbr_eat = (unsigned int)ft_atou(av[5]);
 	else
