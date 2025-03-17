@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+’p/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
@@ -41,6 +41,7 @@ void	start_philo(t_philo *philo, unsigned int id)
 		mysleep(philo->tt_sleep);
 		philo->nbr_of_meal++;
 	}
+	sem_post(&philo->is_done);
 	free(philo);
 }
 
@@ -51,6 +52,7 @@ void	start_processes(t_philo *philo)
 
 	id = 0;
 	pid = 0;
+	philo->ppid = get
 	while(id < philo->nbr_philo)
 	{
 		pid = fork();
@@ -67,7 +69,9 @@ void	start_processes(t_philo *philo)
 int	main(int ac, char **av)
 {
 	t_philo		*philo;
+	unsigned int	nbr_done;
 
+	nbr_done = 0;
 	if (ac < 5 || ac > 6)
 		return (printf("%s\n", USAGE), 1);
 	if (check_args(ac, av))
@@ -82,6 +86,8 @@ int	main(int ac, char **av)
 	philo->pids = malloc(sizeof(unsigned int) * philo->nbr_philo);
 	sem_unlink("sem_forks");
 	start_processes(philo);
+	while(nbr_done < philo->nbr_philo)
+		sem_wait(philo->is_done);
 	free(philo->pids);
 	free(philo);
 	return (0);

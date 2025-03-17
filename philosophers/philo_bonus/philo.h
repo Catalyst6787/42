@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:17:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/14 15:04:49 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/17 17:06:29 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,12 @@
 typedef struct s_philo
 {
 	unsigned int	id;
+	unsigned int	*ppid;
 	unsigned int	*pids;
 	sem_t			*forks;
 	sem_t			*logs;
 	sem_t			*nbr_of_meal_sem;
+	sem_t			*is_done;
 	unsigned int	nbr_of_meal;
 	sem_t			*last_meal_mutex;
 	unsigned int	last_meal;
