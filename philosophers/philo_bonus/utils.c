@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:44:10 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 15:52:36 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 17:46:18 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,9 @@ void	log_action(t_philo *philo, t_log_action action, char *custom)
 			spent_time_ms(philo), philo->id, philo->last_meal, spent_time_ms(philo) - philo->last_meal);
 	else if (action == custom_log)
 		printf("%lums, %u, %s\n", spent_time_ms(philo), philo->id, custom);
+
+	int value;
+	sem_getvalue(philo->forks, &value);
+	// printf("Semaphore value: %d\n", value);
 	sem_post(philo->logs);
 }

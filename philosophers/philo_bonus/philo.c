@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:11:23 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 16:19:37 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 17:49:17 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,14 +44,14 @@ void	start_philo(t_philo *philo, unsigned int id)
 
 	first = 1;
 	philo->id = id + 1;
-	philo->logs = sem_open("logs", O_CREAT, 0777, 1);
+	philo->logs = sem_open("logs", 0);
 	philo->is_done = sem_open("sem_is_done", 0);
 	// log_action(philo, custom_log,"WAIT is_done");
 	sem_wait(philo->is_done);
 	free(philo->pids);
 	philo->pids = NULL;
 
-	philo->forks = sem_open("sem_forks", O_CREAT, 0777, philo->nbr_philo);
+	philo->forks = sem_open("sem_forks", 0);
 
 
 	if (philo->forks == SEM_FAILED)
@@ -61,21 +61,13 @@ void	start_philo(t_philo *philo, unsigned int id)
 	{
 		if (philo->id % 2 && first)
 		{
-			// log_action(philo, custom_log, "TAKE AND GIVE");
-			// sem_wait(philo->forks);
-			// sem_post(philo->forks);
 			mysleep(1);
 			first = 0;
 		}
-		// if ((spent_time_ms(philo) - philo->last_meal) < (philo->tt_die / 2))
-		// {
-		// 	log_action(philo, custom_log, "waiting test");
-		// 	mysleep(10);
-		// }
-		log_action(philo, custom_log, "tries to take 1st fork");
+		// log_action(philo, custom_log, "tries to take 1st fork");
 		sem_wait(philo->forks);
 		log_action(philo, take_1_log, NULL);
-		log_action(philo, custom_log, "tries to take 2nd fork");
+		// log_action(philo, custom_log, "tries to take 2nd fork");
 		sem_wait(philo->forks);
 		log_action(philo, take_2_log, NULL);
 		philo->nbr_of_meal++;
@@ -84,12 +76,13 @@ void	start_philo(t_philo *philo, unsigned int id)
 			sem_post(philo->is_done);
 		log_action(philo, eat_log, NULL);
 		mysleep(philo->tt_eat);
-		log_action(philo, custom_log, "POST 2 FORKS");
 		sem_post(philo->forks);
 		sem_post(philo->forks);
+		// log_action(philo, custom_log, "POST 2 FORKS");
 		log_action(philo, sleep_log, NULL);
 		mysleep(philo->tt_sleep);
 		log_action(philo, think_log, NULL);
+		usleep(200);
 	}
 	sem_close(philo->is_done);
 	sem_close(philo->forks);
@@ -143,6 +136,7 @@ int	main(int ac, char **av)
 	sem_unlink("sem_forks");
 	sem_unlink("sem_is_done");
 	sem_unlink("logs");
+	philo->forks = sem_open("sem_forks", O_CREAT, 0777, philo->nbr_philo);
 	philo->is_done = sem_open("sem_is_done", O_CREAT, 0777, 0);
 	philo->logs = sem_open("logs", O_CREAT, 0777, 1);
 	init_start_time(philo);
