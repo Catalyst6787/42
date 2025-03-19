@@ -1,4 +1,4 @@
-’p/* ************************************************************************** */
+/* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   philo.c                                            :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:11:23 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/14 16:17:27 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 11:34:11 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,25 @@
 
 void	start_philo(t_philo *philo, unsigned int id)
 {
+	unsigned int	first;
+
+	first = 1;
+	philo->is_done = sem_open("sem_is_done", 0);
+	sem_wait(philo->is_done);
 	free(philo->pids);
 	philo->pids = NULL;
 	philo->id = id + 1;
 	philo->forks = sem_open("sem_forks", O_CREAT, 0777, philo->nbr_philo);
+
 	if (philo->forks == SEM_FAILED)
 		return((void)printf("sem failed\n"));
 	while(philo->nbr_of_meal < (unsigned int)philo->nbr_eat)
 	{
-		if (philo->id % 2 && philo->nbr_of_meal == 0)
+		if (philo->id % 2 && first)
 		{
 			sem_wait(philo->forks);
 			sem_post(philo->forks);
+			first = 0;
 		}
 		printf("%u tries to take fork1\n", philo->id);
 		sem_wait(philo->forks);
@@ -41,8 +48,10 @@ void	start_philo(t_philo *philo, unsigned int id)
 		mysleep(philo->tt_sleep);
 		philo->nbr_of_meal++;
 	}
-	sem_post(&philo->is_done);
-	free(philo);
+	sem_post(philo->is_done);
+	sem_close(philo->is_done);
+	sem_close(philo->forks);
+	// free(philo);
 }
 
 void	start_processes(t_philo *philo)
@@ -52,7 +61,6 @@ void	start_processes(t_philo *philo)
 
 	id = 0;
 	pid = 0;
-	philo->ppid = get
 	while(id < philo->nbr_philo)
 	{
 		pid = fork();
@@ -60,8 +68,8 @@ void	start_processes(t_philo *philo)
 			return(start_philo(philo, id));
 		else
 		{
-			id++;
 			philo->pids[id] = pid;
+			id++;
 		}
 	}
 }
@@ -85,9 +93,20 @@ int	main(int ac, char **av)
 	init_start_time(philo);
 	philo->pids = malloc(sizeof(unsigned int) * philo->nbr_philo);
 	sem_unlink("sem_forks");
+	sem_unlink("sem_is_done");
+	philo->is_done = sem_open("sem_is_done", O_CREAT, 0777, 0);
 	start_processes(philo);
+	nbr_done = philo->nbr_philo;
+	while(nbr_done) // ensures all philosophers lock their is_done semaphore before the main thread starts to wait for them
+	{
+		sem_post(philo->is_done);
+		nbr_done--;
+	}
 	while(nbr_done < philo->nbr_philo)
+	{
 		sem_wait(philo->is_done);
+		nbr_done++;
+	}
 	free(philo->pids);
 	free(philo);
 	return (0);
