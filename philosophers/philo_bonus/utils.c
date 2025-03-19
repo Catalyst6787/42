@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:44:10 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 14:23:25 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 15:52:36 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,19 +39,19 @@ void	log_action(t_philo *philo, t_log_action action, char *custom)
 	// printf("log action with code %d\n", action);
 	sem_wait(philo->logs);
 	if (action == take_1_log)
-		printf("%lu, %u, has taken 1st fork\n", spent_time_ms(philo), philo->id);
+		printf("%lums, %u has taken 1st fork\n", spent_time_ms(philo), philo->id);
 	else if (action == take_2_log)
-		printf("%lu, %u, has taken 2nd fork\n", spent_time_ms(philo), philo->id);
+		printf("%lums, %u has taken 2nd fork\n", spent_time_ms(philo), philo->id);
 	else if (action == eat_log)
-		printf("%lu, %u, is eating. Ate %u times.\n", spent_time_ms(philo), philo->id, philo->nbr_of_meal);
+		printf("%lums, %u is eating. Ate %u times.\n", spent_time_ms(philo), philo->id, philo->nbr_of_meal);
 	else if (action == sleep_log)
-		printf("%lu, %u, is sleeping\n", spent_time_ms(philo), philo->id);
+		printf("%lums, %u is sleeping\n", spent_time_ms(philo), philo->id);
 	else if (action == think_log)
-		printf("%lu, %u, is thinking\n", spent_time_ms(philo), philo->id);
+		printf("%lums, %u is thinking\n", spent_time_ms(philo), philo->id);
 	else if (action == die_log)
-		printf("\033[1;31m%lums %u died. last meal was %u\033[0m\n",
-			spent_time_ms(philo), philo->id, philo->last_meal);
+		printf("\033[1;31m%lums, %u died. Last meal was %u. Time since last meal %lu \033[0m\n",
+			spent_time_ms(philo), philo->id, philo->last_meal, spent_time_ms(philo) - philo->last_meal);
 	else if (action == custom_log)
-		printf("%lu, %u, %s\n", spent_time_ms(philo), philo->id, custom);
+		printf("%lums, %u, %s\n", spent_time_ms(philo), philo->id, custom);
 	sem_post(philo->logs);
 }

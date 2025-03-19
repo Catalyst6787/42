@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:17:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 14:20:06 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:45:21 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,11 @@ typedef struct s_philo
 	sem_t			*logs;
 	sem_t			*nbr_of_meal_sem;
 	sem_t			*is_done;
+	sem_t			*is_over_sem;
+	unsigned int	is_over;
 	unsigned int	nbr_of_meal;
-	sem_t			*last_meal_mutex;
+	sem_t			*last_meal_sem;
 	unsigned int	last_meal;
-	struct s_state	*state;
-	struct s_philo	*left;
 	unsigned int	nbr_philo;
 	unsigned int	tt_die;
 	unsigned int	tt_eat;

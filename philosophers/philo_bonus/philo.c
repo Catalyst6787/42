@@ -6,15 +6,41 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:11:23 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 14:30:04 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 16:19:37 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+void	*manager(t_philo	*philo)
+{
+	unsigned int	i;
+
+	i = 0;
+	mysleep(philo->tt_die);
+	while (!philo->is_over)
+	{
+		if ((spent_time_ms(philo) - philo->last_meal) >= philo->tt_die)
+		{
+			philo->is_over = 1;
+			log_action(philo, die_log, NULL);
+			while (i < philo->nbr_philo)
+			{
+				sem_post(philo->is_done);
+				i++;
+			}
+			pthread_exit(0);
+		}
+		else
+			mysleep(philo->tt_die - (spent_time_ms(philo) - philo->last_meal));
+	}
+	return(NULL);
+}
+
 void	start_philo(t_philo *philo, unsigned int id)
 {
 	unsigned int	first;
+	pthread_t		manager_tid;
 
 	first = 1;
 	philo->id = id + 1;
@@ -30,14 +56,22 @@ void	start_philo(t_philo *philo, unsigned int id)
 
 	if (philo->forks == SEM_FAILED)
 		return(log_action(philo, custom_log, "sem failed\n"));
-	while(philo->nbr_eat == -1 || philo->nbr_of_meal < (unsigned int)philo->nbr_eat)
+	pthread_create(&manager_tid, NULL, (void *)manager, philo);
+	while(!philo->is_over && (philo->nbr_eat == -1 || philo->nbr_of_meal < (unsigned int)philo->nbr_eat))
 	{
 		if (philo->id % 2 && first)
 		{
-			sem_wait(philo->forks);
-			sem_post(philo->forks);
+			// log_action(philo, custom_log, "TAKE AND GIVE");
+			// sem_wait(philo->forks);
+			// sem_post(philo->forks);
+			mysleep(1);
 			first = 0;
 		}
+		// if ((spent_time_ms(philo) - philo->last_meal) < (philo->tt_die / 2))
+		// {
+		// 	log_action(philo, custom_log, "waiting test");
+		// 	mysleep(10);
+		// }
 		log_action(philo, custom_log, "tries to take 1st fork");
 		sem_wait(philo->forks);
 		log_action(philo, take_1_log, NULL);
@@ -45,10 +79,12 @@ void	start_philo(t_philo *philo, unsigned int id)
 		sem_wait(philo->forks);
 		log_action(philo, take_2_log, NULL);
 		philo->nbr_of_meal++;
+		philo->last_meal = spent_time_ms(philo);
 		if (philo->nbr_eat != -1 && philo->nbr_of_meal >= (unsigned int)philo->nbr_eat)
 			sem_post(philo->is_done);
 		log_action(philo, eat_log, NULL);
 		mysleep(philo->tt_eat);
+		log_action(philo, custom_log, "POST 2 FORKS");
 		sem_post(philo->forks);
 		sem_post(philo->forks);
 		log_action(philo, sleep_log, NULL);
@@ -59,6 +95,8 @@ void	start_philo(t_philo *philo, unsigned int id)
 	sem_close(philo->forks);
 	sem_close(philo->logs);
 	free(philo);
+	pthread_join(manager_tid, NULL);
+	(void)first;
 	exit(0);
 }
 
@@ -100,7 +138,7 @@ int	main(int ac, char **av)
 	init_args(ac, av, philo);
 	if (philo->nbr_philo == 0)
 		return (free(philo), 0);
-	init_start_time(philo);
+	// init_start_time(philo);
 	philo->pids = malloc(sizeof(unsigned int) * philo->nbr_philo);
 	sem_unlink("sem_forks");
 	sem_unlink("sem_is_done");
