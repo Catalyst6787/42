@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:17:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 11:08:55 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 12:52:41 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ typedef struct s_philo
 
 typedef enum s_log_action
 {
-	take_left_log,
-	take_right_log,
+	take_1_log,
+	take_2_log,
 	eat_log,
 	sleep_log,
 	think_log,
-	die_log
+	die_log,
+	custom_log
 }	t_log_action;
 
 # define USAGE "usage: nbr_of_philo \
@@ -71,13 +72,7 @@ int				philo_logic(t_philo *philo);
 // UTILS
 void			mysleep(unsigned int ms);
 unsigned long	spent_time_ms(t_philo *philo);
-// void			set_mutex_isover(t_state *state, unsigned int isover);
-// unsigned int	is_over(t_state *state);
-// unsigned int	get_mutex_last_meal(t_philo *philo);
-// void			set_mutex_last_meal(t_philo *philo, unsigned int last_meal);
-// unsigned int	get_mutex_nbr_meal(t_philo *philo);
-// void			set_mutex_nbr_meal(t_philo *philo, unsigned int nbr_meal);
-// void			log_action_mutex(t_philo *philo, t_log_action log);
 int				ft_atou(const char *str);
+void			log_action(t_philo *philo, t_log_action action, char *custom);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:44:52 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/14 16:07:32 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 12:41:11 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,36 +45,3 @@ void	init_start_time(t_philo *philo)
 	philo->start_time_s = tv.tv_sec;
 	philo->start_time_us = tv.tv_usec;
 }
-
-// static	t_philo	*create_philo(t_philo *philo, unsigned int id)
-// {
-// 	t_philo	*philo;
-
-// 	philo = malloc(sizeof(t_philo));
-// 	philo->id = id;
-// 	pthread_mutex_init(&philo->fork, NULL);
-// 	pthread_mutex_init(&philo->nbr_of_meal_mutex, NULL);
-// 	pthread_mutex_init(&philo->last_meal_mutex, NULL);
-// 	philo->nbr_of_meal = 0;
-// 	philo->last_meal = 0;
-// 	philo->thread_id = 0;
-// 	philo->philo = philo;
-// 	philo->left = NULL;
-// 	return (philo);
-// }
-
-// void	init_philo(t_philo *philo)
-// {
-// 	t_philo	*current;
-// 	t_philo	*next;
-
-// 	current = create_philo(philo, 1);
-// 	philo->first = current;
-// 	while (current->id < philo->nbr_philo)
-// 	{
-// 		next = create_philo(philo, current->id + 1);
-// 		current->left = next;
-// 		current = next;
-// 	}
-// 	current->left = philo->first;
-// }
