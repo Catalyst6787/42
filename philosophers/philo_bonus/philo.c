@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:11:23 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 13:32:34 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:30:04 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	start_philo(t_philo *philo, unsigned int id)
 	philo->id = id + 1;
 	philo->logs = sem_open("logs", O_CREAT, 0777, 1);
 	philo->is_done = sem_open("sem_is_done", 0);
-	log_action(philo, custom_log,"WAIT is_done");
+	// log_action(philo, custom_log,"WAIT is_done");
 	sem_wait(philo->is_done);
 	free(philo->pids);
 	philo->pids = NULL;
@@ -30,7 +30,7 @@ void	start_philo(t_philo *philo, unsigned int id)
 
 	if (philo->forks == SEM_FAILED)
 		return(log_action(philo, custom_log, "sem failed\n"));
-	while(philo->nbr_of_meal < (unsigned int)philo->nbr_eat)
+	while(philo->nbr_eat == -1 || philo->nbr_of_meal < (unsigned int)philo->nbr_eat)
 	{
 		if (philo->id % 2 && first)
 		{
@@ -44,8 +44,10 @@ void	start_philo(t_philo *philo, unsigned int id)
 		log_action(philo, custom_log, "tries to take 2nd fork");
 		sem_wait(philo->forks);
 		log_action(philo, take_2_log, NULL);
-		log_action(philo, eat_log, NULL);
 		philo->nbr_of_meal++;
+		if (philo->nbr_eat != -1 && philo->nbr_of_meal >= (unsigned int)philo->nbr_eat)
+			sem_post(philo->is_done);
+		log_action(philo, eat_log, NULL);
 		mysleep(philo->tt_eat);
 		sem_post(philo->forks);
 		sem_post(philo->forks);
@@ -53,8 +55,6 @@ void	start_philo(t_philo *philo, unsigned int id)
 		mysleep(philo->tt_sleep);
 		log_action(philo, think_log, NULL);
 	}
-	log_action(philo, custom_log, "POST is_done");
-	sem_post(philo->is_done);
 	sem_close(philo->is_done);
 	sem_close(philo->forks);
 	sem_close(philo->logs);
@@ -86,8 +86,10 @@ int	main(int ac, char **av)
 {
 	t_philo		*philo;
 	unsigned int	nbr_done;
+	unsigned int	i;
 
 	nbr_done = 0;
+	i = 0;
 	if (ac < 5 || ac > 6)
 		return (printf("%s\n", USAGE), 1);
 	if (check_args(ac, av))
@@ -120,6 +122,11 @@ int	main(int ac, char **av)
 		// printf("main process WAIT is_done\n");
 		sem_wait(philo->is_done);
 		nbr_done++;
+	}
+	while (i < philo->nbr_philo)
+	{
+		kill(philo->pids[i], SIGINT);
+		i++;
 	}
 	free(philo->pids);
 	free(philo);

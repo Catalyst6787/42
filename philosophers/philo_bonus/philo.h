@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:17:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 12:52:41 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:20:06 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,9 @@
 #include <fcntl.h>           /* For O_* constants */
 #include <sys/stat.h>        /* For mode constants */
 #include <semaphore.h>
+
+#include <sys/types.h>
+#include <signal.h>
 
 typedef struct s_philo
 {

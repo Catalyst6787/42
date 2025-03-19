@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:44:10 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 13:31:45 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/19 14:23:25 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	log_action(t_philo *philo, t_log_action action, char *custom)
 	else if (action == take_2_log)
 		printf("%lu, %u, has taken 2nd fork\n", spent_time_ms(philo), philo->id);
 	else if (action == eat_log)
-		printf("%lu, %u, is eating\n", spent_time_ms(philo), philo->id);
+		printf("%lu, %u, is eating. Ate %u times.\n", spent_time_ms(philo), philo->id, philo->nbr_of_meal);
 	else if (action == sleep_log)
 		printf("%lu, %u, is sleeping\n", spent_time_ms(philo), philo->id);
 	else if (action == think_log)
