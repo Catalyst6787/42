@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:11:23 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/20 15:48:23 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:07:46 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	*manager(t_philo	*philo)
 
 	i = 0;
 	mysleep(philo->tt_die);
-	while (get_is_over(philo))
+	while (!philo->is_over && (philo->nbr_eat == -1 || (philo->nbr_of_meal < (unsigned int)philo->nbr_eat)))
 	{
 		if ((spent_time_ms(philo) - get_last_meal(philo)) >= philo->tt_die)
 		{
@@ -186,8 +186,8 @@ void	start_philo(t_philo *philo, unsigned int id)
 	sem_close(philo->is_done);
 	sem_close(philo->forks);
 	sem_close(philo->logs);
-	free(philo);
 	pthread_join(manager_tid, NULL);
+	free(philo);
 	(void)first;
 	exit(0);
 }
