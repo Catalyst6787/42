@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 10:44:10 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/12 18:25:28 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/20 16:30:27 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	mysleep(unsigned int ms)
 {
-	unsigned int us;
+	unsigned int	us;
 
 	us = 1000 * ms;
 	usleep(us);
