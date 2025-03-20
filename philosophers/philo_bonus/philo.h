@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 15:17:06 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 14:45:21 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/20 15:24:24 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ typedef struct s_philo
 	unsigned int	*pids;
 	sem_t			*forks;
 	sem_t			*logs;
-	sem_t			*nbr_of_meal_sem;
+	// sem_t			*nbr_of_meal_sem;
 	sem_t			*is_done;
 	sem_t			*is_over_sem;
 	unsigned int	is_over;
@@ -69,8 +69,7 @@ int				check_args(int ac, char **av);
 void			init_start_time(t_philo *philo);
 
 // LOGIC
-int				eat(t_philo *philo);
-int				philo_logic(t_philo *philo);
+unsigned int	eat(t_philo *philo);
 
 // UTILS
 void			mysleep(unsigned int ms);
