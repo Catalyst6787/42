@@ -6,7 +6,7 @@
 /*   By: lfaure <lfaure@student.42lausanne.ch>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/06 14:44:52 by lfaure            #+#    #+#             */
-/*   Updated: 2025/03/19 12:41:11 by lfaure           ###   ########.fr       */
+/*   Updated: 2025/03/20 14:07:40 by lfaure           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ void	init_args(int ac, char **av, t_philo *philo)
 		philo->nbr_eat = (unsigned int)ft_atou(av[5]);
 	else
 		philo->nbr_eat = -1;
+	philo->is_over = 0;
+	philo->last_meal = 0;
 }
 
 int	check_args(int ac, char **av)
